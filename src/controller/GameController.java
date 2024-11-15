@@ -73,7 +73,6 @@ public class GameController {
             return;
         }
         moveNormally();
-
     }
 
     public void switchDirection(){
@@ -114,7 +113,7 @@ public class GameController {
                 player.setPlayerX(posX  + player.speed);
                 break;
             case "right" :
-
+                player.setPlayerX(posX  - player.speed);
                 break;
         }
 

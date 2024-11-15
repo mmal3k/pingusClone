@@ -107,6 +107,7 @@ public class CollisonChecker {
 
         int tileNum1 , tileNum2 ;
 
+        canFall(entity);
         if (entity.isFalling){
             //if the player is falling
             bottomRow = (bottomPosY + entity.speed) / gp.tileSize ;
@@ -151,26 +152,6 @@ public class CollisonChecker {
         }
 
     }
-//    public boolean canGoUp(Entity entity){
-//        int entityLeftWorldX = (entity.getPlayerX()) + entity.solidArea.x;
-//        int entityRightWorldX = (entity.getPlayerX()) + entity.solidArea.x + entity.solidArea.width;
-//        int entityTopWorldY =  (entity.getPlayerY()) + entity.solidArea.y;
-//        int entityBottomWorldY = (entity.getPlayerY()) + entity.solidArea.y + entity.solidArea.height;
-//
-//        int entityLeftCol = entityLeftWorldX / gp.tileSize;
-//        int entityRightCol  = entityRightWorldX / gp.tileSize;
-//        int entityTopRow = entityTopWorldY / gp.tileSize;
-//        int entityBottomRow = entityBottomWorldY / gp.tileSize;
-//
-//        switch(entity.direction) {
-//            case  "left" :
-//                break;
-//            case  "right" :
-//                entityRightCol = (entityRightWorldX - entity.speed) / gp.tileSize ;
-//                break;
-//        }
-//        return  true ;
-//    }
 
     public void canGoUp(Entity entity){
         int leftPosX = entity.getPlayerX() + entity.solidArea.x;
@@ -188,9 +169,7 @@ public class CollisonChecker {
         switch (entity.direction) {
             case "left" :
                 rightCol = (rightPosX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[rightCol -1][bottomRow + 1] ;
-//                System.out.println("i : "+(rightCol - 1)+ "j : "+(bottomRow+ 1));
-                System.out.println(gp.tileM.tiles[tileNum1].collision);
+                tileNum1 = gp.tileM.mapTileNum[rightCol -1][bottomRow - 1] ;
                 if (gp.tileM.tiles[tileNum1].collision) {
                     entity.canGoUp = false ;
                 }else {
@@ -200,6 +179,30 @@ public class CollisonChecker {
             case "right" :
 
                 break;
+
+        }
+
+    }
+
+    public void canFall (Entity entity){
+        int leftPosX = entity.getPlayerX() + entity.solidArea.x;
+        int rightPosX = entity.getPlayerX() + entity.solidArea.x + entity.solidArea.width ;
+        int topPosY = entity.getPlayerY() + entity.solidArea.y;
+        int bottomPosY = entity.getPlayerY() + entity.solidArea.y + entity.solidArea.height ;
+
+        int leftCol = leftPosX / gp.tileSize ;
+        int rightCol = rightPosX / gp.tileSize ;
+        int topRow = topPosY / gp.tileSize ;
+        int bottomRow = bottomPosY / gp.tileSize ;
+
+        bottomRow = (bottomPosY + entity.speed) / gp.tileSize ;
+        int tileNum1 = gp.tileM.mapTileNum[rightCol][bottomRow];
+        int tileNum2 = gp.tileM.mapTileNum[leftCol][bottomRow];
+
+        if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
+            entity.isFalling = false ;
+        }else {
+            entity.isFalling = true;
         }
 
     }
