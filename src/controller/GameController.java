@@ -63,6 +63,7 @@ public class GameController {
             player.setPlayerY(posY + player.speed);
             return;
         }
+        moveNormally();
         if (player.collisonOn){
             cCheker.canGoUp(player);
             if (player.canGoUp){
@@ -72,7 +73,7 @@ public class GameController {
             switchDirection();
             return;
         }
-        moveNormally();
+
 
     }
 
@@ -109,15 +110,7 @@ public class GameController {
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY - player.speed);
-        switch (player.direction){
-            case "left" :
-                player.setPlayerX(posX  + player.speed);
-                break;
-            case "right" :
-
-                break;
-        }
-
+        System.out.println(player.getPlayerX()+player.solidArea.x);
 
     }
 }

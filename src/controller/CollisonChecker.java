@@ -140,6 +140,7 @@ public class CollisonChecker {
                     tileNum1 = gp.tileM.mapTileNum[rightCol][topRow];
                     tileNum2 = gp.tileM.mapTileNum[rightCol][bottomRow];
                     if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
+
                         entity.collisonOn = true ;
                     }else {
                         entity.collisonOn = false;
@@ -187,17 +188,23 @@ public class CollisonChecker {
 
         switch (entity.direction) {
             case "left" :
-                rightCol = (rightPosX + entity.speed) / gp.tileSize;
-                tileNum1 = gp.tileM.mapTileNum[rightCol -1][bottomRow + 1] ;
-//                System.out.println("i : "+(rightCol - 1)+ "j : "+(bottomRow+ 1));
-                System.out.println(gp.tileM.tiles[tileNum1].collision);
-                if (gp.tileM.tiles[tileNum1].collision) {
-                    entity.canGoUp = false ;
-                }else {
+//                rightCol = (rightPosX + entity.speed) / gp.tileSize; hadi ta3 malek
+                tileNum1 = gp.tileM.mapTileNum[leftCol][bottomRow-1] ;
+                if (!gp.tileM.tiles[tileNum1].collision) {
                     entity.canGoUp = true ;
+                    entity.isFalling = true ;
+                }else {
+                    entity.canGoUp = false;
                 }
                 break;
             case "right" :
+                tileNum1 = gp.tileM.mapTileNum[rightCol][bottomRow - 1] ;
+                if (!gp.tileM.tiles[tileNum1].collision) {
+                    entity.canGoUp = true ;
+                    entity.isFalling = true ;
+                }else {
+                    entity.canGoUp = false ;
+                }
 
                 break;
         }

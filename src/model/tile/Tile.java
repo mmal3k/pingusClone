@@ -5,6 +5,6 @@ import java.awt.image.BufferedImage;
 
 public class Tile {
     public Color color ;
-    public boolean collision ;
+    public boolean collision =false;
 
 }

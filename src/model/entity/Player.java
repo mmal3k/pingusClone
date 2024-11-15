@@ -9,7 +9,6 @@ import java.io.IOException;
 
 public class Player extends Entity {
     GamePanel gp ;
-    public BufferedImage left1, left2 , right1 , right2 , down1, down2,up1 , up2;
 
     public Player (GamePanel gp) {
         this.gp = gp;
@@ -19,7 +18,7 @@ public class Player extends Entity {
 
     public void setDefaultValues(){
         playerX = gp.tileSize * 3 ;
-        playerY = gp.tileSize * 1 ;
+        playerY = gp.tileSize;
         speed = 3;
         direction = "right";
     }
