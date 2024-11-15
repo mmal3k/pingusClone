@@ -20,7 +20,7 @@ public class Player extends Entity {
     public void setDefaultValues(){
         playerX = gp.tileSize * 3 ;
         playerY = gp.tileSize * 1 ;
-        speed = 3 ;
+        speed = 3;
         direction = "right";
     }
     @Override
