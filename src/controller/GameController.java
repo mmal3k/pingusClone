@@ -17,21 +17,17 @@ public class GameController {
     public void movePlayer(){
         cCheker.checkTile(player);
         if (player.isFalling){
-            System.out.println("is Falling");
            goDown();
            return;
         }
         if (player.canGoUp) {
-            System.out.println("going up , player direction : "+ player.direction);
             goUp();
             return;
         }
         if (player.collisonOn) {
-            System.out.println("switch direction");
             switchDirection();
             return;
         }
-        System.out.println("walking normally");
         moveNormally();
     }
     public void switchDirection(){

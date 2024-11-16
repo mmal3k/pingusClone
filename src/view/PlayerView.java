@@ -16,6 +16,9 @@ public class PlayerView {
         g2.setColor(Color.GREEN);
 //        g2.fillRect(player.getPlayerX() + player.solidArea.x, player.getPlayerY() + player.solidArea.y, player.solidArea.width, player.solidArea.height );
         g2.fillRect(player.getPlayerX() , player.getPlayerY() , gp.tileSize, gp.tileSize) ;
+
+//        g2.fillOval(player.getPlayerX() , player.getPlayerY() , gp.tileSize,  gp.tileSize);
+
     }
 
 }
