@@ -14,67 +14,26 @@ public class GameController {
         this.cCheker = gp.cCheker ;
     }
 
-//    public void movePlayer(){
-//        cCheker.checkTile(player);
-//        int posX = player.getPlayerX();
-//        int posY = player.getPlayerY();
-//        if (player.isFalling){
-//            player.setPlayerY(posY + player.speed);
-//
-//        } else if (player.collisonOn) {
-//            if (player.canGoUp){
-//                player.setPlayerY(posY - player.speed);
-//                if (player.direction  == "right") {
-//                    player.setPlayerX(posX - player.speed);
-//                } else {
-//                    player.setPlayerX(posX + player.speed);
-//                }
-//                player.isFalling = true;
-//            }else{
-//                switch (player.direction) {
-//                    case "left" :
-//                        player.direction = "right";
-//                        player.setPlayerX(posX + player.speed);
-//                        break;
-//                    case "right" :
-//                        player.direction = "left";
-//                        player.setPlayerX(posX - player.speed);
-//                        break;
-//                }
-//            }
-//
-//        } else {
-//            switch (player.direction) {
-//                case "left" :
-//                    player.setPlayerX(posX - player.speed);
-//                    break;
-//                case "right" :
-//                    player.setPlayerX(posX + player.speed);
-//                    break;
-//            }
-//        }
-//
-//    }
     public void movePlayer(){
         cCheker.checkTile(player);
-        int posX = player.getPlayerX();
-        int posY = player.getPlayerY();
         if (player.isFalling){
-            player.setPlayerY(posY + player.speed);
+            System.out.println("is Falling");
+           goDown();
+           return;
+        }
+        if (player.canGoUp) {
+            System.out.println("going up , player direction : "+ player.direction);
+            goUp();
             return;
         }
-        if (player.collisonOn){
-            cCheker.canGoUp(player);
-            if (player.canGoUp){
-                goUp();
-                return;
-            }
+        if (player.collisonOn) {
+            System.out.println("switch direction");
             switchDirection();
             return;
         }
+        System.out.println("walking normally");
         moveNormally();
     }
-
     public void switchDirection(){
         int posX = player.getPlayerX();
         switch (player.direction) {
@@ -88,7 +47,6 @@ public class GameController {
                 break;
         }
     }
-
     public void moveNormally(){
         int posX = player.getPlayerX();
         switch (player.direction) {
@@ -100,8 +58,10 @@ public class GameController {
                 break;
         }
     }
-
-
+    public void goDown(){
+        int posY = player.getPlayerY();
+        player.setPlayerY(posY + player.speed);
+    }
     public void goUp(){
 
         int posX = player.getPlayerX();
@@ -109,10 +69,10 @@ public class GameController {
 
         player.setPlayerY(posY - player.speed);
         switch (player.direction){
-            case "left" :
+            case "right" :
                 player.setPlayerX(posX  + player.speed);
                 break;
-            case "right" :
+            case "left" :
                 player.setPlayerX(posX  - player.speed);
                 break;
         }
