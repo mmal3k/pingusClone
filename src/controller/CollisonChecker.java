@@ -44,27 +44,34 @@ public class CollisonChecker {
         int tileNum1 , tileNum2 ;
         switch (entity.direction) {
             case "left" :
-                leftCol =( leftPosX - entity.speed) / gp.tileSize ;
-                tileNum1 = gp.tileM.mapTileNum[leftCol][topRow];
-                tileNum2 = gp.tileM.mapTileNum[leftCol][bottomRow];
-                if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
+                int tileNum0 = gp.tileM.mapTileNum[leftCol][bottomRow - 1] ;
+                if (!gp.tileM.tiles[tileNum0].collision){
+                    leftCol =( leftPosX - entity.speed) / gp.tileSize ;
 
-                }else{
-                    entity.canGoUp =false;
+                    tileNum1 = gp.tileM.mapTileNum[leftCol][topRow];
+                    tileNum2 = gp.tileM.mapTileNum[leftCol][bottomRow];
+                    if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
+                        int tileNum3 = gp.tileM.mapTileNum[leftCol ][bottomRow - 1] ;
+                        if (!gp.tileM.tiles[tileNum3].collision) {
+                            entity.canGoUp = true ;
+                            return;
+                        }
+                    }
                 }
+                entity.canGoUp = false;
                 break ;
             case "right" :
-                rightCol = (rightPosX + entity.speed) / gp.tileSize ;
-                tileNum1 = gp.tileM.mapTileNum[rightCol][topRow];
-                tileNum2 = gp.tileM.mapTileNum[rightCol][bottomRow];
-                if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
-                    System.out.println("i : "+(rightCol+ 1 )+ " j :"+(bottomRow - 1));
-                    int tileNum3 = gp.tileM.mapTileNum[rightCol ][bottomRow - 1] ;
-                    System.out.println("tileNum : " + tileNum3 +" condition : "+gp.tileM.tiles[tileNum3].collision );
-
-                    if (!gp.tileM.tiles[tileNum3].collision) {
-                        entity.canGoUp = true ;
-                        return;
+                int tileNum = gp.tileM.mapTileNum[rightCol][bottomRow - 1] ;
+                if (!gp.tileM.tiles[tileNum].collision){
+                    rightCol = (rightPosX + entity.speed) / gp.tileSize ;
+                    tileNum1 = gp.tileM.mapTileNum[rightCol][topRow];
+                    tileNum2 = gp.tileM.mapTileNum[rightCol][bottomRow];
+                    if(gp.tileM.tiles[tileNum1].collision || gp.tileM.tiles[tileNum2].collision){
+                        int tileNum3 = gp.tileM.mapTileNum[rightCol ][bottomRow - 1] ;
+                        if (!gp.tileM.tiles[tileNum3].collision) {
+                            entity.canGoUp = true ;
+                            return;
+                        }
                     }
                 }
                 entity.canGoUp = false;
