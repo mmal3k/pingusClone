@@ -30,7 +30,6 @@ public class CollisonChecker {
             return;
         }
     }
-
     public void canGoUp(Entity entity){
         int leftPosX = entity.getPlayerX() + entity.solidArea.x;
         int rightPosX = entity.getPlayerX() + entity.solidArea.x + entity.solidArea.width ;

@@ -10,7 +10,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
-
     final int originalTileSize = 16;
     final int scale = 3;
     public final int tileSize = originalTileSize * scale;
@@ -23,37 +22,28 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileM = new TileManager(this);
     TileView tileView  = new TileView(this);
     public CollisonChecker cCheker = new CollisonChecker(this);
-//    PlayerView playerView = new PlayerView(this );
     GameController gc = new GameController(this);
     Thread gameThread;
     PlayersView playersView = new PlayersView(this , 3) ;
-
-
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-
     }
-
     public void startGameThread(){
         gameThread = new Thread(this);
-
         gameThread.start();
         playersView.startAddThread();
     }
-
     @Override
     public void run() {
-
         double drawIntervale = 1000000000/FPS;  // 1 seconds devisee par le fps
         double delta = 0 ; //
         long lastTime = System.nanoTime(); //
         long currentTime ;
         long timer = 0;
         int drawCount = 0;
-
         while (gameThread != null){
             currentTime = System.nanoTime(); // getting the current time
             delta += (currentTime - lastTime) / drawIntervale ;
@@ -70,16 +60,13 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount = 0;
                 timer = 0;
             }
-
         }
     }
-
     public void update(){
         for (Player player : players) {
             gc.movePlayer(player);
         }
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -87,7 +74,4 @@ public class GamePanel extends JPanel implements Runnable {
         tileView.draw(g2);
         playersView.draw(g2);
     }
-
-
-
 }

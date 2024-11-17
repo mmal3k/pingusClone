@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PlayersView implements Runnable {
-
     private int playerNum; // Number of players to add
     private GamePanel gp;  // Reference to GamePanel
     private Thread thread; // Thread for adding players
@@ -37,13 +36,10 @@ public class PlayersView implements Runnable {
             }
         }
     }
-
     public void startAddThread() {
         thread = new Thread(this);
         thread.start();
     }
-
-
     public void draw(Graphics2D g2) {
         if (players != null){
             for(Player player : players){
@@ -54,6 +50,5 @@ public class PlayersView implements Runnable {
                 g2.fillOval((int)(posX + player.solidArea.width / 4), (int)(posY - player.solidArea.height + 14 ) , (int)(player.solidArea.width / 1.8)  , (int)(player.solidArea.width / 1.8));
             }
         }
-
     }
 }

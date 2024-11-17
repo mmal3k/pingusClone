@@ -7,15 +7,10 @@ import view.GamePanel;
 import java.util.ArrayList;
 
 public class GameController {
-
     CollisonChecker cCheker ;
-
-
     public GameController (GamePanel gp) {
         this.cCheker = gp.cCheker ;
     }
-
-
     public void movePlayer(Entity player){
             cCheker.checkTile(player);
             if (player.isFalling){
@@ -61,10 +56,8 @@ public class GameController {
         player.setPlayerY(posY + player.speed);
     }
     public void goUp(Entity player){
-
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
-
         player.setPlayerY(posY - player.speed);
         switch (player.direction){
             case "right" :
@@ -74,8 +67,6 @@ public class GameController {
                 player.setPlayerX(posX  - player.speed);
                 break;
         }
-
-
     }
 
 

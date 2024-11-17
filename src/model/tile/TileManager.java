@@ -19,7 +19,6 @@ public class TileManager {
         getTileColor();
         loadMap("/maps/map02.txt");
     }
-
     public void getTileColor (){
         tiles[0] = new Tile();
         tiles[0].color = Color.BLACK;
@@ -35,20 +34,13 @@ public class TileManager {
         tiles[3] = new Tile();
         tiles[3].color = Color.PINK;
 
-
         tiles[4] = new Tile();
         tiles[4].color = Color.cyan;
 
         tiles[5] = new Tile();
         tiles[5].color = Color.MAGENTA;
-
-
-
     }
-
-
     public void loadMap(String mapName){
-
         try {
             InputStream is = getClass().getResourceAsStream(mapName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -56,23 +48,20 @@ public class TileManager {
             int row = 0;
             while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
                 String line = br.readLine();
-
                 while (col < gp.maxScreenCol){
                     String numbers[] = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]) ;
+                    int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    col ++ ;
+                    col ++;
                 }
                 if (col == gp.maxScreenCol) {
-                    col  = 0;
-                    row ++ ;
+                    col = 0;
+                    row ++;
                 }
             }
-
         }catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
 }
