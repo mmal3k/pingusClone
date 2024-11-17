@@ -10,10 +10,14 @@ import java.io.IOException;
 public class Player extends Entity {
     GamePanel gp ;
     public BufferedImage left1, left2 , right1 , right2 , down1, down2,up1 , up2;
+    private long fallStartTime; // Timestamp for when the game starts or the player is initialized
+    public int fallDelay;       // Delay (in seconds) before this player starts falling
+
+
 
     public Player (GamePanel gp) {
         this.gp = gp;
-        solidArea = new Rectangle(8,16,32,32);
+        solidArea = new Rectangle(10,18,28,30);
         setDefaultValues();
     }
 
@@ -22,7 +26,11 @@ public class Player extends Entity {
         playerY = gp.tileSize * 1 ;
         speed = 3;
         direction = "left";
+
+        fallDelay = 0;
+        fallStartTime = System.currentTimeMillis();
     }
+
     @Override
     public int getPlayerX() {
         return playerX;

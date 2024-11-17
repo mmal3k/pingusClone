@@ -1,6 +1,7 @@
 package controller;
 
 import model.entity.Entity;
+import model.entity.Player;
 import model.tile.TileManager;
 import view.GamePanel;
 
@@ -8,7 +9,7 @@ import java.sql.SQLOutput;
 
 public class CollisonChecker {
     GamePanel gp ;
-    TileManager tileM;
+
     public CollisonChecker(GamePanel gp ){
         this.gp = gp ;
     }
@@ -19,7 +20,7 @@ public class CollisonChecker {
             return;
         }
 
-        canFall(entity);
+        canFall((Player) entity);
         if (entity.isFalling){
             return;
         }
@@ -82,7 +83,7 @@ public class CollisonChecker {
 
     }
 
-    public void canFall (Entity entity){
+    public void canFall (Player entity){
         int leftPosX = entity.getPlayerX() + entity.solidArea.x;
         int rightPosX = entity.getPlayerX() + entity.solidArea.x + entity.solidArea.width ;
         int topPosY = entity.getPlayerY() + entity.solidArea.y;

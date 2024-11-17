@@ -1,36 +1,38 @@
 package controller;
 
+import model.entity.Entity;
 import model.entity.Player;
 import view.GamePanel;
 
+import java.util.ArrayList;
+
 public class GameController {
 
-    Player player ;
     CollisonChecker cCheker ;
 
 
     public GameController (GamePanel gp) {
-        this.player = gp.player;
         this.cCheker = gp.cCheker ;
     }
 
-    public void movePlayer(){
-        cCheker.checkTile(player);
-        if (player.isFalling){
-           goDown();
-           return;
-        }
-        if (player.canGoUp) {
-            goUp();
-            return;
-        }
-        if (player.collisonOn) {
-            switchDirection();
-            return;
-        }
-        moveNormally();
+
+    public void movePlayer(Entity player){
+            cCheker.checkTile(player);
+            if (player.isFalling){
+                goDown(player);
+                return;
+            }
+            if (player.canGoUp) {
+                goUp(player);
+                return;
+            }
+            if (player.collisonOn) {
+                switchDirection(player);
+                return;
+            }
+            moveNormally(player);
     }
-    public void switchDirection(){
+    public void switchDirection(Entity player){
         int posX = player.getPlayerX();
         switch (player.direction) {
             case "left" :
@@ -43,7 +45,7 @@ public class GameController {
                 break;
         }
     }
-    public void moveNormally(){
+    public void moveNormally(Entity player){
         int posX = player.getPlayerX();
         switch (player.direction) {
             case "left" :
@@ -54,11 +56,11 @@ public class GameController {
                 break;
         }
     }
-    public void goDown(){
+    public void goDown(Entity player){
         int posY = player.getPlayerY();
         player.setPlayerY(posY + player.speed);
     }
-    public void goUp(){
+    public void goUp(Entity player){
 
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
@@ -75,4 +77,6 @@ public class GameController {
 
 
     }
+
+
 }

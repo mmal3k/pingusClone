@@ -8,7 +8,7 @@ public abstract class Entity {
     public String direction;
     public int speed ;
     public boolean collisonOn = false;
-    public boolean isFalling = true ;
+    public boolean isFalling = false ;
     public boolean canGoUp = false ;
     public Rectangle solidArea;
 
