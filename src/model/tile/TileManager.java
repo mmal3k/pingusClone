@@ -69,27 +69,12 @@ public class TileManager {
         }
     }
 
-    public GamePanel getGp() {
-        return gp;
-    }
-
-    public void setGp(GamePanel gp) {
-        this.gp = gp;
-    }
-
     public Tile[] getTiles() {
         return tiles;
-    }
-
-    public void setTiles(Tile[] tiles) {
-        this.tiles = tiles;
     }
 
     public int[][] getMapTileNum() {
         return mapTileNum;
     }
 
-    public void setMapTileNum(int[][] mapTileNum) {
-        this.mapTileNum = mapTileNum;
-    }
 }

@@ -14,7 +14,7 @@ public class GameController {
 
             cCheker.checkTile(player);
             int[] indexes = cCheker.checkObject(player,true);
-            gp.objectController.interactWithObject(indexes[0],indexes[1]);
+            gp.getObjectController().interactWithObject(indexes[0],indexes[1]);
 
             if (player!= null && player.isFalling()){
                 goDown(player);
@@ -78,16 +78,4 @@ public class GameController {
                 break;
         }
     }
-
-
-
-    public CollisonChecker getcCheker() {
-        return cCheker;
-    }
-
-
-    public void setcCheker(CollisonChecker cCheker) {
-        this.cCheker = cCheker;
-    }
-
 }

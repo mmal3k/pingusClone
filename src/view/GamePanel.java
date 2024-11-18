@@ -27,9 +27,9 @@ public class GamePanel extends JPanel implements Runnable {
     private GameController gc = new GameController(this);
     private Thread gameThread;
     private PlayersView playersView = new PlayersView(this , 10) ;
-    public SuperObject obj[] = new SuperObject[10];
-    public ObjectView objectView = new ObjectView(this);
-    public ObjectController objectController = new ObjectController(this);
+    private SuperObject[] obj = new SuperObject[10];
+    private ObjectView objectView = new ObjectView(this);
+    private ObjectController objectController = new ObjectController(this);
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);
@@ -86,13 +86,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public int getOriginalTileSize() {
-        return originalTileSize;
-    }
-
-    public int getScale() {
-        return scale;
-    }
 
     public int getTileSize() {
         return tileSize;
@@ -106,72 +99,24 @@ public class GamePanel extends JPanel implements Runnable {
         return maxScreenRow;
     }
 
-    public int getScreenWidth() {
-        return screenWidth;
-    }
-
-    public int getScreenHeight() {
-        return screenHeight;
-    }
-
-    public int getFPS() {
-        return FPS;
-    }
-
     public ArrayList<Player> getPlayers() {
         return players;
-    }
-
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
     }
 
     public TileManager getTileM() {
         return tileM;
     }
 
-    public void setTileM(TileManager tileM) {
-        this.tileM = tileM;
-    }
-
-    public TileView getTileView() {
-        return tileView;
-    }
-
-    public void setTileView(TileView tileView) {
-        this.tileView = tileView;
-    }
-
     public CollisonChecker getcCheker() {
         return cCheker;
     }
 
-    public void setcCheker(CollisonChecker cCheker) {
-        this.cCheker = cCheker;
+    public SuperObject[] getObj() {
+        return obj;
     }
 
-    public GameController getGc() {
-        return gc;
+    public ObjectController getObjectController() {
+        return objectController;
     }
 
-    public void setGc(GameController gc) {
-        this.gc = gc;
-    }
-
-    public Thread getGameThread() {
-        return gameThread;
-    }
-
-    public void setGameThread(Thread gameThread) {
-        this.gameThread = gameThread;
-    }
-
-    public PlayersView getPlayersView() {
-        return playersView;
-    }
-
-    public void setPlayersView(PlayersView playersView) {
-        this.playersView = playersView;
-
-    }
 }

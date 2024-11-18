@@ -9,10 +9,10 @@ public class Player extends Entity {
 
     public Player (GamePanel gp ,int id) {
         this.gp = gp;
-        this.id = id;
+        this.setId(id);
         setSolidArea(new Rectangle(10,18,28,30));
-        solidAreaDefaultX = getSolidArea().x;
-        solidAreaDefaultY = getSolidArea().y;
+        setSolidAreaDefaultX(getSolidArea().x);
+        setSolidAreaDefaultY(getSolidArea().y);
         setDefaultValues();
     }
 
@@ -43,11 +43,4 @@ public class Player extends Entity {
         super.setPlayerY(playerY);
     }
 
-    public GamePanel getGp() {
-        return gp;
-    }
-
-    public void setGp(GamePanel gp) {
-        this.gp = gp;
-    }
 }

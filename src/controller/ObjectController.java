@@ -3,9 +3,9 @@ package controller;
 import view.GamePanel;
 
 public class ObjectController {
-    int i =0;
-    String name;
-    GamePanel gp;
+    private int i =0;
+    private String name;
+    private GamePanel gp;
     private CollisonChecker cCheker ;
     public ObjectController (GamePanel gp) {
         this.gp = gp;
@@ -15,8 +15,7 @@ public class ObjectController {
 
     public void interactWithObject(int index, int playerIndex){
         if (index != 999 && playerIndex != 999){
-            String name = gp.obj[index].name;
-//            System.out.println("player num  : "+ i);
+            String name = gp.getObj()[index].getName();
             switch (name){
                 case "door":
 
@@ -28,5 +27,8 @@ public class ObjectController {
                     break;
             }
         }
+    }
+    public String getName() {
+        return name;
     }
 }

@@ -176,8 +176,8 @@ public class CollisonChecker {
 
             int playerIndex = 999;
             int index = 999;
-            for (int i = 0; i < gp.obj.length; i++) {
-                if (gp.obj[i] != null) {
+            for (int i = 0; i < gp.getObj().length; i++) {
+                if (gp.getObj()[i] != null) {
 
                     // get entity's solid area position
                     int x = entity.getPlayerX() + entity.getSolidArea().x;
@@ -186,7 +186,7 @@ public class CollisonChecker {
 
                     //get the object solid area position
 
-                    Rectangle objectSolidArea = new Rectangle(gp.obj[i].objX + gp.obj[i].solidArea.x, gp.obj[i].objY + gp.obj[i].solidArea.y, gp.obj[i].solidArea.width, gp.obj[i].solidArea.height);
+                    Rectangle objectSolidArea = new Rectangle(gp.getObj()[i].getObjX() + gp.getObj()[i].getSolidArea().x, gp.getObj()[i].getObjY() + gp.getObj()[i].getSolidArea().y, gp.getObj()[i].getSolidArea().width, gp.getObj()[i].getSolidArea().height);
 
 
                     switch (entity.getDirection()) {
@@ -194,7 +194,7 @@ public class CollisonChecker {
                             testSolidArea.x -= entity.getSpeed();
 
                             if (testSolidArea.intersects(objectSolidArea)) {
-                                if (gp.obj[i].collison) {
+                                if (gp.getObj()[i].isCollison()) {
                                     entity.setCollisonOn(true);
                                 }
                                 if (player) {
@@ -206,12 +206,12 @@ public class CollisonChecker {
 
                             testSolidArea.x += entity.getSpeed();
                             if (testSolidArea.intersects(objectSolidArea)) {
-                                if (gp.obj[i].collison) {
+                                if (gp.getObj()[i].isCollison()) {
                                     entity.setCollisonOn(true);
                                 }
                                 if (player) {
                                     index = i;
-                                    playerIndex = entity.id;
+                                    playerIndex = entity.getId();
                                 }
                             }
                             break;
@@ -221,13 +221,5 @@ public class CollisonChecker {
             return new int[]{index,playerIndex};
         }
         return new int[]{999,999};
-    }
-
-    public GamePanel getGp() {
-        return gp;
-    }
-
-    public void setGp(GamePanel gp) {
-        this.gp = gp;
     }
 }

@@ -3,7 +3,7 @@ package model.entity;
 import java.awt.*;
 
 public abstract class Entity {
-    public int id;
+    private int id;
     private int playerX;
     private int playerY;
     private String direction;
@@ -12,8 +12,8 @@ public abstract class Entity {
     private boolean isFalling = false;
     private boolean canGoUp = false;
     private Rectangle solidArea;
-    public int solidAreaDefaultX ;
-    public int solidAreaDefaultY ;
+    private int solidAreaDefaultX ;
+    private int solidAreaDefaultY ;
 
 
 
@@ -82,4 +82,27 @@ public abstract class Entity {
         this.playerY = playerY;
     }
 
+    public int getSolidAreaDefaultX() {
+        return solidAreaDefaultX;
+    }
+
+    public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+        this.solidAreaDefaultX = solidAreaDefaultX;
+    }
+
+    public int getSolidAreaDefaultY() {
+        return solidAreaDefaultY;
+    }
+
+    public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+        this.solidAreaDefaultY = solidAreaDefaultY;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
