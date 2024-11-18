@@ -30,7 +30,7 @@ public class PlayersView implements Runnable {
 
                 gp.getPlayers().add(new Player(this.gp,i)); // Add a new player
                 i++;
-                System.out.println("players added : "+i);
+                System.out.println("poussins entrees : "+i);
                 playerNum--; // Decrease the number of players to add
                 lastTime = currentTime; // Reset the last time
             }

@@ -23,7 +23,7 @@ public class ObjectController {
                     break;
                 case "portal" :
                     i++;
-                    System.out.println("players morts :"+i);
+                    System.out.println("poussins sortis :"+i);
                     gp.getPlayers().set(playerIndex,null);
                     break;
             }
