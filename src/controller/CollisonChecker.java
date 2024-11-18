@@ -2,10 +2,7 @@ package controller;
 
 import model.entity.Entity;
 import model.entity.Player;
-import model.tile.TileManager;
 import view.GamePanel;
-
-import java.sql.SQLOutput;
 
 public class CollisonChecker {
     GamePanel gp ;
@@ -42,7 +39,7 @@ public class CollisonChecker {
         int bottomRow = bottomPosY / gp.tileSize ;
 
         int tileNum1 , tileNum2 ;
-        switch (entity.direction) {
+        switch (entity.getDirection()) {
             case "left" :
                 int tileNum0 = gp.tileM.mapTileNum[leftCol][bottomRow - 1] ;
                 if (!gp.tileM.tiles[tileNum0].collision){
@@ -117,7 +114,7 @@ public class CollisonChecker {
         int bottomRow = bottomPosY / gp.tileSize ;
 
         int tileNum1 , tileNum2 ;
-        switch (entity.direction) {
+        switch (entity.getDirection()) {
             case "left" :
                 leftCol =( leftPosX - entity.speed) / gp.tileSize ;
                 tileNum1 = gp.tileM.mapTileNum[leftCol][topRow];

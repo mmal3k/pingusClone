@@ -17,7 +17,7 @@ public class Player extends Entity {
         playerX = gp.tileSize * 3 ;
         playerY = gp.tileSize * 8 ;
         speed = 3;
-        direction = "left";
+        setDirection("left");
     }
 
     @Override

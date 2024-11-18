@@ -1,10 +1,7 @@
 package controller;
 
 import model.entity.Entity;
-import model.entity.Player;
 import view.GamePanel;
-
-import java.util.ArrayList;
 
 public class GameController {
     CollisonChecker cCheker ;
@@ -29,20 +26,20 @@ public class GameController {
     }
     public void switchDirection(Entity player){
         int posX = player.getPlayerX();
-        switch (player.direction) {
+        switch (player.getDirection()) {
             case "left" :
-                player.direction = "right";
+                player.setDirection("right");
                 player.setPlayerX(posX + player.speed);
                 break;
             case "right" :
-                player.direction = "left";
+                player.setDirection("left");
                 player.setPlayerX(posX - player.speed);
                 break;
         }
     }
     public void moveNormally(Entity player){
         int posX = player.getPlayerX();
-        switch (player.direction) {
+        switch (player.getDirection()) {
             case "left" :
                 player.setPlayerX(posX - player.speed);
                 break;
@@ -59,7 +56,7 @@ public class GameController {
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
         player.setPlayerY(posY - player.speed);
-        switch (player.direction){
+        switch (player.getDirection()){
             case "right" :
                 player.setPlayerX(posX  + player.speed);
                 break;
