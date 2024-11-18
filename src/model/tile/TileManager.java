@@ -16,7 +16,7 @@ public class TileManager {
         tiles = new Tile[10];
         mapTileNum = new int[gp.getMaxScreenCol()][gp.getMaxScreenRow()];
         getTileColor();
-        loadMap("/maps/map02.txt");
+        loadMap("/maps/map01.txt");
     }
     public void getTileColor (){
         tiles[0] = new Tile();
