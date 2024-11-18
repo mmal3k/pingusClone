@@ -212,7 +212,6 @@ public class CollisonChecker {
                                 if (player) {
                                     index = i;
                                     playerIndex = entity.id;
-                                    System.out.println("index : "+index);
                                 }
                             }
                             break;

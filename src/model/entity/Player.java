@@ -11,7 +11,6 @@ public class Player extends Entity {
         this.gp = gp;
         this.id = id;
         setSolidArea(new Rectangle(10,18,28,30));
-
         solidAreaDefaultX = getSolidArea().x;
         solidAreaDefaultY = getSolidArea().y;
         setDefaultValues();
