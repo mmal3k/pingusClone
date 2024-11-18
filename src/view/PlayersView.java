@@ -15,7 +15,9 @@ public class PlayersView implements Runnable {
     public PlayersView(GamePanel gp, int playerNum) {
         this.gp = gp;
         this.playerNum = playerNum;
-        this.players = gp.players;
+
+        this.players = gp.getPlayers();
+
     }
     @Override
     public void run() {
@@ -25,7 +27,9 @@ public class PlayersView implements Runnable {
             long currentTime = System.currentTimeMillis(); // Get current time
             if (currentTime - lastTime >= addInterval) { // Check if 5 seconds have passed
                 System.out.println("Added player");
-                gp.players.add(new Player(this.gp)); // Add a new player
+
+                gp.getPlayers().add(new Player(this.gp)); // Add a new player
+
                 playerNum--; // Decrease the number of players to add
                 lastTime = currentTime; // Reset the last time
             }
@@ -44,10 +48,12 @@ public class PlayersView implements Runnable {
         if (players != null){
             for(Player player : players){
                 g2.setColor(Color.GREEN);
-                int posX = player.getPlayerX() + player.solidArea.x ;
-                int posY = player.getPlayerY() + player.solidArea.y ;
-                g2.fillOval(posX, posY, player.solidArea.width  , player.solidArea.height);
-                g2.fillOval((int)(posX + player.solidArea.width / 4), (int)(posY - player.solidArea.height + 14 ) , (int)(player.solidArea.width / 1.8)  , (int)(player.solidArea.width / 1.8));
+
+                int posX = player.getPlayerX() + player.getSolidArea().x ;
+                int posY = player.getPlayerY() + player.getSolidArea().y ;
+                g2.fillOval(posX, posY, player.getSolidArea().width  , player.getSolidArea().height);
+                g2.fillOval((int)(posX + player.getSolidArea().width / 4), (int)(posY - player.getSolidArea().height + 14 ) , (int)(player.getSolidArea().width / 1.8)  , (int)(player.getSolidArea().width / 1.8));
+
             }
         }
     }

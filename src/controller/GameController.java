@@ -4,21 +4,23 @@ import model.entity.Entity;
 import view.GamePanel;
 
 public class GameController {
-    CollisonChecker cCheker ;
+
+    private CollisonChecker cCheker ;
     public GameController (GamePanel gp) {
-        this.cCheker = gp.cCheker ;
+        this.cCheker = gp.getcCheker();
     }
     public void movePlayer(Entity player){
             cCheker.checkTile(player);
-            if (player.isFalling){
+            if (player.isFalling()){
                 goDown(player);
                 return;
             }
-            if (player.canGoUp) {
+            if (player.isCanGoUp()) {
                 goUp(player);
                 return;
             }
-            if (player.collisonOn) {
+            if (player.isCollisonOn()) {
+
                 switchDirection(player);
                 return;
             }
@@ -29,11 +31,13 @@ public class GameController {
         switch (player.getDirection()) {
             case "left" :
                 player.setDirection("right");
-                player.setPlayerX(posX + player.speed);
+
+                player.setPlayerX(posX + player.getSpeed());
                 break;
             case "right" :
                 player.setDirection("left");
-                player.setPlayerX(posX - player.speed);
+                player.setPlayerX(posX - player.getSpeed());
+
                 break;
         }
     }
@@ -41,30 +45,43 @@ public class GameController {
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
-                player.setPlayerX(posX - player.speed);
+                player.setPlayerX(posX - player.getSpeed());
                 break;
             case "right" :
-                player.setPlayerX(posX + player.speed);
+                player.setPlayerX(posX + player.getSpeed());
                 break;
         }
     }
     public void goDown(Entity player){
         int posY = player.getPlayerY();
-        player.setPlayerY(posY + player.speed);
+
+        player.setPlayerY(posY + player.getSpeed());
+
     }
     public void goUp(Entity player){
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
-        player.setPlayerY(posY - player.speed);
+
+        player.setPlayerY(posY - player.getSpeed());
         switch (player.getDirection()){
             case "right" :
-                player.setPlayerX(posX  + player.speed);
+                player.setPlayerX(posX  + player.getSpeed());
                 break;
             case "left" :
-                player.setPlayerX(posX  - player.speed);
+                player.setPlayerX(posX  - player.getSpeed());
                 break;
         }
     }
 
+
+
+    public CollisonChecker getcCheker() {
+        return cCheker;
+    }
+
+
+    public void setcCheker(CollisonChecker cCheker) {
+        this.cCheker = cCheker;
+    }
 
 }
