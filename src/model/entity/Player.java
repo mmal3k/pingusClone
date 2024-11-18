@@ -1,44 +1,47 @@
 package model.entity;
 
+import java.awt.*;
 import view.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 public class Player extends Entity {
-    GamePanel gp ;
+    private GamePanel gp ;
 
     public Player (GamePanel gp) {
         this.gp = gp;
-        solidArea = new Rectangle(8,16,32,32);
+        setSolidArea(new Rectangle(10,18,28,30));
         setDefaultValues();
     }
 
     public void setDefaultValues(){
-        playerX = gp.tileSize * 3 ;
-        playerY = gp.tileSize;
-        speed = 3;
-        direction = "right";
-    }
-    @Override
-    public int getPlayerX() {
-        return playerX;
+        super.setPlayerX(gp.getTileSize() * 3);
+        super.setPlayerY(gp.getTileSize() * 8);
+        setSpeed(3);
+        setDirection("left");
     }
 
-    @Override
+
+    public int getPlayerX() {return super.getPlayerX();}
+
+
     public void setPlayerX(int playerX) {
-        this.playerX = playerX;
+        super.setPlayerX(playerX);
     }
 
-    @Override
+
     public int getPlayerY() {
-        return playerY;
+        return super.getPlayerY();
     }
 
-    @Override
+
     public void setPlayerY(int playerY) {
-        this.playerY = playerY;
+        super.setPlayerY(playerY);
+    }
+
+    public GamePanel getGp() {
+        return gp;
+    }
+
+    public void setGp(GamePanel gp) {
+        this.gp = gp;
     }
 }

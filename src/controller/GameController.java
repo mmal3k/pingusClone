@@ -1,118 +1,77 @@
 package controller;
 
-import model.entity.Player;
+import model.entity.Entity;
 import view.GamePanel;
 
 public class GameController {
-
-    Player player ;
-    CollisonChecker cCheker ;
-
-
+    private CollisonChecker cCheker ;
     public GameController (GamePanel gp) {
-        this.player = gp.player;
-        this.cCheker = gp.cCheker ;
+        this.cCheker = gp.getcCheker();
     }
-
-
-    public void movePlayer(){
-        cCheker.checkTile(player);
-        int posX = player.getPlayerX();
-        int posY = player.getPlayerY();
-        if (player.isFalling){
-            player.setPlayerY(posY + player.speed);
-            return;
-        }
-        moveNormally();
-        if (player.collisonOn){
-            cCheker.canGoUp(player);
-            if (player.canGoUp){
-                goUp();
+    public void movePlayer(Entity player){
+            cCheker.checkTile(player);
+            if (player.isFalling()){
+                goDown(player);
                 return;
             }
-            switchDirection();
-            return;
-        }
-
-
+            if (player.isCanGoUp()) {
+                goUp(player);
+                return;
+            }
+            if (player.isCollisonOn()) {
+                switchDirection(player);
+                return;
+            }
+            moveNormally(player);
     }
-
-    public void switchDirection(){
+    public void switchDirection(Entity player){
         int posX = player.getPlayerX();
-        switch (player.direction) {
+        switch (player.getDirection()) {
             case "left" :
-                player.direction = "right";
-                player.setPlayerX(posX + player.speed);
+                player.setDirection("right");
+                player.setPlayerX(posX + player.getSpeed());
                 break;
             case "right" :
-                player.direction = "left";
-                player.setPlayerX(posX - player.speed);
+                player.setDirection("left");
+                player.setPlayerX(posX - player.getSpeed());
                 break;
         }
     }
-
-    public void moveNormally(){
+    public void moveNormally(Entity player){
         int posX = player.getPlayerX();
-        switch (player.direction) {
+        switch (player.getDirection()) {
             case "left" :
-                player.setPlayerX(posX - player.speed);
+                player.setPlayerX(posX - player.getSpeed());
                 break;
             case "right" :
-                player.setPlayerX(posX + player.speed);
+                player.setPlayerX(posX + player.getSpeed());
                 break;
         }
     }
-
-
-    public void goUp(){
-
+    public void goDown(Entity player){
+        int posY = player.getPlayerY();
+        player.setPlayerY(posY + player.getSpeed());
+    }
+    public void goUp(Entity player){
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
+        player.setPlayerY(posY - player.getSpeed());
+        switch (player.getDirection()){
+            case "right" :
+                player.setPlayerX(posX  + player.getSpeed());
+                break;
+            case "left" :
+                player.setPlayerX(posX  - player.getSpeed());
+                break;
+        }
+    }
 
-        player.setPlayerY(posY - player.speed);
-        System.out.println(player.getPlayerX()+player.solidArea.x);
 
+    public CollisonChecker getcCheker() {
+        return cCheker;
+    }
+
+    public void setcCheker(CollisonChecker cCheker) {
+        this.cCheker = cCheker;
     }
 }
-
-//    public void movePlayer(){
-//        cCheker.checkTile(player);
-//        int posX = player.getPlayerX();
-//        int posY = player.getPlayerY();
-//        if (player.isFalling){
-//            player.setPlayerY(posY + player.speed);
-//
-//        } else if (player.collisonOn) {
-//            if (player.canGoUp){
-//                player.setPlayerY(posY - player.speed);
-//                if (player.direction  == "right") {
-//                    player.setPlayerX(posX - player.speed);
-//                } else {
-//                    player.setPlayerX(posX + player.speed);
-//                }
-//                player.isFalling = true;
-//            }else{
-//                switch (player.direction) {
-//                    case "left" :
-//                        player.direction = "right";
-//                        player.setPlayerX(posX + player.speed);
-//                        break;
-//                    case "right" :
-//                        player.direction = "left";
-//                        player.setPlayerX(posX - player.speed);
-//                        break;
-//                }
-//            }
-//
-//        } else {
-//            switch (player.direction) {
-//                case "left" :
-//                    player.setPlayerX(posX - player.speed);
-//                    break;
-//                case "right" :
-//                    player.setPlayerX(posX + player.speed);
-//                    break;
-//            }
-//        }
-//
-//    }
