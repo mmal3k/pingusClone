@@ -7,8 +7,9 @@ import view.GamePanel;
 public class Player extends Entity {
     private GamePanel gp ;
 
-    public Player (GamePanel gp) {
+    public Player (GamePanel gp ,int id) {
         this.gp = gp;
+        this.id = id;
         setSolidArea(new Rectangle(10,18,28,30));
 
         solidAreaDefaultX = getSolidArea().x;

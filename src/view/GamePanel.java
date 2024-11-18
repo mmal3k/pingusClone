@@ -2,6 +2,7 @@ package view;
 
 import controller.CollisonChecker;
 import controller.GameController;
+import controller.ObjectController;
 import model.entity.Player;
 import model.object.SuperObject;
 import model.tile.TileManager;
@@ -28,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     private PlayersView playersView = new PlayersView(this , 10) ;
     public SuperObject obj[] = new SuperObject[10];
     public ObjectView objectView = new ObjectView(this);
+    public ObjectController objectController = new ObjectController(this);
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);

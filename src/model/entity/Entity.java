@@ -3,7 +3,7 @@ package model.entity;
 import java.awt.*;
 
 public abstract class Entity {
-
+    public int id;
     private int playerX;
     private int playerY;
     private String direction;

@@ -4,35 +4,40 @@ import model.entity.Entity;
 import view.GamePanel;
 
 public class GameController {
-
+    GamePanel gp;
     private CollisonChecker cCheker ;
     public GameController (GamePanel gp) {
         this.cCheker = gp.getcCheker();
+        this.gp = gp;
     }
     public void movePlayer(Entity player){
+
             cCheker.checkTile(player);
-            int objIndex = cCheker.checkObject(player,true);
-            if (player.isFalling()){
+            int[] indexes = cCheker.checkObject(player,true);
+            gp.objectController.interactWithObject(indexes[0],indexes[1]);
+
+            if (player!= null && player.isFalling()){
                 goDown(player);
                 return;
             }
-            if (player.isCanGoUp()) {
+            if (player!= null &&player.isCanGoUp()) {
                 goUp(player);
                 return;
             }
-            if (player.isCollisonOn()) {
+            if (player!= null &&player.isCollisonOn()) {
 
                 switchDirection(player);
                 return;
             }
-            moveNormally(player);
+            if (player!= null )moveNormally(player);
+
+
     }
     public void switchDirection(Entity player){
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
                 player.setDirection("right");
-
                 player.setPlayerX(posX + player.getSpeed());
                 break;
             case "right" :

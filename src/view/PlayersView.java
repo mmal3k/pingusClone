@@ -22,14 +22,14 @@ public class PlayersView implements Runnable {
     @Override
     public void run() {
         lastTime = System.currentTimeMillis(); // Initialize the last time
-
+        int i =0;
         while (playerNum > 0) {
             long currentTime = System.currentTimeMillis(); // Get current time
             if (currentTime - lastTime >= addInterval) { // Check if 5 seconds have passed
                 System.out.println("Added player");
 
-                gp.getPlayers().add(new Player(this.gp)); // Add a new player
-
+                gp.getPlayers().add(new Player(this.gp,i)); // Add a new player
+                i++;
                 playerNum--; // Decrease the number of players to add
                 lastTime = currentTime; // Reset the last time
             }
@@ -45,8 +45,9 @@ public class PlayersView implements Runnable {
         thread.start();
     }
     public void draw(Graphics2D g2) {
-        if (players != null) {
+
             for (Player player : players) {
+                if(player == null) continue;
                 g2.setColor(Color.GREEN);
 
                 // Get player position and size
@@ -82,7 +83,7 @@ public class PlayersView implements Runnable {
 
                 g2.fillPolygon(xPoints, yPoints, 3);
             }
-        }
+
 
     }
 }
