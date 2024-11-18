@@ -45,16 +45,44 @@ public class PlayersView implements Runnable {
         thread.start();
     }
     public void draw(Graphics2D g2) {
-        if (players != null){
-            for(Player player : players){
+        if (players != null) {
+            for (Player player : players) {
                 g2.setColor(Color.GREEN);
 
-                int posX = player.getPlayerX() + player.getSolidArea().x ;
-                int posY = player.getPlayerY() + player.getSolidArea().y ;
-                g2.fillOval(posX, posY, player.getSolidArea().width  , player.getSolidArea().height);
-                g2.fillOval((int)(posX + player.getSolidArea().width / 4), (int)(posY - player.getSolidArea().height + 14 ) , (int)(player.getSolidArea().width / 1.8)  , (int)(player.getSolidArea().width / 1.8));
+                // Get player position and size
+                int posX = player.getPlayerX() + player.getSolidArea().x;
+                int posY = player.getPlayerY() + player.getSolidArea().y;
+                int circleWidth = player.getSolidArea().width;
+                int circleHeight = player.getSolidArea().height;
 
+                // Draw the bottom circle (body)
+                g2.fillOval(posX, posY, circleWidth, circleHeight);
+
+                // Draw the top circle (head)
+                int headPosX = (int) (posX + circleWidth / 4);
+                int headPosY = (int) (posY - circleHeight + 14);
+                int headWidth = (int) (circleWidth / 1.8);
+                g2.fillOval(headPosX, headPosY, headWidth, headWidth);
+
+                // Draw the nose (triangle)
+                g2.setColor(Color.GREEN);
+                int noseX = headPosX + (headWidth / 2); // X-coordinate for nose center
+                int noseY = headPosY + (headWidth / 2); // Y-coordinate for nose center
+                int[] xPoints;
+                // Define the triangle vertices for the nose
+                if (player.getDirection() == "left") {
+                     xPoints = new int[] {noseX, noseX, noseX - 15};
+                } else {
+                     xPoints = new int[]{noseX , noseX , noseX+15};// Centered vertically
+                }
+                int[] yPoints = {noseY - 5, noseY + 5, noseY};
+
+
+                // Draw the nose as a filled polygon
+
+                g2.fillPolygon(xPoints, yPoints, 3);
             }
         }
+
     }
 }

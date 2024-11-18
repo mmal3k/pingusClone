@@ -11,13 +11,15 @@ public class Player extends Entity {
         this.gp = gp;
         setSolidArea(new Rectangle(10,18,28,30));
 
+        solidAreaDefaultX = getSolidArea().x;
+        solidAreaDefaultY = getSolidArea().y;
         setDefaultValues();
     }
 
     public void setDefaultValues(){
 
-        super.setPlayerX(gp.getTileSize() * 3);
-        super.setPlayerY(gp.getTileSize() * 8);
+        super.setPlayerX(gp.getTileSize() * 4);
+        super.setPlayerY(gp.getTileSize() * 9);
         setSpeed(3);
         setDirection("left");
 

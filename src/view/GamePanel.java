@@ -3,6 +3,7 @@ package view;
 import controller.CollisonChecker;
 import controller.GameController;
 import model.entity.Player;
+import model.object.SuperObject;
 import model.tile.TileManager;
 
 import javax.swing.*;
@@ -10,7 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
-
     private final int originalTileSize = 16;
     private final int scale = 3;
     private final int tileSize = originalTileSize * scale;
@@ -25,13 +25,18 @@ public class GamePanel extends JPanel implements Runnable {
     private CollisonChecker cCheker = new CollisonChecker(this);
     private GameController gc = new GameController(this);
     private Thread gameThread;
-    private PlayersView playersView = new PlayersView(this , 3) ;
-
+    private PlayersView playersView = new PlayersView(this , 10) ;
+    public SuperObject obj[] = new SuperObject[10];
+    public ObjectView objectView = new ObjectView(this);
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+    }
+
+    public void setupGame(){
+        objectView.setObject();
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -74,6 +79,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g ;
         tileView.draw(g2);
+        objectView.draw(g2,this);
         playersView.draw(g2);
 
     }

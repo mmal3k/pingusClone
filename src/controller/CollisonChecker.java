@@ -4,6 +4,8 @@ import model.entity.Entity;
 import model.entity.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class CollisonChecker {
 
     private GamePanel gp ;
@@ -157,6 +159,44 @@ public class CollisonChecker {
                 break ;
         }
 
+    }
+
+    public int checkObject(Entity entity , boolean player){
+        int index = 999;
+        for (int i =0 ; i < gp.obj.length ; i++){
+            if(gp.obj[i] != null){
+                // get entity's solid area position
+                int x = entity.getPlayerX() + entity.getSolidArea().x;
+                int y = entity.getPlayerY() + entity.getSolidArea().y;
+                entity.setSolidArea(new Rectangle(x,y));
+                //get the object solid area position
+
+                gp.obj[i].solidArea.x = gp.obj[i].objX + gp.obj[i].solidArea.x;
+                gp.obj[i].solidArea.y = gp.obj[i].objY + gp.obj[i].solidArea.y;
+
+                switch (entity.getDirection()) {
+                    case "left" :
+                        x = entity.getSolidArea().x - entity.getSpeed();
+                        entity.setSolidArea(new Rectangle(x,y));
+                        if (entity.getSolidArea().intersects(gp.obj[i].solidArea)){
+                            System.out.println("left colision");
+                        }
+                        break;
+                    case "right" :
+                        x = entity.getSolidArea().x + entity.getSpeed();
+                        entity.setSolidArea(new Rectangle(x,y));
+                        if (entity.getSolidArea().intersects(gp.obj[i].solidArea)){
+                            System.out.println("right colision");
+                        }
+                        break;
+
+                }
+                entity.setSolidArea(new Rectangle(entity.solidAreaDefaultX,entity.solidAreaDefaultY));
+                gp.obj[i].solidArea.x = gp.obj[i].solidAreaDefaultX;
+                gp.obj[i].solidArea.y = gp.obj[i].solidAreaDefaultY;
+            }
+        }
+        return index;
     }
 
     public GamePanel getGp() {

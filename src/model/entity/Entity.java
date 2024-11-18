@@ -12,6 +12,9 @@ public abstract class Entity {
     private boolean isFalling = false;
     private boolean canGoUp = false;
     private Rectangle solidArea;
+    public int solidAreaDefaultX ;
+    public int solidAreaDefaultY ;
+
 
 
     public String getDirection() {

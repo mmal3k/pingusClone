@@ -11,6 +11,7 @@ public class GameController {
     }
     public void movePlayer(Entity player){
             cCheker.checkTile(player);
+            int objIndex = cCheker.checkObject(player,true);
             if (player.isFalling()){
                 goDown(player);
                 return;
