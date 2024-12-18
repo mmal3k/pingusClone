@@ -7,6 +7,7 @@ import view.GamePanel;
 public class Player extends Entity {
     private GamePanel gp ;
 
+
     public Player (GamePanel gp ,int id) {
         this.gp = gp;
         this.setId(id);

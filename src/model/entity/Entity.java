@@ -14,6 +14,8 @@ public abstract class Entity {
     private Rectangle solidArea;
     private int solidAreaDefaultX ;
     private int solidAreaDefaultY ;
+    public int hbat = 0;
+
 
 
 

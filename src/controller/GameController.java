@@ -9,7 +9,7 @@ public class GameController {
     PlayersView pv;
     private CollisonChecker cCheker ;
 
-    int hbat=0;
+
 
     public GameController (GamePanel gp,PlayersView pv) {
         this.cCheker = gp.getcCheker();
@@ -23,33 +23,31 @@ public class GameController {
             int[] indexes = cCheker.checkObject(player,true);
             gp.getObjectController().interactWithObject(indexes[0],indexes[1]);
 
-            if (player==null){
-                System.out.println("ya rien a dessiner merci");
-                return;
-            }
 
             if (player!= null && player.isFalling()){
-                hbat = hbat +player.getSpeed();
+                player.hbat = player.hbat +player.getSpeed();
                 goDown(player);
-                if (hbat == gp.getTileSize()*5){
+                if (player.hbat == gp.getTileSize()*3){
+                    int index = gp.getPlayers().indexOf(player);
                     System.out.println("Player "+player.getId()+" died du to the fall");
-                    pv.players.remove(player);
+                    gp.getPlayers().set(index,null);
+
                     return;
                 }
                 return;
             }
             if (player!= null &&player.isCanGoUp()) {
-                hbat = 0;
+                player.hbat = 0;
                 goUp(player);
                 return;
             }
             if (player!= null &&player.isCollisonOn()) {
-                hbat = 0;
+                player.hbat = 0;
                 switchDirection(player);
                 return;
             }
             if (player!= null ){
-                hbat = 0;
+                player.hbat = 0;
                 moveNormally(player);
             }
 
