@@ -11,7 +11,7 @@ public class PlayersView implements Runnable {
     private Thread thread; // Thread for adding players
     private long lastTime; // Tracks the last time a player was added
     private final long addInterval = 2000; // Interval in milliseconds (2 seconds)
-    private ArrayList<Player> players ;
+    public ArrayList<Player> players ;
     public PlayersView(GamePanel gp, int playerNum) {
         this.gp = gp;
         this.playerNum = playerNum;

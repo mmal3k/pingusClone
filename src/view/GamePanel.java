@@ -24,9 +24,9 @@ public class GamePanel extends JPanel implements Runnable {
     private TileManager tileM = new TileManager(this);
     private TileView tileView  = new TileView(this);
     private CollisonChecker cCheker = new CollisonChecker(this);
-    private GameController gc = new GameController(this);
     private Thread gameThread;
-    private PlayersView playersView = new PlayersView(this , 10) ;
+    private PlayersView playersView = new PlayersView(this , 1) ;
+    private GameController gc = new GameController(this,playersView);
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
