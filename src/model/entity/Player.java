@@ -17,12 +17,10 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues(){
-
         super.setPlayerX(gp.getTileSize() * 4);
         super.setPlayerY(gp.getTileSize() * 9);
-        setSpeed(3);
+        setSpeed(2);
         setDirection("left");
-
     }
 
 
@@ -43,4 +41,13 @@ public class Player extends Entity {
         super.setPlayerY(playerY);
     }
 
+
+    public Rectangle getBounds() {
+        return new Rectangle(getPlayerX(), getPlayerY(), gp.getTileSize(), gp.getTileSize());
+    }
+
+    public void performClickAction() {
+        System.out.println("Player : "+ this.getId() +" clicked! Performing action... : " + gp.menuPanel.getRole());
+        // Add your desired action here
+    }
 }
