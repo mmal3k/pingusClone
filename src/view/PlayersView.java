@@ -26,8 +26,6 @@ public class PlayersView implements Runnable {
         while (playerNum > 0) {
             long currentTime = System.currentTimeMillis(); // Get current time
             if (currentTime - lastTime >= addInterval) { // Check if 5 seconds have passed
-
-
                 gp.getPlayers().add(new Player(this.gp,i)); // Add a new player
                 i++;
                 System.out.println("poussins entrees : "+i);

@@ -9,6 +9,8 @@ import model.tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
@@ -30,11 +32,28 @@ public class GamePanel extends JPanel implements Runnable {
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
+    public MenuPanel menuPanel = new MenuPanel(this);
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.setLayout(new BorderLayout());
+        this.add(menuPanel , BorderLayout.SOUTH);
+
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point clickPoint = e.getPoint();
+                for (Player player : players){
+                    if (player != null && player.getBounds().contains(clickPoint)) {
+                        player.performClickAction();
+                    }
+                }
+
+            }
+        });
     }
 
     public void setupGame(){
@@ -78,7 +97,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g ;
         tileView.draw(g2);
         objectView.draw(g2,this);
@@ -119,4 +137,11 @@ public class GamePanel extends JPanel implements Runnable {
         return objectController;
     }
 
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
+    }
 }

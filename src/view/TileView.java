@@ -2,6 +2,7 @@ package view;
 
 import model.tile.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class TileView {
@@ -19,7 +20,7 @@ public class TileView {
     public void draw(Graphics2D g2){
         int worldCol = 0 ;
         int worldRow = 0 ;
-        while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow()){
+        while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow() -1){
             int tileNum = mapTileNum[worldCol][worldRow ] ;
 
             int worldX = worldCol  * gp.getTileSize();
@@ -33,5 +34,9 @@ public class TileView {
                 worldRow ++ ;
             }
         }
+
+
+
+
     }
 }

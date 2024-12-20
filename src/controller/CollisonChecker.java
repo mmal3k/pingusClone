@@ -16,24 +16,15 @@ public class CollisonChecker {
     }
     public void checkTile (Entity entity){
         if (entity != null) {
-
-
             canGoUp(entity);
-
             if (entity.isCanGoUp()) {
-
                 return;
             }
-
             canFall((Player) entity);
-
             if (entity.isFalling()) {
-
                 return;
             }
-
             checkCollision(entity);
-
             if (entity.isCollisonOn()) {
                 return;
             }

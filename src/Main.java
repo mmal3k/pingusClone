@@ -1,6 +1,8 @@
 import view.GamePanel;
+import view.MenuPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +12,9 @@ public class Main {
         frame.setTitle("Test Game");
 
         GamePanel gamePanel = new GamePanel();
+
         frame.add(gamePanel);
+
         frame.pack();
 
         frame.setLocationRelativeTo(null);
