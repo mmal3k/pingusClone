@@ -1,7 +1,6 @@
 package view;
 
 import controller.CollisonChecker;
-import controller.GameController;
 import controller.ObjectController;
 import model.Player;
 import model.object.SuperObject;
@@ -26,7 +25,6 @@ public class GamePanel extends JPanel implements Runnable {
     private TileManager tileM = new TileManager(this);
     private TileView tileView  = new TileView(this);
     private CollisonChecker cCheker = new CollisonChecker(this);
-    private GameController gc = new GameController(this);
     private Thread gameThread;
     private PlayersView playersView = new PlayersView(this , 10) ;
     private SuperObject[] obj = new SuperObject[10];
@@ -92,7 +90,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void update(){
         for (Player player : players) {
-            gc.movePlayer(player);
+            if (player != null){
+
+                player.movePlayer(this , player , cCheker);
+            }
         }
     }
     @Override

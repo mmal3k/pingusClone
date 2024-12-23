@@ -2,6 +2,10 @@ package model;
 
 
 import java.awt.*;
+
+import controller.CollisonChecker;
+import model.roles.NormalRole;
+import model.roles.Role;
 import view.GamePanel;
 
 //public class Player extends Entity {
@@ -11,41 +15,16 @@ public class Player {
     private int id;
     private int playerX;
     private int playerY;
-
-
-
     private String direction;
-
-
-
     private int speed ;
-
-
-
     private boolean collisonOn = false;
-
-
-
     private boolean isFalling = false;
-
-
-
     private boolean canGoUp = false;
-
-    public Rectangle getSolidArea() {
-        return solidArea;
-    }
-
-    public void setSolidArea(Rectangle solidArea) {
-        this.solidArea = solidArea;
-    }
-
     private Rectangle solidArea;
     private int solidAreaDefaultX ;
     private int solidAreaDefaultY ;
-
-
     private GamePanel gp ;
+    private Role role ;
 
     public Player (GamePanel gp ,int id) {
         this.gp = gp;
@@ -53,6 +32,7 @@ public class Player {
         this.solidArea = new Rectangle(10,18,28,30);
         this.solidAreaDefaultX  = this.solidArea.x;
         this.solidAreaDefaultY  = this.solidArea.y;
+        this.role = new NormalRole();
         setDefaultValues();
     }
 
@@ -64,8 +44,8 @@ public class Player {
         this.speed = 2 ;
 
         this.direction = "left";
-    }
 
+    }
 
 
     public Rectangle getBounds() {
@@ -75,6 +55,10 @@ public class Player {
     public void performClickAction() {
         System.out.println("Player : "+ this.id +" clicked! Performing action... : " + gp.menuPanel.getRole());
         // Add your desired action here
+    }
+
+    public void movePlayer (GamePanel gp,  Player player ,CollisonChecker cChecker) {
+        role.handleRequest(gp ,player , cChecker);
     }
 
 
@@ -142,5 +126,13 @@ public class Player {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Rectangle getSolidArea() {
+        return solidArea;
+    }
+
+    public void setSolidArea(Rectangle solidArea) {
+        this.solidArea = solidArea;
     }
 }
