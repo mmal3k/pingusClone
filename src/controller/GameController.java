@@ -1,6 +1,6 @@
 package controller;
 
-import model.entity.Entity;
+import model.Player;
 import view.GamePanel;
 
 public class GameController {
@@ -10,7 +10,7 @@ public class GameController {
         this.cCheker = gp.getcCheker();
         this.gp = gp;
     }
-    public void movePlayer(Entity player){
+    public void movePlayer(Player player){
 
             cCheker.checkTile(player);
             int[] indexes = cCheker.checkObject(player,true);
@@ -33,7 +33,7 @@ public class GameController {
 
 
     }
-    public void switchDirection(Entity player){
+    public void switchDirection(Player player){
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -47,7 +47,7 @@ public class GameController {
                 break;
         }
     }
-    public void moveNormally(Entity player){
+    public void moveNormally(Player player){
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -58,13 +58,13 @@ public class GameController {
                 break;
         }
     }
-    public void goDown(Entity player){
+    public void goDown(Player player){
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY + player.getSpeed());
 
     }
-    public void goUp(Entity player){
+    public void goUp(Player player){
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
 

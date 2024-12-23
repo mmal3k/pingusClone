@@ -3,7 +3,7 @@ package view;
 import controller.CollisonChecker;
 import controller.GameController;
 import controller.ObjectController;
-import model.entity.Player;
+import model.Player;
 import model.object.SuperObject;
 import model.tile.TileManager;
 
