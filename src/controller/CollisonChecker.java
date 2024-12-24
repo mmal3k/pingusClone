@@ -1,7 +1,6 @@
 package controller;
 
-import model.entity.Entity;
-import model.entity.Player;
+import model.Player;
 import view.GamePanel;
 
 import java.awt.*;
@@ -14,13 +13,13 @@ public class CollisonChecker {
     public CollisonChecker(GamePanel gp ){
         this.gp = gp ;
     }
-    public void checkTile (Entity entity){
+    public void checkTile (Player entity){
         if (entity != null) {
             canGoUp(entity);
             if (entity.isCanGoUp()) {
                 return;
             }
-            canFall((Player) entity);
+            canFall( entity);
             if (entity.isFalling()) {
                 return;
             }
@@ -30,7 +29,7 @@ public class CollisonChecker {
             }
         }
     }
-    public void canGoUp(Entity entity){
+    public void canGoUp(Player entity){
         if (entity != null) {
 
 
@@ -121,7 +120,7 @@ public class CollisonChecker {
     }
 
 
-    public void checkCollision(Entity entity){
+    public void checkCollision(Player entity){
         if (entity != null) {
 
 
@@ -162,7 +161,7 @@ public class CollisonChecker {
         }
     }
 
-    public int[] checkObject(Entity entity , boolean player){
+    public int[] checkObject(Player entity , boolean player){
         if(entity != null) {
 
             int playerIndex = 999;

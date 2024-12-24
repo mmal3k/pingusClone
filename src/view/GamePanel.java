@@ -1,9 +1,8 @@
 package view;
 
 import controller.CollisonChecker;
-import controller.GameController;
 import controller.ObjectController;
-import model.entity.Player;
+import model.Player;
 import model.object.SuperObject;
 import model.tile.TileManager;
 
@@ -92,7 +91,10 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void update(){
         for (Player player : players) {
-            gc.movePlayer(player);
+            if (player != null){
+
+                player.movePlayer(this , player , cCheker);
+            }
         }
     }
     @Override

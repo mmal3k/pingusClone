@@ -1,6 +1,6 @@
 package view;
 
-import model.entity.Player;
+import model.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
