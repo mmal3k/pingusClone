@@ -20,6 +20,7 @@ public class Player {
     private boolean collisonOn = false;
     private boolean isFalling = false;
     private boolean canGoUp = false;
+    public int goDown;
     private Rectangle solidArea;
     private int solidAreaDefaultX ;
     private int solidAreaDefaultY ;
@@ -33,6 +34,7 @@ public class Player {
         this.solidAreaDefaultX  = this.solidArea.x;
         this.solidAreaDefaultY  = this.solidArea.y;
         this.role = new NormalRole();
+        goDown = 0;
         setDefaultValues();
     }
 
