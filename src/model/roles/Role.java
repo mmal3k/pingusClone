@@ -5,5 +5,5 @@ import model.Player;
 import view.GamePanel;
 
 public abstract class Role {
-    public abstract void handleRequest(GamePanel gp ,Player player , CollisonChecker cChecker);
+    public abstract void move(GamePanel gp , Player player , CollisonChecker cChecker);
 }
