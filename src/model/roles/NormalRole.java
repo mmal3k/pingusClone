@@ -8,7 +8,7 @@ public class NormalRole extends Role{
 
 
     @Override
-    public void handleRequest(GamePanel gp , Player player, CollisonChecker cChecker) {
+    public void move(GamePanel gp , Player player, CollisonChecker cChecker) {
         cChecker.checkTile(player);
         int[] indexes = cChecker.checkObject(player,true);
         gp.getObjectController().interactWithObject(indexes[0],indexes[1]);

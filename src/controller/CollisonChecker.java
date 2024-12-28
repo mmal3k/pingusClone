@@ -24,6 +24,7 @@ public class CollisonChecker {
                 return;
             }
             checkCollision(entity);
+            collisionWithPlayer(entity);
             if (entity.isCollisonOn()) {
                 return;
             }
@@ -120,14 +121,14 @@ public class CollisonChecker {
     }
 
 
-    public void checkCollision(Player entity){
-        if (entity != null) {
+    public void checkCollision(Player player){
+        if (player != null) {
 
 
-            int leftPosX = entity.getPlayerX() + entity.getSolidArea().x;
-            int rightPosX = entity.getPlayerX() + entity.getSolidArea().x + entity.getSolidArea().width;
-            int topPosY = entity.getPlayerY() + entity.getSolidArea().y;
-            int bottomPosY = entity.getPlayerY() + entity.getSolidArea().y + entity.getSolidArea().height;
+            int leftPosX = player.getPlayerX() + player.getSolidArea().x;
+            int rightPosX = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
+            int topPosY = player.getPlayerY() + player.getSolidArea().y;
+            int bottomPosY = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height;
 
             int leftCol = leftPosX / gp.getTileSize();
             int rightCol = rightPosX / gp.getTileSize();
@@ -135,28 +136,46 @@ public class CollisonChecker {
             int bottomRow = bottomPosY / gp.getTileSize();
 
             int tileNum1, tileNum2;
-            switch (entity.getDirection()) {
+            switch (player.getDirection()) {
                 case "left":
-                    leftCol = (leftPosX - entity.getSpeed()) / gp.getTileSize();
+                    leftCol = (leftPosX - player.getSpeed()) / gp.getTileSize();
                     tileNum1 = gp.getTileM().getMapTileNum()[leftCol][topRow];
                     tileNum2 = gp.getTileM().getMapTileNum()[leftCol][bottomRow];
                     if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
-                        entity.setCollisonOn(true);
+                        player.setCollisonOn(true);
                     } else {
-                        entity.setCollisonOn(false);
+                        player.setCollisonOn(false);
                     }
                     break;
                 case "right":
-                    rightCol = (rightPosX + entity.getSpeed()) / gp.getTileSize();
+                    rightCol = (rightPosX + player.getSpeed()) / gp.getTileSize();
                     tileNum1 = gp.getTileM().getMapTileNum()[rightCol][topRow];
                     tileNum2 = gp.getTileM().getMapTileNum()[rightCol][bottomRow];
                     if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
-                        entity.setCollisonOn(true);
+                        player.setCollisonOn(true);
                     } else {
-                        entity.setCollisonOn(false);
+                        player.setCollisonOn(false);
 
                     }
                     break;
+            }
+        }
+    }
+
+
+    public void collisionWithPlayer (Player player) {
+
+        int leftPosX = player.getPlayerX() - player.getSolidArea().x ;
+        int rightPosX = player.getPlayerX() + player.getSolidArea().x ;
+        int topPosY = player.getPlayerY() ;
+
+
+
+        for (Player p : gp.getPlayers()) {
+            if (p!= null && p != player && p.colliddable) {
+                if ((leftPosX == p.getPlayerX() || rightPosX == p.getPlayerX()) && (topPosY == (p.getPlayerY()))) {
+                    player.setCollisonOn(true);
+                }
             }
         }
     }

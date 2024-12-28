@@ -4,6 +4,7 @@ package model;
 import java.awt.*;
 
 import controller.CollisonChecker;
+import model.roles.BlockerRole;
 import model.roles.NormalRole;
 import model.roles.Role;
 import view.GamePanel;
@@ -26,6 +27,9 @@ public class Player {
     private int solidAreaDefaultY ;
     private GamePanel gp ;
     private Role role ;
+    public boolean colliddable = false ;
+
+
 
     public Player (GamePanel gp ,int id) {
         this.gp = gp;
@@ -56,11 +60,17 @@ public class Player {
 
     public void performClickAction() {
         System.out.println("Player : "+ this.id +" clicked! Performing action... : " + gp.menuPanel.getRole());
+
+        switch (gp.menuPanel.getRole()) {
+            case "Role 2" :
+                this.role = new BlockerRole();
+                break;
+        }
         // Add your desired action here
     }
 
     public void movePlayer (GamePanel gp,  Player player ,CollisonChecker cChecker) {
-        role.handleRequest(gp ,player , cChecker);
+        role.move(gp ,player , cChecker);
     }
 
 
