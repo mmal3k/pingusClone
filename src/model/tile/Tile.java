@@ -5,6 +5,7 @@ import java.awt.*;
 public class Tile {
     private Color color ;
     private boolean collision ;
+    private boolean destructible = true;
 
     public Color getColor() {
         return color;
@@ -17,6 +18,9 @@ public class Tile {
     public boolean isCollision() {
         return collision;
     }
+
+    public boolean isDestructible(){ return this.destructible;}
+
 
     public void setCollision(boolean collision) {
         this.collision = collision;
