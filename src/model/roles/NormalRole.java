@@ -16,7 +16,7 @@ public class NormalRole extends Role{
         if (player!= null && player.isFalling()){
             player.goDown = player.goDown + player.getSpeed();
             goDown(player);
-            if (player.goDown == gp.getTileSize()*3){
+            if (player.goDown == gp.getTileSize()*5){
                 int playerInd = gp.getPlayers().indexOf(player);
                 System.out.println("Player "+player.getId()+"died due to the fall");
                 gp.getPlayers().set(playerInd,null);
