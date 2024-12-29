@@ -7,9 +7,6 @@ import view.GamePanel;
 
 public class TunnelierRole extends Role {
     NormalRole normalRole = new NormalRole();
-    boolean foundDestructible = false ;
-    boolean enter = false ;
-
 
     @Override
     public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
@@ -73,10 +70,5 @@ public class TunnelierRole extends Role {
                 }
                 break;
         }
-
-
-
     }
-
-
 }
