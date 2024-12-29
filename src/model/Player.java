@@ -5,6 +5,7 @@ import java.awt.*;
 
 import controller.CollisonChecker;
 import model.roles.BlockerRole;
+import model.roles.Bombeur;
 import model.roles.NormalRole;
 import model.roles.Role;
 import view.GamePanel;
@@ -64,6 +65,9 @@ public class Player {
         switch (gp.menuPanel.getRole()) {
             case "Role 2" :
                 this.role = new BlockerRole();
+                break;
+            case "Role 3" :
+                this.role = new Bombeur();
                 break;
         }
         // Add your desired action here
