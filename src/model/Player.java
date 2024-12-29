@@ -7,9 +7,9 @@ import controller.CollisonChecker;
 import model.roles.BlockerRole;
 import model.roles.NormalRole;
 import model.roles.Role;
+import model.roles.TunnelierRole;
 import view.GamePanel;
 
-//public class Player extends Entity {
 public class Player {
 
 
@@ -64,6 +64,9 @@ public class Player {
         switch (gp.menuPanel.getRole()) {
             case "Role 2" :
                 this.role = new BlockerRole();
+                break;
+            case "Role 4" :
+                this.role = new TunnelierRole();
                 break;
         }
         // Add your desired action here
@@ -146,5 +149,13 @@ public class Player {
 
     public void setSolidArea(Rectangle solidArea) {
         this.solidArea = solidArea;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

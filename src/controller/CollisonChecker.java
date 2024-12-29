@@ -19,7 +19,7 @@ public class CollisonChecker {
             if (entity.isCanGoUp()) {
                 return;
             }
-            canFall( entity);
+            canFall(entity);
             if (entity.isFalling()) {
                 return;
             }
@@ -115,10 +115,49 @@ public class CollisonChecker {
                 entity.setFalling(false);
             } else {
                 entity.setFalling(true);
-
             }
+
         }
     }
+
+    public void checkPlayerUnder(Player player) {
+        if (player.isFalling()){
+
+            int leftPosX = player.getPlayerX() + player.getSolidArea().x;
+            int rightPosX = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
+            int topPosY = player.getPlayerY() + player.getSolidArea().y;
+            int bottomPosY = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height;
+
+
+            int leftCol = leftPosX / gp.getTileSize();
+            int rightCol = rightPosX / gp.getTileSize();
+            int topRow = topPosY / gp.getTileSize();
+            int bottomRow = bottomPosY / gp.getTileSize();
+
+
+            int bottom = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height ;
+            int left = player.getPlayerX()  ;
+            int right = player.getPlayerX() + gp.getTileSize() ;
+            for (Player p : gp.getPlayers()){
+
+                if (p != null && p != player && p.colliddable){
+                    if (p.getPlayerY()+ p.getSolidArea().y == bottom && (p.getPlayerX() >= left && p.getPlayerX() <= right) ){
+                        player.setFalling(false);
+                    }else {
+                        player.setFalling(true);
+                    }
+                }
+            }
+
+
+        }
+
+    }
+
+
+
+
+
 
 
     public void checkCollision(Player player){
