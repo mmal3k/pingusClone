@@ -25,6 +25,7 @@ public class TileManager {
         tiles[1] = new Tile();
         tiles[1].setColor(Color.darkGray);
         tiles[1].setCollision(true);
+        tiles[1].setDestructible(true);
 
         tiles[2] = new Tile();
         tiles[2].setColor(Color.RED);

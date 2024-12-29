@@ -4,10 +4,7 @@ package model;
 import java.awt.*;
 
 import controller.CollisonChecker;
-import model.roles.BlockerRole;
-import model.roles.Bombeur;
-import model.roles.NormalRole;
-import model.roles.Role;
+import model.roles.*;
 import view.GamePanel;
 
 //public class Player extends Entity {
@@ -16,7 +13,7 @@ public class Player {
 
     private int id;
     private int playerX;
-    private int playerY;
+    public int playerY;
     private String direction;
     private int speed ;
     private boolean collisonOn = false;
@@ -69,12 +66,19 @@ public class Player {
             case "Role 3" :
                 this.role = new Bombeur();
                 break;
+            case "Role 4" :
+                this.role = new Foreur();
+                break;
         }
         // Add your desired action here
     }
 
     public void movePlayer (GamePanel gp,  Player player ,CollisonChecker cChecker) {
         role.move(gp ,player , cChecker);
+    }
+
+    public void setRole(Role role){
+        this.role=role;
     }
 
 

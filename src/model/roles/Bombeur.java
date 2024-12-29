@@ -18,8 +18,8 @@ public class Bombeur extends NormalRole  {
             int playerInd = gp.getPlayers().indexOf(player);
             gp.getPlayers().set(playerInd,null);
             System.out.println("BOOM!!!");
-            int mapx = (player.getPlayerX()  / gp.getTileSize()) +1;
-            int mapy = player.getPlayerY() / gp.getTileSize();
+            int mapx = (player.getPlayerX() + gp.halfTileSize)  / gp.getTileSize();
+            int mapy = (player.getPlayerY() +gp.halfTileSize) / gp.getTileSize();
 
 
 
@@ -36,18 +36,18 @@ public class Bombeur extends NormalRole  {
 
 //            gp.getTileM().getMapTileNum()[mapx][mapy] = 0;
 
-            gp.getTileM().getMapTileNum()[mapx-1][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx-2][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx+1][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx+2][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy-1] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy+2] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy+3] = 0;
-            gp.getTileM().getMapTileNum()[mapx+1][mapy+2] = 0;
-            gp.getTileM().getMapTileNum()[mapx-1][mapy+2] = 0;
             gp.getTileM().getMapTileNum()[mapx-1][mapy] = 0;
+            gp.getTileM().getMapTileNum()[mapx-2][mapy] = 0;
             gp.getTileM().getMapTileNum()[mapx+1][mapy] = 0;
+            gp.getTileM().getMapTileNum()[mapx+2][mapy] = 0;
+            gp.getTileM().getMapTileNum()[mapx][mapy-1] = 0;
+            gp.getTileM().getMapTileNum()[mapx][mapy-2] = 0;
+            gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
+            gp.getTileM().getMapTileNum()[mapx][mapy+2] = 0;
+            gp.getTileM().getMapTileNum()[mapx+1][mapy+1] = 0;
+            gp.getTileM().getMapTileNum()[mapx-1][mapy+1] = 0;
+            gp.getTileM().getMapTileNum()[mapx-1][mapy-1] = 0;
+            gp.getTileM().getMapTileNum()[mapx+1][mapy-1] = 0;
 
 //            for (int i = 0 ; i < 9 ; i++){
 //                if (gp.getTileM().getTiles()[tileNums[i]].isDestructible()){
