@@ -64,7 +64,7 @@ public class Player {
                 this.role = new BlockerRole();
                 break;
             case "Role 3" :
-                this.role = new Bombeur();
+                this.role = new Bombeur(gp);
                 break;
             case "Role 4" :
                 this.role = new Foreur();

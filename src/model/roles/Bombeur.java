@@ -6,8 +6,16 @@ import view.GamePanel;
 
 public class Bombeur extends NormalRole  {
     int pas ;
-    public Bombeur(){
+    GamePanel gp;
+    public Bombeur(GamePanel gp){
         pas = 0;
+        this.gp = gp;
+    }
+
+    private void boom(int x,int y){
+        if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x][y]].isDestructible()){
+          gp.getTileM().getMapTileNum()[x][y]=0;
+        }
     }
 
     @Override
@@ -23,38 +31,282 @@ public class Bombeur extends NormalRole  {
 
 
 
-            int[] tileNums = new int[9];
-//            tileNums[0] =  gp.getTileM().getMapTileNum()[mapx][mapy];
-//            tileNums[1] = gp.getTileM().getMapTileNum()[mapx-1][mapy];
-//            tileNums[2] = gp.getTileM().getMapTileNum()[mapx-2][mapy];
-//            tileNums[3] = gp.getTileM().getMapTileNum()[mapx+1][mapy];
-//            tileNums[4] = gp.getTileM().getMapTileNum()[mapx+2][mapy];
-//            tileNums[5] = gp.getTileM().getMapTileNum()[mapx][mapy-1];
-//            tileNums[6] = gp.getTileM().getMapTileNum()[mapx][mapy-2];
-//            tileNums[7] = gp.getTileM().getMapTileNum()[mapx][mapy+1];
-//            tileNums[8] = gp.getTileM().getMapTileNum()[mapx][mapy+2];
+            if (mapx==0){
+                if (mapy == 0){
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                } else if (mapy ==17){
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx+1,mapy-1);
+                } else if (mapy == 1){
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                } else if (mapy ==16){
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                } else {
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx + 1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                }
+            }
 
-//            gp.getTileM().getMapTileNum()[mapx][mapy] = 0;
+            else if (mapx ==1){
+                if (mapy == 0){
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx - 1,mapy+1);
+                    boom(mapx - 1,mapy);
+                } else if (mapy ==17){
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx-1,mapy);
 
-            gp.getTileM().getMapTileNum()[mapx-1][mapy] = 0;
-            gp.getTileM().getMapTileNum()[mapx-2][mapy] = 0;
-            gp.getTileM().getMapTileNum()[mapx+1][mapy] = 0;
-            gp.getTileM().getMapTileNum()[mapx+2][mapy] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy-1] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy-2] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx][mapy+2] = 0;
-            gp.getTileM().getMapTileNum()[mapx+1][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx-1][mapy+1] = 0;
-            gp.getTileM().getMapTileNum()[mapx-1][mapy-1] = 0;
-            gp.getTileM().getMapTileNum()[mapx+1][mapy-1] = 0;
+                } else if (mapy == 1){
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx-1,mapy);
 
-//            for (int i = 0 ; i < 9 ; i++){
-//                if (gp.getTileM().getTiles()[tileNums[i]].isDestructible()){
-//                    gp.getTileM().getMapTileNum()[mapx][mapy]= 0;
-//                }
-//
-//            }
+                } else if (mapy ==16){
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx-1,mapy);
+
+                } else {
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx + 1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx-1,mapy);
+                }
+            }
+
+            else if (mapx ==22){
+                if (mapy == 0){
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy);
+                    boom(mapx - 1,mapy+1);
+                    boom(mapx - 1,mapy);
+                    boom(mapx-2,mapy);
+
+                } else if (mapy ==17){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx+1,mapy);
+
+
+                } else if (mapy == 1){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+
+
+
+
+                } else if (mapy ==16){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+
+
+
+                } else {
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy);
+
+                }
+            } else if (mapx==23){
+                if (mapy == 0){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+
+
+                } else if (mapy ==17){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+
+                } else if (mapy == 1){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+
+                } else if (mapy ==16){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+2);
+
+
+                } else {
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx,mapy-2);
+
+                }
+            }
+
+            else {
+                if (mapy == 0){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+
+                } else if (mapy ==17){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx+1,mapy-1);
+
+
+                } else if (mapy == 1){
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+
+
+                } else if (mapy ==16){
+
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+
+
+                } else {
+                    boom(mapx-1,mapy);
+                    boom(mapx-2,mapy);
+                    boom(mapx-1,mapy+1);
+                    boom(mapx-1,mapy-1);
+                    boom(mapx+1,mapy);
+                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1);
+                    boom(mapx,mapy-2);
+                    boom(mapx,mapy+1);
+                    boom(mapx,mapy+2);
+                    boom(mapx+1,mapy+1);
+                    boom(mapx+1,mapy-1);
+
+                }
+            }
         }
     }
 
