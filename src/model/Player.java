@@ -4,10 +4,7 @@ package model;
 import java.awt.*;
 
 import controller.CollisonChecker;
-import model.roles.BlockerRole;
-import model.roles.NormalRole;
-import model.roles.Role;
-import model.roles.TunnelierRole;
+import model.roles.*;
 import view.GamePanel;
 
 public class Player {
@@ -67,6 +64,9 @@ public class Player {
                 break;
             case "Role 4" :
                 this.role = new TunnelierRole();
+                break;
+            case "Role 5" :
+                this.role = new GrimpeurRole();
                 break;
         }
         // Add your desired action here

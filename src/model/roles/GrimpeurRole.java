@@ -4,7 +4,9 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class NormalRole extends Role{
+public class GrimpeurRole extends Role{
+    private boolean goUpNormally = false ;
+
     @Override
     public void move(GamePanel gp , Player player, CollisonChecker cChecker) {
         cChecker.checkTile(player);
@@ -22,11 +24,20 @@ public class NormalRole extends Role{
             return;
 
         }
-        if (player!= null &&player.isCanGoUp()) {
+
+        if (player!= null && isGoUpNormally()) {
+            player.goDown=0;
+            normalGoUp(player);
+            return;
+        }
+
+        if (player!= null && player.isCanGoUp()) {
             player.goDown=0;
             goUp(player);
             return;
         }
+
+
         if (player!= null &&player.isCollisonOn()) {
             player.goDown=0;
             switchDirection(player);
@@ -72,6 +83,24 @@ public class NormalRole extends Role{
 
         player.setPlayerY(posY - player.getSpeed());
 
+//        switch (player.getDirection()){
+//            case "right" :
+//                player.setPlayerX(posX  + player.getSpeed());
+//                break;
+//            case "left" :
+//                player.setPlayerX(posX  - player.getSpeed());
+//                break;
+//        }
+
+
+    }
+
+    public void normalGoUp (Player player) {
+        int posX = player.getPlayerX();
+        int posY = player.getPlayerY();
+
+        player.setPlayerY(posY - player.getSpeed());
+
         switch (player.getDirection()){
             case "right" :
                 player.setPlayerX(posX  + player.getSpeed());
@@ -80,5 +109,14 @@ public class NormalRole extends Role{
                 player.setPlayerX(posX  - player.getSpeed());
                 break;
         }
+    }
+
+
+    public boolean isGoUpNormally() {
+        return goUpNormally;
+    }
+
+    public void setGoUpNormally(boolean goUpNormally) {
+        this.goUpNormally = goUpNormally;
     }
 }
