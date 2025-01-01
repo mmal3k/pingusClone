@@ -44,7 +44,7 @@ public class Player {
 
         this.playerY = gp.getTileSize() * 9 ;
 
-        this.speed = 2 ;
+        this.speed = 3 ;
 
         this.direction = "left";
 
@@ -59,6 +59,9 @@ public class Player {
         System.out.println("Player : "+ this.id +" clicked! Performing action... : " + gp.menuPanel.getRole());
 
         switch (gp.menuPanel.getRole()) {
+            case "Role 1" :
+                this.role = new ParachutisteRole(this);
+                break;
             case "Role 2" :
                 this.role = new BlockerRole();
                 break;
