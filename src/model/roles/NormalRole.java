@@ -4,7 +4,7 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class NormalRole extends Role{
+public class NormalRole implements Role{
 
 
     @Override

@@ -69,6 +69,9 @@ public class Player {
             case "Role 4" :
                 this.role = new Foreur();
                 break;
+            case "Role 5" :
+                this.role = new Grimpeur();
+                break;
         }
         // Add your desired action here
     }

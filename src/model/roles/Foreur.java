@@ -4,7 +4,9 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class Foreur extends NormalRole{
+// Le Foreur ya7fer 7ata yekemel l count c pas une ligne droite
+
+public class Foreur extends NormalRole implements Role{
     int creuser = 0 ;
     @Override
     public void move(GamePanel gp , Player player , CollisonChecker cChecker){

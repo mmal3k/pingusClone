@@ -4,7 +4,7 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class Bombeur extends NormalRole  {
+public class Bombeur extends NormalRole implements Role  {
     int pas ;
     GamePanel gp;
     public Bombeur(GamePanel gp){
