@@ -6,7 +6,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PlayersView implements Runnable {
+
+
     private int playerNum; // Number of players to add
+    private int playerNumber ;
     private GamePanel gp;  // Reference to GamePanel
     private Thread thread; // Thread for adding players
     private long lastTime; // Tracks the last time a player was added
@@ -15,7 +18,7 @@ public class PlayersView implements Runnable {
     public PlayersView(GamePanel gp, int playerNum) {
         this.gp = gp;
         this.playerNum = playerNum;
-
+        this.playerNumber = playerNum ;
         this.players = gp.getPlayers();
 
     }
@@ -84,5 +87,9 @@ public class PlayersView implements Runnable {
             }
 
 
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
     }
 }

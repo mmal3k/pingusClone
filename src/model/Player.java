@@ -65,10 +65,10 @@ public class Player {
             case "Role 2" :
                 this.role = new BlockerRole();
                 break;
-            case "Role 4" :
+            case "Role 3" :
                 this.role = new TunnelierRole();
                 break;
-            case "Role 5" :
+            case "Role 4" :
                 this.role = new GrimpeurRole();
                 break;
         }

@@ -1,9 +1,15 @@
 package controller;
 
+import view.GamePanel;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
+    GamePanel gp ;
+    public KeyHandler(GamePanel gp) {
+        this.gp = gp;
+    }
 
 
     public boolean [] roles = new boolean[7];
@@ -22,24 +28,31 @@ public class KeyHandler implements KeyListener {
         switch (code) {
             case KeyEvent.VK_1 :
                 role = "Role 1";
+                gp.ui.showNotif("you choosed Parachutiste");
                 break;
             case KeyEvent.VK_2 :
                 role = "Role 2";
+                gp.ui.showNotif("you choosed Blocker");
                 break;
             case KeyEvent.VK_3 :
                 role = "Role 3";
+                gp.ui.showNotif("you choosed Tunnerlier");
                 break;
             case KeyEvent.VK_4 :
                 role = "Role 4";
+                gp.ui.showNotif("you choosed Grimpeur");
                 break;
             case KeyEvent.VK_5 :
                 role = "Role 5";
+                gp.ui.showNotif("not defined");
                 break;
             case KeyEvent.VK_6 :
                 role = "Role 6";
+                gp.ui.showNotif("not defined");
                 break;
             case KeyEvent.VK_7 :
                 role = "Role 7";
+                gp.ui.showNotif("not defined");
                 break;
         }
     }

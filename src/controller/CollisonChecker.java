@@ -235,13 +235,13 @@ public class CollisonChecker {
     }
 
     public void collisionWithPlayer (Player player) {
-        int leftPosX = player.getPlayerX() - player.getSolidArea().x ;
+        int leftPosX = player.getPlayerX() - player.getSolidArea().x  ;
         int rightPosX = player.getPlayerX() + player.getSolidArea().x ;
         int topPosY = player.getPlayerY() ;
 
         for (Player p : gp.getPlayers()) {
             if (p!= null && p != player && p.colliddable) {
-                if ((leftPosX == p.getPlayerX() || rightPosX == p.getPlayerX()) && (topPosY == (p.getPlayerY()))) {
+                if ((leftPosX == p.getPlayerX() || rightPosX == p.getPlayerX()) && (topPosY == p.getPlayerY()) ) {
                     player.setCollisonOn(true);
                 }
             }

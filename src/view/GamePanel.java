@@ -26,8 +26,13 @@ public class GamePanel extends JPanel implements Runnable {
     private TileManager tileM = new TileManager(this);
     private TileView tileView  = new TileView(this);
     private CollisonChecker cCheker = new CollisonChecker(this);
+
+
+
     private Thread gameThread;
-    private PlayersView playersView = new PlayersView(this , 2) ;
+
+
+    private PlayersView playersView = new PlayersView(this , 1) ;
 
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
@@ -35,11 +40,14 @@ public class GamePanel extends JPanel implements Runnable {
 //    public MenuPanel menuPanel = new MenuPanel(this);
 
     //key handler
-    public KeyHandler keyH = new KeyHandler();
+    public KeyHandler keyH = new KeyHandler(this);
     // game state
     public int gameState  ;
     public final int playState = 1 ;
     public final int pauseState = 2 ;
+
+    // UI
+    public UI ui = new UI(this);
 
 
     public GamePanel(){
@@ -123,7 +131,8 @@ public class GamePanel extends JPanel implements Runnable {
         tileView.draw(g2);
         objectView.draw(g2,this);
         playersView.draw(g2);
-
+        // UI
+        ui.draw(g2);
     }
 
 
@@ -166,4 +175,12 @@ public class GamePanel extends JPanel implements Runnable {
     public int getScreenHeight() {
         return screenHeight;
     }
+    public PlayersView getPlayersView() {
+        return playersView;
+    }
+
+    public void setGameThread(Thread gameThread) {
+        this.gameThread = gameThread;
+    }
+
 }
