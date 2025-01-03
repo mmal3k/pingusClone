@@ -5,6 +5,7 @@ import model.Player;
 import view.GamePanel;
 
 public class NormalRole extends Role{
+    int up=0;
 
 
     @Override
@@ -77,13 +78,20 @@ public class NormalRole extends Role{
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY - player.getSpeed());
-        switch (player.getDirection()){
-            case "right" :
-                player.setPlayerX(posX  + player.getSpeed());
-                break;
-            case "left" :
-                player.setPlayerX(posX  - player.getSpeed());
-                break;
+        up+= player.getSpeed();
+        if ( up!= 0&&up %48==0){
+
+            switch (player.getDirection()){
+                case "right" :
+                    player.setPlayerX(posX  + 7*player.getSpeed());
+                    break;
+                case "left" :
+                    player.setPlayerX(posX  - 7*player.getSpeed());
+                    break;
+            }
+
         }
+
+
     }
 }

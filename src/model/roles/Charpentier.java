@@ -14,7 +14,7 @@ public class Charpentier extends Role{
     }
     @Override
     public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
-        if (built == 10 ){
+        if (built == 5 ){
             player.setRole(new NormalRole());
         }
 
