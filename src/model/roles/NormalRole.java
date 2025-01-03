@@ -4,7 +4,7 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class NormalRole implements Role{
+public class NormalRole extends Role{
 
 
     @Override
@@ -29,7 +29,7 @@ public class NormalRole implements Role{
             goUp(player);
             return;
         }
-        if (player!= null &&player.isCollisonOn()) {
+        if (player!= null &&player.isCollisonOn()&&!player.isCanGoUp()) {
             player.goDown=0;
             switchDirection(player);
             return;
@@ -38,6 +38,7 @@ public class NormalRole implements Role{
     }
 
     public void switchDirection(Player player){
+        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -52,6 +53,7 @@ public class NormalRole implements Role{
         }
     }
     public void moveNormally(Player player){
+        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -63,12 +65,14 @@ public class NormalRole implements Role{
         }
     }
     public void goDown(Player player){
+        player.isGoingUp = false;
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY + player.getSpeed());
 
     }
     public void goUp(Player player){
+        player.isGoingUp = true;
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
 

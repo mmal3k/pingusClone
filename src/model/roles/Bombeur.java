@@ -4,12 +4,14 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class Bombeur extends NormalRole implements Role  {
+public class Bombeur extends Role {
     int pas ;
     GamePanel gp;
+    NormalRole normal;
     public Bombeur(GamePanel gp){
         pas = 0;
         this.gp = gp;
+        normal = new NormalRole();
     }
 
     private void boom(int x,int y){
@@ -20,7 +22,7 @@ public class Bombeur extends NormalRole implements Role  {
 
     @Override
     public void move(GamePanel gp , Player player, CollisonChecker cChecker){
-        super.move(gp, player, cChecker);
+        normal.move(gp, player, cChecker);
         pas = pas + player.getSpeed();
         if (pas == gp.getTileSize()*2){
             int playerInd = gp.getPlayers().indexOf(player);

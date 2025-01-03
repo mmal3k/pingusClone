@@ -6,8 +6,13 @@ import view.GamePanel;
 
 // Le Foreur ya7fer 7ata yekemel l count c pas une ligne droite
 
-public class Foreur extends NormalRole implements Role{
+public class Foreur extends  Role{
     int creuser = 0 ;
+    NormalRole normal;
+
+    public Foreur(){
+        normal = new NormalRole();
+    }
     @Override
     public void move(GamePanel gp , Player player , CollisonChecker cChecker){
         int mapx = (player.getPlayerX() + gp.halfTileSize) / gp.getTileSize() ;
@@ -19,10 +24,10 @@ public class Foreur extends NormalRole implements Role{
             gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
 
 
-            super.move(gp, player, cChecker);
+            normal.move(gp, player, cChecker);
 
             System.out.println("apres move");
-        } else super.move(gp, player, cChecker);
+        } else normal.move(gp, player, cChecker);
 
 
         if (creuser == 5){

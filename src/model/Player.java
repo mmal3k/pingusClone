@@ -13,12 +13,13 @@ public class Player {
 
     private int id;
     private int playerX;
-    public int playerY;
+    private int playerY;
     private String direction;
     private int speed ;
     private boolean collisonOn = false;
     private boolean isFalling = false;
     private boolean canGoUp = false;
+    public boolean isGoingUp = false;
     public int goDown;
     private Rectangle solidArea;
     private int solidAreaDefaultX ;
@@ -69,8 +70,8 @@ public class Player {
             case "Role 4" :
                 this.role = new Foreur();
                 break;
-            case "Role 5" :
-                this.role = new Grimpeur();
+            case "Role 5":
+                this.role = new Charpentier();
                 break;
         }
         // Add your desired action here
