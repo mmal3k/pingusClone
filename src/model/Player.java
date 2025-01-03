@@ -56,9 +56,9 @@ public class Player {
     }
 
     public void performClickAction() {
-        System.out.println("Player : "+ this.id +" clicked! Performing action... : " + gp.menuPanel.getRole());
+        System.out.println("Player : "+ this.id +" clicked! Performing action... : " + gp.keyH.role);
 
-        switch (gp.menuPanel.getRole()) {
+        switch (gp.keyH.role) {
             case "Role 1" :
                 this.role = new ParachutisteRole(this);
                 break;

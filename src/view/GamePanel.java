@@ -1,6 +1,7 @@
 package view;
 
 import controller.CollisonChecker;
+import controller.KeyHandler;
 import controller.ObjectController;
 import model.Player;
 import model.object.SuperObject;
@@ -31,15 +32,24 @@ public class GamePanel extends JPanel implements Runnable {
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
-    public MenuPanel menuPanel = new MenuPanel(this);
+//    public MenuPanel menuPanel = new MenuPanel(this);
+
+    //key handler
+    public KeyHandler keyH = new KeyHandler();
+    // game state
+    public int gameState  ;
+    public final int playState = 1 ;
+    public final int pauseState = 2 ;
+
+
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth , screenHeight));
         this.setBackground(Color.RED);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        this.setLayout(new BorderLayout());
-        this.add(menuPanel , BorderLayout.SOUTH);
 
+
+        this.addKeyListener(keyH);
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -56,7 +66,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame(){
+
         objectView.setObject();
+        gameState = playState;
     }
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -90,12 +102,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
     public void update(){
-        for (Player player : players) {
-            if (player != null){
+        if (gameState == playState) {
+            for (Player player : players) {
+                if (player != null){
 
-                player.movePlayer(this , player , cCheker);
+                    player.movePlayer(this , player , cCheker);
+                }
             }
         }
+
+        if (gameState == pauseState) {
+
+        }
+
+
     }
     @Override
     protected void paintComponent(Graphics g) {
