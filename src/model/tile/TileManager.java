@@ -22,6 +22,7 @@ public class TileManager {
         tiles[0] = new Tile();
         tiles[0].setColor(Color.BLACK);
 
+
         tiles[1] = new Tile();
         tiles[1].setColor(Color.darkGray);
         tiles[1].setCollision(true);

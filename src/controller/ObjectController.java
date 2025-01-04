@@ -28,6 +28,7 @@
                             System.out.println("finish");
                             gp.ui.gameFinished = true;
                         }
+
                         break;
                 }
             }

@@ -20,6 +20,11 @@ public class GrimpeurRole extends Role{
                 int playerInd = gp.getPlayers().indexOf(player);
                 System.out.println("Player "+player.getId()+"died due to the fall");
                 gp.getPlayers().set(playerInd,null);
+                gp.getPlayersView().nbDiedPlayers ++ ;
+                System.out.println("players died "+ gp.getPlayersView().nbDiedPlayers +" , players number : " + gp.getPlayersView().getPlayerNumber());
+                if (gp.getPlayersView().nbDiedPlayers ++ == gp.getPlayersView().getPlayerNumber()) {
+                    gp.ui.lost = true ;
+                }
             }
             return;
 

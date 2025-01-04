@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     GamePanel gp ;
+    public boolean checkDrawTime = false ;
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
     }
@@ -54,6 +55,23 @@ public class KeyHandler implements KeyListener {
                 role = "Role 7";
                 gp.ui.showNotif("not defined");
                 break;
+            case KeyEvent.VK_T :
+                if (checkDrawTime == false) {
+                    checkDrawTime = true;
+                }else {
+                    checkDrawTime = false;
+                }
+                break;
+            case KeyEvent.VK_ESCAPE :
+                if (gp.gameState == gp.playState) {
+                    System.out.println("paused");
+                    gp.gameState = gp.pauseState;
+                }if (gp.gameState == gp.pauseState) {
+                    System.out.println("unpaused");
+                    gp.gameState = gp.playState;
+                }
+                break;
+
         }
     }
 

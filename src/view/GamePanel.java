@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
+
     private final int originalTileSize = 16;
     private final int scale = 3;
     private final int tileSize = originalTileSize * scale;
@@ -37,7 +38,6 @@ public class GamePanel extends JPanel implements Runnable {
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
-//    public MenuPanel menuPanel = new MenuPanel(this);
 
     //key handler
     public KeyHandler keyH = new KeyHandler(this);
@@ -68,13 +68,11 @@ public class GamePanel extends JPanel implements Runnable {
                         player.performClickAction();
                     }
                 }
-
             }
         });
     }
 
     public void setupGame(){
-
         objectView.setObject();
         gameState = playState;
     }
@@ -128,11 +126,28 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g ;
+
+        // DEBUG
+        long drawStart = 0 ;
+        if (keyH.checkDrawTime) {
+            drawStart = System.nanoTime();
+
+        }
+
+
+
         tileView.draw(g2);
         objectView.draw(g2,this);
         playersView.draw(g2);
         // UI
         ui.draw(g2);
+        if (keyH.checkDrawTime) {
+            long drawEnd = System.nanoTime() ;
+            long passed = drawEnd - drawStart ;
+            g2.setColor(Color.white);
+            g2.drawString("Draw Time : " + passed , 10 , 400);
+            System.out.println("draw time : " + passed);
+        }
     }
 
 
