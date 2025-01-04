@@ -6,10 +6,8 @@ import java.text.DecimalFormat;
 public class UI {
     private final GamePanel gp;
 
-
-    private Font arial15;
-    private Font arial40;
-    private Font arial60;
+    // Use this flag to switch between custom and fallback fonts
+    private static final boolean USE_CUSTOM_FONT = true; // Set to false to use Arial
 
     private final DecimalFormat dFormat = new DecimalFormat("#0.00");
 
@@ -34,16 +32,10 @@ public class UI {
     private double playTime = 0;
 
     public boolean gameFinished = false;
-
-    public boolean lost = false ;
+    public boolean lost = false;
 
     public UI(GamePanel gp) {
         this.gp = gp;
-
-        // Initialize fonts immediately
-        arial15 = new Font("Arial", Font.PLAIN, 15);
-        arial40 = new Font("Arial", Font.PLAIN, 40);
-        arial60 = new Font("Arial", Font.BOLD, 60);
 
         // Precompute static line dimensions
         staticLinesX = gp.getScreenWidth() - 150;
@@ -52,7 +44,7 @@ public class UI {
         // Calculate line height using a temporary Graphics object
         Graphics g = gp.getGraphics();
         if (g != null) {
-            FontMetrics fm = g.getFontMetrics(arial15);
+            FontMetrics fm = g.getFontMetrics(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_SMALL));
             lineHeight = fm.getHeight() + 5; // Add padding
         } else {
             lineHeight = 20; // Fallback value
@@ -60,10 +52,7 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-
         if (gp.gameState == gp.playState) {
-
-
             if (lost) {
                 drawLosingScreen(g2);
                 return;
@@ -73,110 +62,29 @@ public class UI {
                 return;
             }
 
-            // Draw time
-            g2.setFont(arial15);
-            g2.setColor(Color.white);
-            playTime += (1.0 / 60); // Increment playtime
-            g2.drawString("Time: " + dFormat.format(playTime), 24, 24);
-
-            // Draw static lines
+            drawPlayTime(g2);
             drawStaticLines(g2);
 
-            // Show notification
             if (messageOn) {
-                g2.setFont(arial40); // Use preloaded font
-                g2.setColor(Color.white);
-
-                // Calculate the X position to center the text
-                int textLength = g2.getFontMetrics().stringWidth(message);
-                int x = (gp.getScreenWidth() - textLength) / 2; // Center the text on the X-axis
-
-                // Calculate the Y position to place the text 3 tiles down
-                int y = gp.getTileSize() * 3; // 3 tiles down from the top
-
-                // Draw the message
-                g2.drawString(message, x, y);
-
-                // Increment message count and turn off the message after a delay
-                if (++messageCount == 90) {
-                    messageOn = false;
-                    messageCount = 0;
-                }
+                drawMessage(g2);
             }
 
-        }else if (gp.gameState == gp.pauseState) {
+        } else if (gp.gameState == gp.pauseState) {
             showPauseScreen(g2);
         }
     }
 
-    private void drawGameOverScreen(Graphics2D g2) {
-        g2.setFont(arial40);
-        g2.setColor(Color.white);
-
-        // Draw game over text
-        String text = "All players left";
-        int textLength = g2.getFontMetrics().stringWidth(text);
-        int x = gp.getScreenWidth() / 2 - textLength / 2;
-        int y = gp.getScreenHeight() / 2 - (gp.getTileSize() * 3);
-        g2.drawString(text, x, y);
-
-        // Draw play time
-        text = "Your time is: " + dFormat.format(playTime) + "!";
-        textLength = g2.getFontMetrics().stringWidth(text);
-        x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2 - (gp.getTileSize() * 2);
-        g2.drawString(text, x, y);
-
-        // Draw congratulations
-        g2.setFont(arial60);
-        g2.setColor(Color.yellow);
-        text = "Congratulations";
-        textLength = g2.getFontMetrics().stringWidth(text);
-        x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2;
-        g2.drawString(text, x, y);
-
-        gp.setGameThread(null); // Stop the game thread
-
-        }
-
-    public void drawLosingScreen (Graphics2D g2) {
-        g2.setFont(arial40);
-        g2.setColor(Color.white);
-
-        // Draw play time
-        String text = "Your time is: " + dFormat.format(playTime) + "!";
-        int textLength = g2.getFontMetrics().stringWidth(text);
-        int x = gp.getScreenWidth() / 2 - textLength / 2;
-        int y = gp.getScreenHeight() / 2 - (gp.getTileSize() * 2);
-        g2.drawString(text, x, y);
-
-        // Draw congratulations
-        g2.setFont(arial60);
-        g2.setColor(Color.BLUE);
-        text = "lost ! try again";
-        textLength = g2.getFontMetrics().stringWidth(text);
-        x = gp.getScreenWidth() / 2 - textLength / 2;
-        y = gp.getScreenHeight() / 2;
-        g2.drawString(text, x, y);
-
-        gp.setGameThread(null); // Stop the game thread
-    }
-
-    public void showPauseScreen(Graphics2D g2){
-
-
-        g2.setFont(arial60);
+    private void drawPlayTime(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_SMALL));
         g2.setColor(Color.WHITE);
-        String text = "PAUSED";
-        int textLength = g2.getFontMetrics().stringWidth(text);
-        int x = gp.getScreenWidth() / 2 - textLength / 2;
-        int y = gp.getScreenHeight() / 2;
-        g2.drawString(text, x, y);
-
+        playTime += (1.0 / 60); // Increment playtime
+        g2.drawString("Time: " + dFormat.format(playTime), 24, 24);
     }
 
     private void drawStaticLines(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_SMALL));
+        g2.setColor(Color.WHITE);
+
         int x = staticLinesX;
         int y = staticLinesY;
 
@@ -184,6 +92,67 @@ public class UI {
             g2.drawString(line, x, y);
             y += lineHeight;
         }
+    }
+
+    private void drawMessage(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.WHITE);
+
+        int textLength = g2.getFontMetrics().stringWidth(message);
+        int x = (gp.getScreenWidth() - textLength) / 2;
+        int y = gp.getTileSize() * 3;
+
+        g2.drawString(message, x, y);
+
+        if (++messageCount == 90) {
+            messageOn = false;
+            messageCount = 0;
+        }
+    }
+
+    private void drawGameOverScreen(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.WHITE);
+
+        String text = "All players left";
+        drawCenteredText(g2, text, gp.getScreenHeight() / 2 - (gp.getTileSize() * 3));
+
+        text = "Your time is: " + dFormat.format(playTime) + "!";
+        drawCenteredText(g2, text, gp.getScreenHeight() / 2 - (gp.getTileSize() * 2));
+
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
+        g2.setColor(Color.YELLOW);
+        text = "Congratulations";
+        drawCenteredText(g2, text, gp.getScreenHeight() / 2);
+
+        gp.setGameThread(null); // Stop the game thread
+    }
+
+    private void drawLosingScreen(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.WHITE);
+
+        String text = "Your time is: " + dFormat.format(playTime) + "!";
+        drawCenteredText(g2, text, gp.getScreenHeight() / 2 - (gp.getTileSize() * 2));
+
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
+        g2.setColor(Color.BLUE);
+        text = "Lost! Try again";
+        drawCenteredText(g2, text, gp.getScreenHeight() / 2);
+
+        gp.setGameThread(null); // Stop the game thread
+    }
+
+    private void showPauseScreen(Graphics2D g2) {
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
+        g2.setColor(Color.WHITE);
+        drawCenteredText(g2, "PAUSED", gp.getScreenHeight() / 2);
+    }
+
+    private void drawCenteredText(Graphics2D g2, String text, int y) {
+        int textLength = g2.getFontMetrics().stringWidth(text);
+        int x = (gp.getScreenWidth() - textLength) / 2;
+        g2.drawString(text, x, y);
     }
 
     public void showNotif(String text) {
