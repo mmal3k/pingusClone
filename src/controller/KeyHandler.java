@@ -64,10 +64,8 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_ESCAPE :
                 if (gp.gameState == gp.playState) {
-                    System.out.println("paused");
                     gp.gameState = gp.pauseState;
-                }if (gp.gameState == gp.pauseState) {
-                    System.out.println("unpaused");
+                } else if (gp.gameState == gp.pauseState) {
                     gp.gameState = gp.playState;
                 }
                 break;

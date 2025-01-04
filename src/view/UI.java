@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 
 public class UI {
     private final GamePanel gp;
-    Graphics2D g2 ;
+
 
     private Font arial15;
     private Font arial40;
@@ -59,47 +59,53 @@ public class UI {
         }
     }
 
-    public void draw(Graphics2D g) {
-        this.g2 = g;
+    public void draw(Graphics2D g2) {
 
-        if (lost) {
-            drawLosingScreen(g2);
-            return ;
-        }
-        if (gameFinished) {
-            drawGameOverScreen(g2);
-            return;
-        }
+        if (gp.gameState == gp.playState) {
 
-        // Draw time
-        g2.setFont(arial15);
-        g2.setColor(Color.white);
-        playTime += (1.0 / 60); // Increment playtime
-        g2.drawString("Time: " + dFormat.format(playTime), 24, 24);
 
-        // Draw static lines
-        drawStaticLines(g2);
-
-        // Show notification
-        if (messageOn) {
-            g2.setFont(arial40); // Use preloaded font
-            g2.setColor(Color.white);
-
-            // Calculate the X position to center the text
-            int textLength = g2.getFontMetrics().stringWidth(message);
-            int x = (gp.getScreenWidth() - textLength) / 2; // Center the text on the X-axis
-
-            // Calculate the Y position to place the text 3 tiles down
-            int y = gp.getTileSize() * 3; // 3 tiles down from the top
-
-            // Draw the message
-            g2.drawString(message, x, y);
-
-            // Increment message count and turn off the message after a delay
-            if (++messageCount == 90) {
-                messageOn = false;
-                messageCount = 0;
+            if (lost) {
+                drawLosingScreen(g2);
+                return;
             }
+            if (gameFinished) {
+                drawGameOverScreen(g2);
+                return;
+            }
+
+            // Draw time
+            g2.setFont(arial15);
+            g2.setColor(Color.white);
+            playTime += (1.0 / 60); // Increment playtime
+            g2.drawString("Time: " + dFormat.format(playTime), 24, 24);
+
+            // Draw static lines
+            drawStaticLines(g2);
+
+            // Show notification
+            if (messageOn) {
+                g2.setFont(arial40); // Use preloaded font
+                g2.setColor(Color.white);
+
+                // Calculate the X position to center the text
+                int textLength = g2.getFontMetrics().stringWidth(message);
+                int x = (gp.getScreenWidth() - textLength) / 2; // Center the text on the X-axis
+
+                // Calculate the Y position to place the text 3 tiles down
+                int y = gp.getTileSize() * 3; // 3 tiles down from the top
+
+                // Draw the message
+                g2.drawString(message, x, y);
+
+                // Increment message count and turn off the message after a delay
+                if (++messageCount == 90) {
+                    messageOn = false;
+                    messageCount = 0;
+                }
+            }
+
+        }else if (gp.gameState == gp.pauseState) {
+            showPauseScreen(g2);
         }
     }
 
@@ -131,18 +137,12 @@ public class UI {
         g2.drawString(text, x, y);
 
         gp.setGameThread(null); // Stop the game thread
-    }
+
+        }
 
     public void drawLosingScreen (Graphics2D g2) {
         g2.setFont(arial40);
         g2.setColor(Color.white);
-
-        // Draw game over text
-//        String text = gp.getPlayersView().nbDiedPlayers + " players died";
-//        int textLength = g2.getFontMetrics().stringWidth(text);
-//        int x = gp.getScreenWidth() / 2 - textLength / 2;
-//        int y = gp.getScreenHeight() / 2 - (gp.getTileSize() * 3);
-//        g2.drawString(text, x, y);
 
         // Draw play time
         String text = "Your time is: " + dFormat.format(playTime) + "!";
@@ -161,6 +161,19 @@ public class UI {
         g2.drawString(text, x, y);
 
         gp.setGameThread(null); // Stop the game thread
+    }
+
+    public void showPauseScreen(Graphics2D g2){
+
+
+        g2.setFont(arial60);
+        g2.setColor(Color.WHITE);
+        String text = "PAUSED";
+        int textLength = g2.getFontMetrics().stringWidth(text);
+        int x = gp.getScreenWidth() / 2 - textLength / 2;
+        int y = gp.getScreenHeight() / 2;
+        g2.drawString(text, x, y);
+
     }
 
     private void drawStaticLines(Graphics2D g2) {

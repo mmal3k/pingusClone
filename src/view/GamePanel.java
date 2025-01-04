@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         if (gameState == pauseState) {
-
+            System.out.println("in pause state");
         }
 
 
