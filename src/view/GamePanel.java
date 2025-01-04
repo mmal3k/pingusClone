@@ -2,6 +2,7 @@ package view;
 
 import controller.CollisonChecker;
 import controller.ObjectController;
+import controller.Sound;
 import model.Player;
 import model.object.SuperObject;
 import model.tile.TileManager;
@@ -28,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
     private CollisonChecker cCheker = new CollisonChecker(this);
     private Thread gameThread;
     private PlayersView playersView = new PlayersView(this , 1) ;
+
+    public Sound sound = new Sound();
 
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
@@ -105,6 +108,16 @@ public class GamePanel extends JPanel implements Runnable {
         objectView.draw(g2,this);
         playersView.draw(g2);
 
+    }
+
+    public void playSE(int i){
+        sound.setFile(i);
+        sound.play();
+
+    }
+
+    public void stopMusic(){
+        sound.stop();
     }
 
 

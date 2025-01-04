@@ -25,6 +25,7 @@ public class Bombeur extends Role {
         normal.move(gp, player, cChecker);
         pas = pas + player.getSpeed();
         if (pas == gp.getTileSize()*2){
+            gp.playSE(0);
             int playerInd = gp.getPlayers().indexOf(player);
             gp.getPlayers().set(playerInd,null);
             System.out.println("BOOM!!!");
@@ -309,6 +310,7 @@ public class Bombeur extends Role {
 
                 }
             }
+//            gp.stopMusic();
         }
     }
 
