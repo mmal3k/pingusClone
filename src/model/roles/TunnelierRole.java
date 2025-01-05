@@ -29,6 +29,7 @@ public class TunnelierRole extends Role {
                 tileNum1 = gp.getTileM().getMapTileNum()[leftCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[leftCol][bottomRow];
                 if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                    gp.playSE(2);
                     gp.getTileM().getMapTileNum()[leftCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[leftCol][topRow] = 0;
 
@@ -51,6 +52,7 @@ public class TunnelierRole extends Role {
                 tileNum1 = gp.getTileM().getMapTileNum()[rightCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[rightCol][bottomRow];
                 if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                    gp.playSE(2);
                     gp.getTileM().getMapTileNum()[rightCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[rightCol][topRow] = 0;
 

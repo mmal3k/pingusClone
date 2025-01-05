@@ -15,24 +15,31 @@ public class Foreur extends  Role{
     }
     @Override
     public void move(GamePanel gp , Player player , CollisonChecker cChecker){
+        if (creuser == 5){
+            player.setRole(new NormalRole());
+            return;
+        }
+
         int mapx = (player.getPlayerX() + gp.halfTileSize) / gp.getTileSize() ;
         int mapy = (player.getPlayerY() +  gp.halfTileSize) / gp.getTileSize() ;
 
+
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[mapx][mapy+1]].isDestructible() && !player.isFalling()){
+            gp.playSE(2);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             creuser++;
             System.out.println("Forage");
             gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
 
 
             normal.move(gp, player, cChecker);
-
-            System.out.println("apres move");
         } else normal.move(gp, player, cChecker);
 
 
-        if (creuser == 5){
-            player.setRole(new NormalRole());
-        }
 
     }
 }

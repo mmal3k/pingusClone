@@ -37,6 +37,7 @@ public class NormalRole extends Role{
         }
         if (player!= null &&player.isCollisonOn()&&!player.isCanGoUp()) {
             player.fallen =0;
+//            gp.playSE(1);
             switchDirection(player);
             return;
         }
