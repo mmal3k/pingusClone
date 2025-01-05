@@ -23,7 +23,9 @@ public class GrimpeurRole extends Role{
                 gp.getPlayersView().nbDiedPlayers ++ ;
                 System.out.println("players died "+ gp.getPlayersView().nbDiedPlayers +" , players number : " + gp.getPlayersView().getPlayerNumber());
                 if (gp.getPlayersView().nbDiedPlayers ++ == gp.getPlayersView().getPlayerNumber()) {
-                    gp.ui.lost = true ;
+
+                    gp.gameState = gp.gameOverState ;
+                    gp.getPlayersView().nbDiedPlayers = 0;
                 }
             }
             return;

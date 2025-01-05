@@ -40,6 +40,8 @@ public class Player {
         setDefaultValues();
     }
 
+
+
     public void setDefaultValues(){
         this.playerX = gp.getTileSize() * 4 ;
 
