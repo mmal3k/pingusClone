@@ -40,7 +40,7 @@ public class UI {
 
     public int titleScreenState = 0 ; // 0 : the first screen || 1 : the second screen
 
-    public boolean fullScreen = false ;
+    public boolean fullScreen = true ;
     public UI(GamePanel gp) {
         this.gp = gp;
 
@@ -136,13 +136,13 @@ public class UI {
 
         int x = staticLinesX;
         int y = staticLinesY;
-        drawSubStroke(g2 , x -15  , y - 10  , gp.getScreenWidth() - x +12, y * (staticLines.length ));
-
-        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_SMALL));
+//        drawSubStroke(g2 , x -15  , y - 10  , gp.getScreenWidth() - x +12, y * (staticLines.length ));
+        drawSubRec(g2 , x - 30 , y - 12 , gp.getScreenWidth() - x +20 , y * (staticLines.length ) , 255 ,new Color(0 ,255, 255 , 200));
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_SMALL));
         g2.setColor(Color.WHITE);
 
-        x -= 5 ;
-        y += 5;
+        x -= 24 ;
+        y += 0;
         for (String line : staticLines) {
             g2.drawString(line, x, y);
             y += lineHeight;
