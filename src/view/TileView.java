@@ -2,36 +2,41 @@ package view;
 
 import model.tile.Tile;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class TileView {
 
-    public int mapTileNum [][];
-    GamePanel gp ;
-    Tile[] tiles ;
+    private int[][] mapTileNum;
+    private GamePanel gp ;
+    private Tile[] tiles ;
 
 
     public TileView(GamePanel gp){
         this.gp = gp;
-        this.mapTileNum = gp.tileM.mapTileNum;
-        this.tiles = gp.tileM.tiles;
+        this.mapTileNum = gp.getTileM().getMapTileNum();
+        this.tiles = gp.getTileM().getTiles();
     }
     public void draw(Graphics2D g2){
         int worldCol = 0 ;
         int worldRow = 0 ;
-        while (worldCol < gp.maxScreenCol  && worldRow < gp.maxScreenRow ){
+        while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow() ){
             int tileNum = mapTileNum[worldCol][worldRow ] ;
 
-            int worldX = worldCol  * gp.tileSize;
-            int worldY = worldRow * gp.tileSize;
+            int worldX = worldCol  * gp.getTileSize();
+            int worldY = worldRow * gp.getTileSize();
 
-            g2.setColor(tiles[tileNum].color);
-            g2.fillRect(worldX , worldY , gp.tileSize , gp.tileSize);
+            g2.setColor(tiles[tileNum].getColor());
+            g2.fillRect(worldX , worldY , gp.getTileSize(), gp.getTileSize());
             worldCol ++ ;
-            if (worldCol == gp.maxScreenCol ) {
+            if (worldCol == gp.getMaxScreenCol()) {
                 worldCol = 0;
                 worldRow ++ ;
             }
         }
+
+
+
+
     }
 }

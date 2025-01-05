@@ -1,78 +1,77 @@
 package model.tile;
 
-import view.GamePanel;
-
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import view.GamePanel;
 
 public class TileManager {
-    public GamePanel gp ;
-    public Tile[] tiles;
-    public int mapTileNum[][];
+    private GamePanel gp;
+    private Tile[] tiles;
+    public String map;
+    private int[][] mapTileNum;
 
-    public TileManager(GamePanel gp){
+    public TileManager(GamePanel gp) {
         this.gp = gp;
         tiles = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.getMaxScreenCol()][gp.getMaxScreenRow()];
         getTileColor();
-        loadMap("/maps/map02.txt");
     }
 
-    public void getTileColor (){
+    public void getTileColor() {
+        // Tile 0: Background (Dark Gray)
         tiles[0] = new Tile();
-        tiles[0].color = Color.BLACK;
+        tiles[0].setColor(new Color(30, 30, 30)); // Dark gray
 
+        // Tile 1: Obstacle (Dark Blue)
         tiles[1] = new Tile();
-        tiles[1].color = Color.darkGray;
-        tiles[1].collision  = true;
+        tiles[1].setColor(new Color(0, 51, 102)); // Dark blue
+        tiles[1].setCollision(true);
+        tiles[1].setDestructible(true);
 
+        // Tile 2: Ground (Dark Green)
         tiles[2] = new Tile();
-        tiles[2].color = Color.RED;
-        tiles[2].collision = true ;
-
-        tiles[3] = new Tile();
-        tiles[3].color = Color.PINK;
-
-
-        tiles[4] = new Tile();
-        tiles[4].color = Color.cyan;
-
-        tiles[5] = new Tile();
-        tiles[5].color = Color.MAGENTA;
-
-
-
+        tiles[2].setColor(new Color(0, 102, 51)); // Dark green
+        tiles[2].setCollision(true);
     }
 
-
-    public void loadMap(String mapName){
-
+    public void loadMap(String mapName) {
         try {
             InputStream is = getClass().getResourceAsStream(mapName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
-            while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
+            while (col < gp.getMaxScreenCol() && row < gp.getMaxScreenRow()) {
                 String line = br.readLine();
 
-                while (col < gp.maxScreenCol){
+                while (col < gp.getMaxScreenCol()) {
                     String numbers[] = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]) ;
+                    int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
-                    col ++ ;
+                    col++;
                 }
-                if (col == gp.maxScreenCol) {
-                    col  = 0;
-                    row ++ ;
+
+                if (col == gp.getMaxScreenCol()) {
+                    col = 0;
+                    row++;
                 }
             }
-
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
+    public Tile[] getTiles() {
+        return tiles;
+    }
+
+    public int[][] getMapTileNum() {
+        return mapTileNum;
+    }
+
+    public void setMap(String map) {
+        this.map = map;
+        this.loadMap("/maps/" + map + ".txt");
+    }
 }

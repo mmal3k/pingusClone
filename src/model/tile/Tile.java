@@ -1,10 +1,30 @@
 package model.tile;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Tile {
-    public Color color ;
-    public boolean collision ;
+    private Color color ;
+    private boolean collision ;
+    private boolean destructible;
 
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public boolean isCollision() {
+        return collision;
+    }
+
+    public boolean isDestructible(){ return this.destructible;}
+
+    public void setDestructible(boolean destructible){ this.destructible = destructible;}
+
+
+    public void setCollision(boolean collision) {
+        this.collision = collision;
+    }
 }
