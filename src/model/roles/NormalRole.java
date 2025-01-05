@@ -15,9 +15,9 @@ public class NormalRole extends Role{
         gp.getObjectController().interactWithObject(indexes[0],indexes[1]);
 
         if (player!= null && player.isFalling()){
-            player.goDown = player.goDown + player.getSpeed();
+            player.fallen = player.fallen + player.getSpeed();
             goDown(player);
-            if (player.goDown == gp.getTileSize()*5){
+            if (player.fallen == gp.getTileSize()*5){
                 int playerInd = gp.getPlayers().indexOf(player);
                 System.out.println("Player "+player.getId()+" died due to the fall");
                 gp.getPlayers().set(playerInd,null);
@@ -31,12 +31,12 @@ public class NormalRole extends Role{
 
         }
         if (player!= null &&player.isCanGoUp()) {
-            player.goDown=0;
+            player.fallen =0;
             goUp(player);
             return;
         }
         if (player!= null &&player.isCollisonOn()&&!player.isCanGoUp()) {
-            player.goDown=0;
+            player.fallen =0;
             switchDirection(player);
             return;
         }
@@ -44,7 +44,6 @@ public class NormalRole extends Role{
     }
 
     public void switchDirection(Player player){
-        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -59,7 +58,6 @@ public class NormalRole extends Role{
         }
     }
     public void moveNormally(Player player){
-        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -71,41 +69,37 @@ public class NormalRole extends Role{
         }
     }
     public void goDown(Player player){
-        player.isGoingUp = false;
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY + player.getSpeed());
 
     }
     public void goUp(Player player){
-        player.isGoingUp = true;
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY - player.getSpeed());
 
 
-        switch (player.getDirection()){
-            case "right" :
-                player.setPlayerX(posX  + player.getSpeed());
-                break;
-            case "left" :
-                player.setPlayerX(posX  - player.getSpeed());
-                break;
+//        switch (player.getDirection()){
+//            case "right" :
+//                player.setPlayerX(posX  + player.getSpeed());
+//                break;
+//            case "left" :
+//                player.setPlayerX(posX  - player.getSpeed());
+//                break;
 
-//        up+= player.getSpeed();
-//        if ( up!= 0&&up %48==0){
-//
-//            switch (player.getDirection()){
-//                case "right" :
-//                    player.setPlayerX(posX  + 7*player.getSpeed());
-//                    break;
-//                case "left" :
-//                    player.setPlayerX(posX  - 7*player.getSpeed());
-//                    break;
-//            }
-//
-//
+        up+= player.getSpeed();
+        if ( up!= 0&&up %16==0){
+
+            switch (player.getDirection()){
+                case "right" :
+                    player.setPlayerX(posX  + player.getSpeed());
+                    break;
+                case "left" :
+                    player.setPlayerX(posX  - player.getSpeed());
+                    break;
+            }
         }
 
 
