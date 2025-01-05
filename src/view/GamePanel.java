@@ -51,6 +51,8 @@ public class GamePanel extends JPanel implements Runnable {
     public final int titleState = 0;
     public final int playState = 1;
     public final int pauseState = 2;
+    public final int gameOverState = 3 ;
+    public final int wonState = 4 ;
 
     // UI
     public UI ui = new UI(this);
@@ -103,7 +105,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
-        playersView.startAddThread();
     }
 
     @Override
@@ -137,10 +138,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == playState) {
-            // Start the player-adding thread only if it hasn't been started yet
-            if (!playersView.isThreadRunning()) {
-                playersView.startAddThread();
-            }
 
             // Update player movements
             for (Player player : players) {
@@ -149,12 +146,11 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         } else if (gameState == pauseState) {
-            // Pause logic (if needed)
-        } else {
-            // Stop the player-adding thread if the game is not in playState
-            if (playersView.isThreadRunning()) {
-                playersView.stopAddThread();
-            }
+
+        } else if (gameState == gameOverState) {
+
+        }else if (gameState == wonState) {
+
         }
     }
 
@@ -189,6 +185,12 @@ public class GamePanel extends JPanel implements Runnable {
                 System.out.println("draw time : " + passed);
             }
         }
+    }
+
+    public void restart () {
+        playersView.restartPlayers();
+        objectController.restartObject();
+
     }
 
 

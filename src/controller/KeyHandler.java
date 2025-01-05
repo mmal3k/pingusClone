@@ -52,21 +52,22 @@ public class KeyHandler implements KeyListener {
                 }
             } else if (gp.ui.titleScreenState == 1) {
                 switch (code) {
-                    case KeyEvent.VK_DOWN:
+                    case KeyEvent.VK_DOWN :
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 2) {
                             gp.ui.commandNum = 0;
                         }
                         break;
-                    case KeyEvent.VK_UP:
+                    case KeyEvent.VK_UP :
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 2;
                         }
                         break;
-                    case KeyEvent.VK_ENTER:
+                    case KeyEvent.VK_ENTER :
                         gp.getTileM().setMap("map0" + (gp.ui.commandNum + 1));
                         gp.gameState = gp.playState;
+                        gp.getPlayersView().startAddThread();
                         break;
                 }
             }
@@ -117,6 +118,38 @@ public class KeyHandler implements KeyListener {
             }
 
         }
+
+
+        if (gp.gameState == gp.gameOverState || gp.gameState == gp.wonState) {
+
+                switch (code) {
+                    case KeyEvent.VK_DOWN:
+                        gp.ui.commandNum++;
+                        if (gp.ui.commandNum > 1) {
+                            gp.ui.commandNum = 0;
+                        }
+                        break;
+                    case KeyEvent.VK_UP:
+                        gp.ui.commandNum--;
+                        if (gp.ui.commandNum < 0) {
+                            gp.ui.commandNum = 1;
+                        }
+                        break;
+                    case KeyEvent.VK_ENTER:
+                        if (gp.ui.commandNum == 0) {
+                            gp.restart();
+                            gp.gameState = gp.titleState ;
+                            gp.ui.titleScreenState = 1 ;
+
+                        }
+                        if (gp.ui.commandNum == 1) {
+                            System.exit(0);
+                        }
+                        break;
+                }
+
+        }
+
 
 
     }

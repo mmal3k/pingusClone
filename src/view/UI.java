@@ -63,23 +63,17 @@ public class UI {
         if (gp.gameState == gp.titleState) {
             drawTitleScreen(g2);
         } else if (gp.gameState == gp.playState) {
-            if (lost) {
-                drawLosingScreen(g2);
-                return;
-            }
-            if (gameFinished) {
-                drawGameOverScreen(g2);
-                return;
-            }
-
             drawPlayTime(g2);
             drawStaticLines(g2);
-
             if (messageOn) {
                 drawMessage(g2);
             }
         } else if (gp.gameState == gp.pauseState) {
             showPauseScreen(g2);
+        } else if (gp.gameState == gp.wonState){
+            drawGameOverScreen(g2);
+        }else if (gp.gameState == gp.gameOverState) {
+            drawLosingScreen(g2);
         }
     }
 
@@ -113,8 +107,6 @@ public class UI {
         }
 
     }
-
-
     public void drawTitleScreen(Graphics2D g2) {
         if (titleScreenState == 0) {
             g2.setColor(new Color(70 , 120 , 80));
@@ -196,10 +188,6 @@ public class UI {
         }
 
     }
-
-
-
-
     public void drawSubStroke(Graphics2D g2 , int x , int y , int width , int height) {
         g2.setColor(Color.cyan);
         g2.setStroke(new BasicStroke(4));
@@ -236,7 +224,24 @@ public class UI {
         text = "Congratulations";
         drawCenteredText(g2, text, gp.getScreenHeight() / 2 ,0);
 
-        gp.setGameThread(null); // Stop the game thread
+
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.white);
+        text = "Retry !" ;
+        int y = gp.getTileSize() * 12 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 0){
+            drawCenteredText(g2 , ">" , y , -110);
+        }
+
+        text = "QUIT" ;
+        y = gp.getTileSize() * 14 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 1){
+            drawCenteredText(g2 , ">" , y , -110);
+        }
     }
 
     private void drawLosingScreen(Graphics2D g2) {
@@ -248,10 +253,29 @@ public class UI {
 
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
         g2.setColor(Color.BLUE);
-        text = "Lost! Try again";
+        text = "LOST ! TRY AGAIN";
         drawCenteredText(g2, text, gp.getScreenHeight() / 2 , 0);
 
-        gp.setGameThread(null); // Stop the game thread
+        // start
+
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.white);
+        text = "Retry !" ;
+        int y = gp.getTileSize() * 12 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 0){
+            drawCenteredText(g2 , ">" , y , -110);
+        }
+
+        text = "QUIT" ;
+        y = gp.getTileSize() * 14 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 1){
+            drawCenteredText(g2 , ">" , y , -110);
+        }
+
     }
 
 //    private void showPauseScreen(Graphics2D g2) {

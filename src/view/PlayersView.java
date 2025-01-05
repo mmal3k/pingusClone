@@ -8,14 +8,15 @@ import java.util.ArrayList;
 public class PlayersView implements Runnable {
 
     private int playerNum; // Number of players to add
-    private int playerNumber;
+    private final int playerNumber;
     private GamePanel gp;  // Reference to GamePanel
-    private Thread thread; // Thread for adding players
     private long lastTime; // Tracks the last time a player was added
     private final long addInterval = 2000; // Interval in milliseconds (2 seconds)
     public ArrayList<Player> players;
     public int nbDiedPlayers = 0;
+    private Thread thread ;
     private volatile boolean running = false; // Flag to control the thread
+    private int i ;
 
     public PlayersView(GamePanel gp, int playerNum) {
         this.gp = gp;
@@ -28,13 +29,12 @@ public class PlayersView implements Runnable {
     public void run() {
         running = true; // Mark the thread as running
         lastTime = System.currentTimeMillis(); // Initialize the last time
-        int i = 0;
+        i = 0;
         while (running && playerNum > 0) { // Check the running flag
             long currentTime = System.currentTimeMillis(); // Get current time
             if (currentTime - lastTime >= addInterval) { // Check if 2 seconds have passed
                 gp.getPlayers().add(new Player(this.gp, i)); // Add a new player
                 i++;
-                System.out.println("poussins entrees : " + i);
                 playerNum--; // Decrease the number of players to add
                 lastTime = currentTime; // Reset the last time
             }
@@ -47,19 +47,24 @@ public class PlayersView implements Runnable {
     }
 
     public void startAddThread() {
-        if (thread == null || !thread.isAlive()) {
-            thread = new Thread(this);
-            thread.start();
-        }
+        playerNum = playerNumber ;
+        thread = new Thread(this);
+        thread.start();
     }
 
     public void stopAddThread() {
         running = false; // Stop the thread
+
     }
 
-    public boolean isThreadRunning() {
-        return running;
+
+    public void restartPlayers() {
+        nbDiedPlayers = 0;
+        i = 0;
+        playerNum = playerNumber;
+        players.removeAll(players);
     }
+
 
     public void draw(Graphics2D g2) {
         for (Player player : players) {
