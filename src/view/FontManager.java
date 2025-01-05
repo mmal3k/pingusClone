@@ -13,6 +13,8 @@ public class FontManager {
     public static final int SIZE_MEDIUM = 45;
     public static final int SIZE_LARGE = 80;
 
+
+
     // Load the custom font
     static {
         try (InputStream is = FontManager.class.getResourceAsStream("/font/x12y16pxMaruMonica.ttf")) {

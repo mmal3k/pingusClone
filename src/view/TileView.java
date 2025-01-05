@@ -20,7 +20,7 @@ public class TileView {
     public void draw(Graphics2D g2){
         int worldCol = 0 ;
         int worldRow = 0 ;
-        while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow() -1){
+        while (worldCol < gp.getMaxScreenCol() && worldRow < gp.getMaxScreenRow() ){
             int tileNum = mapTileNum[worldCol][worldRow ] ;
 
             int worldX = worldCol  * gp.getTileSize();
