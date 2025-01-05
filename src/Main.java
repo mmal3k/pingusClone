@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
+
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -23,10 +24,9 @@ public class Main {
             System.err.println("Fullscreen mode not supported");
             frame.setSize(gamePanel.getScreenWidth(), gamePanel.getScreenHeight()); // Fallback to windowed mode
         }
-
         frame.setVisible(true);
-
         gamePanel.setupGame();
         gamePanel.startGameThread();
+
     }
 }
