@@ -75,40 +75,9 @@ public class KeyHandler implements KeyListener {
 
         // Handle play and pause states
         if (gp.gameState == gp.playState || gp.gameState == gp.pauseState) {
+
             switch (code) {
-                case KeyEvent.VK_1:
-                    role = "Role 1";
-                    gp.ui.showNotif("you choosed Parachutiste");
-                    break;
-                case KeyEvent.VK_2:
-                    role = "Role 2";
-                    gp.ui.showNotif("you choosed Blocker");
-                    break;
-                case KeyEvent.VK_3:
-                    role = "Role 3";
-                    gp.ui.showNotif("you choosed Tunnerlier");
-                    break;
-                case KeyEvent.VK_4:
-                    role = "Role 4";
-                    gp.ui.showNotif("you choosed Grimpeur");
-                    break;
-                case KeyEvent.VK_5:
-                    role = "Role 5";
-                    gp.ui.showNotif("you choosed Foreur");
-                    break;
-                case KeyEvent.VK_6:
-                    role = "Role 6";
-                    gp.ui.showNotif("you choosed Bomber");
-                    break;
-                case KeyEvent.VK_7:
-                    role = "Role 7";
-                    gp.ui.showNotif("you choosed Charpentier");
-                    break;
-                case KeyEvent.VK_T:
-                    checkDrawTime = !checkDrawTime; // Toggle draw time debug
-                    break;
                 case KeyEvent.VK_ESCAPE:
-                    // Toggle between play and pause states
                     if (gp.gameState == gp.playState) {
                         gp.gameState = gp.pauseState;
                     } else if (gp.gameState == gp.pauseState) {
@@ -116,8 +85,81 @@ public class KeyHandler implements KeyListener {
                     }
                     break;
             }
+            if (gp.gameState == gp.pauseState) {
+                switch (code) {
+                    case KeyEvent.VK_DOWN :
+                        gp.ui.commandNum++;
+                        if (gp.ui.commandNum > 2) {
+                            gp.ui.commandNum = 0;
+                        }
+                        break;
+                    case KeyEvent.VK_UP :
+                        gp.ui.commandNum--;
+                        if (gp.ui.commandNum < 0) {
+                            gp.ui.commandNum = 2;
+                        }
+                        break;
+                    case KeyEvent.VK_ENTER :
+                        if (gp.ui.commandNum == 0) {
+                            gp.restart();
+                            gp.gameState = gp.titleState;
+                            gp.ui.titleScreenState = 1;
+                        }
+                        if (gp.ui.commandNum == 1) {
+                            // to implement later
+                            
+                            gp.ui.fullScreen = !gp.ui.fullScreen;
+                        }
+                        if (gp.ui.commandNum == 2) {
+                            // to implement later
+                            System.exit(0);
+                        }
+
+                        break;
+                }
+            }
+            if (gp.gameState == gp.playState){
+
+                switch (code) {
+                    case KeyEvent.VK_1:
+                        role = "Role 1";
+                        gp.ui.showNotif("you choosed Parachutiste");
+                        break;
+                    case KeyEvent.VK_2:
+                        role = "Role 2";
+                        gp.ui.showNotif("you choosed Blocker");
+                        break;
+                    case KeyEvent.VK_3:
+                        role = "Role 3";
+                        gp.ui.showNotif("you choosed Tunnerlier");
+                        break;
+                    case KeyEvent.VK_4:
+                        role = "Role 4";
+                        gp.ui.showNotif("you choosed Grimpeur");
+                        break;
+                    case KeyEvent.VK_5:
+                        role = "Role 5";
+                        gp.ui.showNotif("you choosed Foreur");
+                        break;
+                    case KeyEvent.VK_6:
+                        role = "Role 6";
+                        gp.ui.showNotif("you choosed Bomber");
+                        break;
+                    case KeyEvent.VK_7:
+                        role = "Role 7";
+                        gp.ui.showNotif("you choosed Charpentier");
+                        break;
+                    case KeyEvent.VK_T:
+                        checkDrawTime = !checkDrawTime; // Toggle draw time debug
+                        break;
+                }
+
+            }
+
 
         }
+
+
 
 
         if (gp.gameState == gp.gameOverState || gp.gameState == gp.wonState) {
