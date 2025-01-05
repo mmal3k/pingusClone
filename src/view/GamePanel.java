@@ -190,7 +190,6 @@ public class GamePanel extends JPanel implements Runnable {
     public void restart () {
         playersView.restartPlayers();
         objectController.restartObject();
-
     }
 
 

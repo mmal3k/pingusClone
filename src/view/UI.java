@@ -40,6 +40,7 @@ public class UI {
 
     public int titleScreenState = 0 ; // 0 : the first screen || 1 : the second screen
 
+    public boolean fullScreen = false ;
     public UI(GamePanel gp) {
         this.gp = gp;
 
@@ -80,7 +81,48 @@ public class UI {
     private void showPauseScreen(Graphics2D g2) {
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
         g2.setColor(Color.WHITE);
-        drawCenteredText(g2, "PAUSED", gp.getScreenHeight() / 2, 0);
+        drawCenteredText(g2, "PAUSED", gp.getTileSize() * 3, 0);
+
+        drawSubWindow(g2 , gp.getScreenWidth() / 2 - gp.getTileSize() * 4 ,gp.getTileSize() * 5 , gp.getTileSize() * 8 , gp.getTileSize() * 7 , 200, null);
+
+        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_MEDIUM));
+        g2.setColor(Color.white);
+        String text = "MAIN MENU" ;
+        int y = gp.getTileSize() * 7 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 0){
+            drawCenteredText(g2 , ">" , y , -130);
+        }
+
+        text = "FULL SCREEN" ;
+        y = gp.getTileSize() * 9 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 1){
+            drawCenteredText(g2 , ">" , y , -130);
+        }
+
+        // Draw the utility rectangle (first rectangle)
+        if (fullScreen) {
+            drawSubRec(g2, gp.getScreenWidth() / 2 + 130, gp.getTileSize() * 9 - 25, 20, 20, 255, new Color(34, 139, 34)); // Forest Green
+        }else {
+            drawSubRec(g2, gp.getScreenWidth() / 2 + 130, gp.getTileSize() * 9 - 25, 20, 20, 255, new Color(255, 0, 0)); // Forest Green
+        }
+
+// Draw the margin rectangle (second rectangle) with a vibrant color
+        drawSubRecStroke(g2, gp.getScreenWidth() / 2 + 130, gp.getTileSize() * 9 - 25, 20, 20, 255, new Color(255, 255, 255)); // Gold
+
+        g2.setColor(Color.white);
+
+        text = "QUIT" ;
+        y = gp.getTileSize() * 11 ;
+        drawCenteredText(g2 , text , y , 0);
+
+        if (commandNum == 2){
+            drawCenteredText(g2 , ">" , y , -130);
+        }
+
     }
 
     private void drawPlayTime(Graphics2D g2) {
@@ -193,6 +235,42 @@ public class UI {
         g2.setStroke(new BasicStroke(4));
         g2.drawRoundRect(x , y , width  , height, 35,35);
     }
+
+    public void drawSubWindow(Graphics2D g2, int x, int y, int width, int height, int opacity , Color c) {
+        // Create a new Color object with the desired opacity (alpha value)
+        Color translucentBlack = new Color(0, 0, 0, opacity); // RGB (0,0,0) is black, and opacity is the alpha value
+        if (c != null) {
+            translucentBlack = c ;
+        }
+        g2.setColor(translucentBlack);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+    }
+    public void drawSubRec(Graphics2D g2, int x, int y, int width, int height, int opacity , Color c) {
+        // Create a new Color object with the desired opacity (alpha value)
+        Color translucentBlack = new Color(0, 0, 0, opacity); // RGB (0,0,0) is black, and opacity is the alpha value
+        if (c != null) {
+            translucentBlack = c ;
+        }
+        g2.setColor(translucentBlack);
+        g2.fillRoundRect(x, y, width, height, 5, 5);
+    }
+
+    public void drawSubRecStroke(Graphics2D g2, int x, int y, int width, int height, int opacity , Color c) {
+        // Create a new Color object with the desired opacity (alpha value)
+        Color translucentBlack = new Color(0, 0, 0, opacity); // RGB (0,0,0) is black, and opacity is the alpha value
+        if (c != null) {
+            translucentBlack = c ;
+        }
+        g2.setColor(translucentBlack);
+
+
+        g2.setStroke(new BasicStroke(4));
+        g2.drawRoundRect(x , y , width  , height, 5,5);
+    }
+
+
+
+
     private void drawMessage(Graphics2D g2) {
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_MEDIUM));
         g2.setColor(Color.WHITE);
@@ -219,11 +297,14 @@ public class UI {
         text = "Your time is: " + dFormat.format(playTime) + "!";
         drawCenteredText(g2, text, gp.getScreenHeight() / 2 - (gp.getTileSize() * 2) , 0);
 
+
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
         g2.setColor(Color.YELLOW);
         text = "Congratulations";
         drawCenteredText(g2, text, gp.getScreenHeight() / 2 ,0);
 
+
+        drawSubWindow(g2 , gp.getScreenWidth() / 2 - gp.getTileSize() * 4 ,gp.getTileSize() * 10 , gp.getTileSize() * 8 , gp.getTileSize() * 5 , 200 , null);
 
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_MEDIUM));
         g2.setColor(Color.white);
@@ -250,6 +331,8 @@ public class UI {
 
         String text = "Your time is: " + dFormat.format(playTime) + "!";
         drawCenteredText(g2, text, gp.getScreenHeight() / 2 - (gp.getTileSize() * 2) , 0);
+
+        drawSubWindow(g2 , gp.getScreenWidth() / 2 - gp.getTileSize() * 4 ,gp.getScreenWidth() / 2 - gp.getTileSize() * 2 , gp.getTileSize() * 8 , gp.getTileSize() * 5 , 200 ,null);
 
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
         g2.setColor(Color.BLUE);
