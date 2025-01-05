@@ -93,15 +93,15 @@ public class KeyHandler implements KeyListener {
                     break;
                 case KeyEvent.VK_5:
                     role = "Role 5";
-                    gp.ui.showNotif("not defined");
+                    gp.ui.showNotif("you choosed Foreur");
                     break;
                 case KeyEvent.VK_6:
                     role = "Role 6";
-                    gp.ui.showNotif("not defined");
+                    gp.ui.showNotif("you choosed Bomber");
                     break;
                 case KeyEvent.VK_7:
                     role = "Role 7";
-                    gp.ui.showNotif("not defined");
+                    gp.ui.showNotif("you choosed Charpentier");
                     break;
                 case KeyEvent.VK_T:
                     checkDrawTime = !checkDrawTime; // Toggle draw time debug
@@ -115,7 +115,10 @@ public class KeyHandler implements KeyListener {
                     }
                     break;
             }
+
         }
+
+
     }
 
     @Override

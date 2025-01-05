@@ -17,9 +17,9 @@ public class UI {
             "Num 2 : Blocker",
             "Num 3 : Tunnelier",
             "Num 4 : Grimpeur",
-            "Num 5 : not defined",
-            "Num 6 : not defined",
-            "Num 7 : not defined",
+            "Num 5 : Foreur",
+            "Num 6 : Bomber",
+            "Num 7 : Charpentier",
             ""
     };
 
