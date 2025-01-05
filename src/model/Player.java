@@ -18,6 +18,7 @@ public class Player {
     private boolean collisonOn = false;
     private boolean isFalling = false;
     private boolean canGoUp = false;
+    public boolean isGoingUp = false;
     public int goDown;
     private Rectangle solidArea;
     private int solidAreaDefaultX ;
@@ -71,6 +72,15 @@ public class Player {
             case "Role 4" :
                 this.role = new GrimpeurRole();
                 break;
+            case "Role 5" :
+                this.role = new Foreur();
+                break;
+            case "Role 6" :
+                this.role = new Bombeur(gp);
+                break;
+            case "Role 7":
+                this.role = new Charpentier();
+                break;
         }
         // Add your desired action here
     }
@@ -78,6 +88,7 @@ public class Player {
     public void movePlayer (GamePanel gp,  Player player ,CollisonChecker cChecker) {
         role.move(gp ,player , cChecker);
     }
+
 
 
     public boolean isFalling() {

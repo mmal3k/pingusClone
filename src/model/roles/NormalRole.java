@@ -5,6 +5,9 @@ import model.Player;
 import view.GamePanel;
 
 public class NormalRole extends Role{
+
+    int up=0;
+
     @Override
     public void move(GamePanel gp , Player player, CollisonChecker cChecker) {
         cChecker.checkTile(player);
@@ -16,7 +19,7 @@ public class NormalRole extends Role{
             goDown(player);
             if (player.goDown == gp.getTileSize()*5){
                 int playerInd = gp.getPlayers().indexOf(player);
-                System.out.println("Player "+player.getId()+"died due to the fall");
+                System.out.println("Player "+player.getId()+" died due to the fall");
                 gp.getPlayers().set(playerInd,null);
                 gp.getPlayersView().nbDiedPlayers ++ ;
                 System.out.println("players died "+ gp.getPlayersView().nbDiedPlayers +" , players number : " + gp.getPlayersView().getPlayerNumber());
@@ -32,7 +35,7 @@ public class NormalRole extends Role{
             goUp(player);
             return;
         }
-        if (player!= null &&player.isCollisonOn()) {
+        if (player!= null &&player.isCollisonOn()&&!player.isCanGoUp()) {
             player.goDown=0;
             switchDirection(player);
             return;
@@ -41,6 +44,7 @@ public class NormalRole extends Role{
     }
 
     public void switchDirection(Player player){
+        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -55,6 +59,7 @@ public class NormalRole extends Role{
         }
     }
     public void moveNormally(Player player){
+        player.isGoingUp = false;
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
@@ -66,16 +71,19 @@ public class NormalRole extends Role{
         }
     }
     public void goDown(Player player){
+        player.isGoingUp = false;
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY + player.getSpeed());
 
     }
     public void goUp(Player player){
+        player.isGoingUp = true;
         int posX = player.getPlayerX();
         int posY = player.getPlayerY();
 
         player.setPlayerY(posY - player.getSpeed());
+
 
         switch (player.getDirection()){
             case "right" :
@@ -84,6 +92,22 @@ public class NormalRole extends Role{
             case "left" :
                 player.setPlayerX(posX  - player.getSpeed());
                 break;
+
+//        up+= player.getSpeed();
+//        if ( up!= 0&&up %48==0){
+//
+//            switch (player.getDirection()){
+//                case "right" :
+//                    player.setPlayerX(posX  + 7*player.getSpeed());
+//                    break;
+//                case "left" :
+//                    player.setPlayerX(posX  - 7*player.getSpeed());
+//                    break;
+//            }
+//
+//
         }
+
+
     }
 }

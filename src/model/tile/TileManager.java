@@ -28,6 +28,7 @@ public class TileManager {
         tiles[1] = new Tile();
         tiles[1].setColor(new Color(0, 51, 102)); // Dark blue
         tiles[1].setCollision(true);
+        tiles[1].setDestructible(true);
 
         // Tile 2: Ground (Dark Green)
         tiles[2] = new Tile();

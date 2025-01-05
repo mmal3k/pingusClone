@@ -3,6 +3,7 @@ package view;
 import controller.CollisonChecker;
 import controller.KeyHandler;
 import controller.ObjectController;
+import controller.Sound;
 import model.Player;
 import model.object.SuperObject;
 import model.tile.TileManager;
@@ -18,6 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     private final int originalTileSize = 16;
     private final int scale = 3;
     private final int tileSize = originalTileSize * scale;
+    public final int halfTileSize = tileSize / 2;
     private final int maxScreenCol = 24;
     private final int maxScreenRow = 18;
     private final int screenWidth = tileSize * maxScreenCol; // Original resolution
@@ -31,7 +33,11 @@ public class GamePanel extends JPanel implements Runnable {
     private CollisonChecker cCheker = new CollisonChecker(this);
 
     private Thread gameThread;
-    private PlayersView playersView = new PlayersView(this, 1);
+
+    private PlayersView playersView = new PlayersView(this , 1) ;
+
+    public Sound sound = new Sound();
+
 
     private SuperObject[] obj = new SuperObject[10];
     private ObjectView objectView = new ObjectView(this);
@@ -184,6 +190,19 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
+
+
+    public void playSE(int i){
+        sound.setFile(i);
+        sound.play();
+
+    }
+
+    public void stopMusic(){
+        sound.stop();
+    }
+
+
 
     public int getTileSize() {
         return tileSize;
