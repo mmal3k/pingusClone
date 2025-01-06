@@ -72,7 +72,7 @@ public class NormalRole implements Role{
                 player.setPlayerX(posX - player.getSpeed());
                 break;
             case "right" :
-                if (posX + player.getSpeed() >gp.getScreenWidth() ) {
+                if (posX + gp.getTileSize() +  player.getSpeed() > gp.getScreenWidth() ) {
                     switchDirection(player);
                     return;
                 }
