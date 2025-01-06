@@ -147,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
         } else if (gameState == pauseState) {
 
-        } else if (gameState == gameOverState) {
+        } else if (gameState == gameOverState) { playSE(3);
 
         }else if (gameState == wonState) {
 

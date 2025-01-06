@@ -25,11 +25,6 @@ public class Bombeur extends Role {
         pas = pas + player.getSpeed();
         if (pas == gp.getTileSize()*2){
             gp.playSE(0);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             int playerInd = gp.getPlayers().indexOf(player);
             gp.getPlayers().set(playerInd,null);
             System.out.println("BOOM!!!");

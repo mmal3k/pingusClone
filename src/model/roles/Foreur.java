@@ -26,11 +26,6 @@ public class Foreur extends  Role{
 
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[mapx][mapy+1]].isDestructible() && !player.isFalling()){
             gp.playSE(2);
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
             creuser++;
             System.out.println("Forage");
             gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;

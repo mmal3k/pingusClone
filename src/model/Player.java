@@ -66,22 +66,22 @@ public class Player {
                 this.role = new ParachutisteRole(this);
                 break;
             case "Role 2" :
-                this.role = new RoleFactory("bloquer");
+                this.role = RoleFactory.RoleFactory("bloqueur");
                 break;
             case "Role 3" :
-                this.role = new TunnelierRole();
+                this.role = RoleFactory.RoleFactory("tunnelier");
                 break;
             case "Role 4" :
-                this.role = new GrimpeurRole();
+                this.role = RoleFactory.RoleFactory("grimpeur");
                 break;
             case "Role 5" :
-                this.role = new Foreur();
+                this.role = RoleFactory.RoleFactory("foreur");
                 break;
             case "Role 6" :
-                this.role = new Bombeur();
+                this.role = RoleFactory.RoleFactory("bombeur");
                 break;
             case "Role 7":
-                this.role = new Charpentier();
+                this.role = RoleFactory.RoleFactory("charpentier");
                 break;
         }
         // Add your desired action here
