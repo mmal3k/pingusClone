@@ -24,6 +24,7 @@ public class Main {
             System.err.println("Fullscreen mode not supported");
             frame.setSize(gamePanel.getScreenWidth(), gamePanel.getScreenHeight()); // Fallback to windowed mode
         }
+
         frame.setVisible(true);
         gamePanel.setupGame();
         gamePanel.startGameThread();

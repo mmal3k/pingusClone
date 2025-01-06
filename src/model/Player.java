@@ -62,7 +62,7 @@ public class Player {
 
         switch (gp.keyH.role) {
             case "Role 1" :
-                this.role = new ParachutisteRole( this );
+                this.role = new ParachutisteRole( );
                 break;
             case "Role 2" :
                 this.role = new BlockerRole();

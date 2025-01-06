@@ -4,7 +4,7 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class GrimpeurRole extends NormalRole{
+public class GrimpeurRole extends NormalRole implements Role{
     private boolean goUpNormally = false ;
 
     @Override

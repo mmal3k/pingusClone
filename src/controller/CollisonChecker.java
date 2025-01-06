@@ -169,32 +169,7 @@ public class CollisonChecker {
         }
     }
 
-    public void checkPlayerUnder(Player player) {
-        if (player.isFalling()){
-            int leftPosX = player.getPlayerX() + player.getSolidArea().x;
-            int rightPosX = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
-            int topPosY = player.getPlayerY() + player.getSolidArea().y;
-            int bottomPosY = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height;
 
-            int leftCol = leftPosX / gp.getTileSize();
-            int rightCol = rightPosX / gp.getTileSize();
-            int topRow = topPosY / gp.getTileSize();
-            int bottomRow = bottomPosY / gp.getTileSize();
-
-            int bottom = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height ;
-            int left = player.getPlayerX()  ;
-            int right = player.getPlayerX() + gp.getTileSize() ;
-            for (Player p : gp.getPlayers()){
-                if (p != null && p != player && p.colliddable){
-                    if (p.getPlayerY()+ p.getSolidArea().y == bottom && (p.getPlayerX() >= left && p.getPlayerX() <= right) ){
-                        player.setFalling(false);
-                    }else{
-                        player.setFalling(true);
-                    }
-                }
-            }
-        }
-    }
 
     public void checkCollision(Player player){
         if (player != null) {
@@ -235,17 +210,74 @@ public class CollisonChecker {
         }
     }
 
-    public void collisionWithPlayer (Player player) {
-        int leftPosX = player.getPlayerX() - player.getSolidArea().x  ;
-        int rightPosX = player.getPlayerX() + player.getSolidArea().x ;
-        int topPosY = player.getPlayerY() ;
+//    public void collisionWithPlayer (Player player) {
+//        int leftPosX = player.getPlayerX() - player.getSolidArea().x  ;
+//        int rightPosX = player.getPlayerX() + player.getSolidArea().x ;
+//        int topPosY = player.getPlayerY()  ;
+//
+//        for (Player p : gp.getPlayers()) {
+//            if (p!= null && p != player && p.colliddable) {
+//
+//                switch (player.getDirection()) {
+//                    case "left":
+//                        leftPosX = leftPosX - player.getSpeed() ;
+//                        if ((leftPosX == p.getPlayerX() + player.getSolidArea().width) && (topPosY == p.getPlayerY()) ) {
+//                            player.setCollisonOn(true);
+//                            return;
+//                        }
+//                       break;
+//                    case "right":
+//                        rightPosX = rightPosX + player.getSpeed() ;
+//                        if ((rightPosX == p.getPlayerX()) && (topPosY == p.getPlayerY()) ) {
+//                            player.setCollisonOn(true);
+//                            return;
+//                        }
+//                        break;
+//                    }
+//            }
+//        }
+//
+//    }
 
-        for (Player p : gp.getPlayers()) {
-            if (p!= null && p != player && p.colliddable) {
-                if ((leftPosX == p.getPlayerX() || rightPosX == p.getPlayerX()) && (topPosY == p.getPlayerY()) ) {
-                    player.setCollisonOn(true);
+    public void collisionWithPlayer(Player player) {
+        if (player != null) {
+            // Get the player's bounding box (solid area) adjusted for speed
+            int playerLeft = player.getPlayerX() + player.getSolidArea().x;
+            int playerRight = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
+            int playerTop = player.getPlayerY() + player.getSolidArea().y;
+            int playerBottom = player.getPlayerY() + player.getSolidArea().y + player.getSolidArea().height;
+
+            // Adjust the bounding box based on the player's direction and speed
+            switch (player.getDirection()) {
+                case "left":
+                    playerLeft -= player.getSpeed(); // Move left by speed
+                    break;
+                case "right":
+                    playerRight += player.getSpeed(); // Move right by speed
+                    break;
+                // Add cases for "up" and "down" if needed
+            }
+
+            // Check for collisions with other players
+            for (Player p : gp.getPlayers()) {
+                if (p != null && p != player && p.colliddable) {
+                    // Get the other player's bounding box
+                    int pLeft = p.getPlayerX() + p.getSolidArea().x;
+                    int pRight = p.getPlayerX() + p.getSolidArea().x + p.getSolidArea().width;
+                    int pTop = p.getPlayerY() + p.getSolidArea().y;
+                    int pBottom = p.getPlayerY() + p.getSolidArea().y + p.getSolidArea().height;
+
+                    // Check for overlapping bounding boxes
+                    if (playerRight >= pLeft && playerLeft <= pRight && // Horizontal overlap
+                            playerBottom >= pTop && playerTop <= pBottom) { // Vertical overlap
+                        player.setCollisonOn(true);
+                        return; // Exit early if a collision is detected
+                    }
                 }
             }
+
+            // No collision detected
+
         }
     }
 
