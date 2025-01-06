@@ -42,8 +42,8 @@ public class Bombeur implements Role {
             // Remove the player from the game
             int playerInd = gp.getPlayers().indexOf(player);
             gp.getPlayers().set(playerInd, null);
-            gp.getPlayersView().nbDiedPlayers ++ ;
-            if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
+//            gp.getPlayersView().nbDiedPlayers ++ ;
+            if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 5) {
                 gp.gameState = gp.gameOverState ;
             }
 
