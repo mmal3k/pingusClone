@@ -173,7 +173,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             tileView.draw(g2);
             objectView.draw(g2, this);
-            playersView.draw(g2);
+            if (gameState != pauseState) playersView.draw(g2);
             // UI
             ui.draw(g2);
 
@@ -190,6 +190,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void restart () {
         playersView.restartPlayers();
         objectController.restartObject();
+        ui.setPlayTime(0);
     }
 
 

@@ -35,7 +35,6 @@ public class UI {
     private boolean roleMessageOn = false ;
     private String roleMessage = "";
 
-
     private double playTime = 0;
 
     public boolean gameFinished = false;
@@ -62,8 +61,6 @@ public class UI {
             lineHeight = 20; // Fallback value
         }
     }
-
-
 
     public void draw(Graphics2D g2) {
         if (gp.gameState == gp.titleState) {
@@ -118,7 +115,7 @@ public class UI {
             drawSubRec(g2, gp.getScreenWidth() / 2 + 130, gp.getTileSize() * 9 - 25, 20, 20, 255, new Color(255, 0, 0)); // Forest Green
         }
 
-// Draw the margin rectangle (second rectangle) with a vibrant color
+
         drawSubRecStroke(g2, gp.getScreenWidth() / 2 + 130, gp.getTileSize() * 9 - 25, 20, 20, 255, new Color(255, 255, 255)); // Gold
 
         g2.setColor(Color.white);
@@ -144,7 +141,6 @@ public class UI {
 
         int x = staticLinesX;
         int y = staticLinesY;
-//        drawSubStroke(g2 , x -15  , y - 10  , gp.getScreenWidth() - x +12, y * (staticLines.length ));
         drawSubRec(g2 , x - 30 , y - 12 , gp.getScreenWidth() - x +20 , y * (staticLines.length ) , 255 ,new Color(0 ,255, 255 , 200));
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_SMALL));
         g2.setColor(Color.WHITE);
@@ -276,9 +272,6 @@ public class UI {
         g2.drawRoundRect(x , y , width  , height, 5,5);
     }
 
-
-
-
     private void drawMessage(Graphics2D g2) {
         g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.PLAIN, FontManager.SIZE_MEDIUM));
         g2.setColor(Color.WHITE);
@@ -405,12 +398,6 @@ public class UI {
 
     }
 
-//    private void showPauseScreen(Graphics2D g2) {
-//        g2.setFont(FontManager.getFont(USE_CUSTOM_FONT, Font.BOLD, FontManager.SIZE_LARGE));
-//        g2.setColor(Color.WHITE);
-//        drawCenteredText(g2, "PAUSED", gp.getScreenHeight() / 2 , 0);
-//    }
-
     private void drawCenteredText(Graphics2D g2, String text, int y , int offset) {
         int textLength = g2.getFontMetrics().stringWidth(text);
         int x = (gp.getScreenWidth() - textLength) / 2 + offset;
@@ -427,5 +414,12 @@ public class UI {
         roleMessageOn = true ;
         roleMessage = text ;
         roleMessageCount = 0;
+    }
+    public double getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(double playTime) {
+        this.playTime = playTime;
     }
 }
