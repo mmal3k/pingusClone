@@ -89,6 +89,7 @@ public class KeyHandler implements KeyListener {
 
             switch (code) {
                 case KeyEvent.VK_ESCAPE:
+                    gp.playSE(5);
                     if (gp.gameState == gp.playState) {
                         gp.gameState = gp.pauseState;
                     } else if (gp.gameState == gp.pauseState) {
@@ -99,18 +100,21 @@ public class KeyHandler implements KeyListener {
             if (gp.gameState == gp.pauseState) {
                 switch (code) {
                     case KeyEvent.VK_DOWN :
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 2) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP :
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 2;
                         }
                         break;
                     case KeyEvent.VK_ENTER :
+                        gp.playSE(4);
                         if (gp.ui.commandNum == 0) {
                             gp.gameState = gp.titleState;
                             gp.restart();
@@ -178,18 +182,21 @@ public class KeyHandler implements KeyListener {
 
                 switch (code) {
                     case KeyEvent.VK_DOWN:
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 1) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP:
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 1;
                         }
                         break;
                     case KeyEvent.VK_ENTER:
+                        gp.playSE(4);
                         if (gp.ui.commandNum == 0) {
                             gp.restart();
                             gp.gameState = gp.titleState ;

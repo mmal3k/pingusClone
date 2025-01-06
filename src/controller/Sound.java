@@ -16,6 +16,7 @@ public class Sound {
         soundURL[2] = getClass().getResource("/sound/game_over.wav");
         soundURL[3] = getClass().getResource("/sound/menu_se.wav");
         soundURL[4] = getClass().getResource("/sound/menu_confirm.wav");
+        soundURL[5] = getClass().getResource("/sound/pause_menu.wav");
 
 //        soundURL[0] = getClass().getResource("/sound/explosion-sound-effect.wav");
     }
