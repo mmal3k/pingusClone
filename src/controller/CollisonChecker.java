@@ -1,7 +1,7 @@
 package controller;
 
 import model.Player;
-import model.roles.GrimpeurRole;
+import controller.roles.GrimpeurRole;
 import view.GamePanel;
 
 import java.awt.*;
