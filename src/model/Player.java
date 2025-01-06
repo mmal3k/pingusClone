@@ -4,6 +4,7 @@ package model;
 import java.awt.*;
 
 import controller.CollisonChecker;
+import controller.RoleFactory;
 import model.roles.*;
 import view.GamePanel;
 
@@ -65,7 +66,7 @@ public class Player {
                 this.role = new ParachutisteRole(this);
                 break;
             case "Role 2" :
-                this.role = new BlockerRole();
+                this.role = new RoleFactory("bloquer");
                 break;
             case "Role 3" :
                 this.role = new TunnelierRole();
@@ -77,7 +78,7 @@ public class Player {
                 this.role = new Foreur();
                 break;
             case "Role 6" :
-                this.role = new Bombeur(gp);
+                this.role = new Bombeur();
                 break;
             case "Role 7":
                 this.role = new Charpentier();

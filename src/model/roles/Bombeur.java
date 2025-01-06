@@ -6,19 +6,18 @@ import view.GamePanel;
 
 public class Bombeur extends Role {
     int pas ;
-    GamePanel gp;
     NormalRole normal;
-    public Bombeur(GamePanel gp){
+    public Bombeur(){
         pas = 0;
-        this.gp = gp;
         normal = new NormalRole();
     }
 
-    private void boom(int x,int y){
+    private void boom(int x, int y, GamePanel gp){
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x][y]].isDestructible()){
-          gp.getTileM().getMapTileNum()[x][y]=0;
+            gp.getTileM().getMapTileNum()[x][y]=0;
         }
     }
+
 
     @Override
     public void move(GamePanel gp , Player player, CollisonChecker cChecker){
@@ -41,277 +40,277 @@ public class Bombeur extends Role {
 
             if (mapx==0){
                 if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
+                    boom(mapx,mapy+1,gp );
+                    boom(mapx,mapy+2,gp);
+                    boom(mapx+1,mapy+1,gp);
+                    boom(mapx+1,mapy,gp);
+                    boom(mapx+2,mapy,gp);
                 } else if (mapy ==17){
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
+                    boom(mapx+1,mapy,gp);
+                    boom(mapx+2,mapy,gp);
+                    boom(mapx,mapy-1,gp);
+                    boom(mapx,mapy-2,gp);
+                    boom(mapx+1,mapy-1,gp);
                 } else if (mapy == 1){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1,gp);
+                    boom(mapx,mapy+1,gp);
+                    boom(mapx,mapy+2,gp);
+                    boom(mapx+1,mapy+1,gp);
+                    boom(mapx+1,mapy-1,gp);
+                    boom(mapx+1,mapy,gp);
+                    boom(mapx+2,mapy,gp);
                 } else if (mapy ==16){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1,gp);
+                    boom(mapx,mapy-2,gp);
+                    boom(mapx,mapy+1,gp);
+                    boom(mapx+1,mapy+1,gp);
+                    boom(mapx+1,mapy-1,gp);
+                    boom(mapx+1,mapy,gp);
+                    boom(mapx+2,mapy,gp);
                 } else {
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx + 1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
+                    boom(mapx,mapy-1,gp);
+                    boom(mapx,mapy-2,gp);
+                    boom(mapx,mapy+1,gp);
+                    boom(mapx,mapy+2,gp);
+                    boom(mapx + 1,mapy+1,gp);
+                    boom(mapx+1,mapy-1, gp);
+                    boom(mapx+1,mapy, gp);
+                    boom(mapx+2,mapy, gp);
                 }
             }
 
             else if (mapx ==1){
                 if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx - 1,mapy+1);
-                    boom(mapx - 1,mapy);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1, gp);
+                    boom(mapx+1,mapy, gp);
+                    boom(mapx+2,mapy, gp);
+                    boom(mapx - 1,mapy+1,gp );
+                    boom(mapx - 1,mapy,gp );
                 } else if (mapy ==17){
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx,mapy-1,gp );
+                    boom(mapx,mapy-2,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx-1,mapy,gp );
 
                 } else if (mapy == 1){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
+                    boom(mapx,mapy-1,gp );
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx-1,mapy,gp );
 
                 } else if (mapy ==16){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
+                    boom(mapx,mapy-1,gp );
+                    boom(mapx,mapy-2,gp );
+                    boom(mapx,mapy+1,gp );
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx-1,mapy,gp );
 
                 } else {
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx + 1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
+                    boom(mapx,mapy-1,gp );
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx + 1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx-1,mapy,gp );
                 }
             }
 
             else if (mapx ==22){
                 if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx - 1,mapy+1);
-                    boom(mapx - 1,mapy);
-                    boom(mapx-2,mapy);
+                    boom(mapx,mapy+1,gp );
+                    boom(mapx,mapy+2,gp );
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx - 1,mapy+1,gp );
+                    boom(mapx - 1,mapy,gp );
+                    boom(mapx-2,mapy,gp );
 
                 } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx+1,mapy, gp);
 
 
                 } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy, gp);
 
 
 
 
                 } else if (mapy ==16){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
 
 
 
                 } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
 
                 }
             } else if (mapx==23){
                 if (mapy == 0){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx,mapy+1,gp );
+                    boom(mapx,mapy+2, gp);
 
 
                 } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
 
                 } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
 
                 } else if (mapy ==16){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+2);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx,mapy+2, gp);
 
 
                 } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx,mapy-2);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx,mapy-2, gp);
 
                 }
             }
 
             else {
                 if (mapy == 0){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx+1,mapy, gp);
+                    boom(mapx+2,mapy, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1,gp );
 
                 } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy, gp);
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx+1,mapy-1, gp);
 
 
                 } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx,mapy+2, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1, gp);
 
 
                 } else if (mapy ==16){
 
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy, gp);
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1, gp);
+                    boom(mapx+1,mapy, gp);
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx,mapy-1, gp);
+                    boom(mapx,mapy-2, gp);
+                    boom(mapx,mapy+1, gp);
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1,gp );
 
 
                 } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
+                    boom(mapx-1,mapy,gp );
+                    boom(mapx-2,mapy, gp);
+                    boom(mapx-1,mapy+1,gp );
+                    boom(mapx-1,mapy-1,gp );
+                    boom(mapx+1,mapy,gp );
+                    boom(mapx+2,mapy,gp );
+                    boom(mapx,mapy-1,gp );
+                    boom(mapx,mapy-2,gp );
+                    boom(mapx,mapy+1,gp );
+                    boom(mapx,mapy+2,gp );
+                    boom(mapx+1,mapy+1,gp );
+                    boom(mapx+1,mapy-1, gp);
 
                 }
             }
