@@ -8,12 +8,10 @@ import java.awt.*;
 
 public class Bombeur implements Role {
     private int pas; // Tracks the steps taken before exploding
-    private GamePanel gp;
     private NormalRole normal;
 
-    public Bombeur(GamePanel gp) {
+    public Bombeur() {
         this.pas = 0;
-        this.gp = gp;
         this.normal = new NormalRole();
     }
 
@@ -23,7 +21,7 @@ public class Bombeur implements Role {
      * @param x The x-coordinate of the tile.
      * @param y The y-coordinate of the tile.
      */
-    private void boom(int x, int y) {
+    private void boom(int x, int y,GamePanel gp) {
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x][y]].isDestructible()) {
             gp.getTileM().getMapTileNum()[x][y] = 0; // Destroy the tile
         }
@@ -51,7 +49,7 @@ public class Bombeur implements Role {
             int mapy = (player.getPlayerY() + gp.halfTileSize) / gp.getTileSize();
 
             // Handle the explosion
-            handleExplosion(mapx, mapy);
+            handleExplosion(mapx, mapy,gp);
         }
     }
 
@@ -61,7 +59,7 @@ public class Bombeur implements Role {
      * @param centerX The x-coordinate of the explosion center.
      * @param centerY The y-coordinate of the explosion center.
      */
-    private void handleExplosion(int centerX, int centerY) {
+    private void handleExplosion(int centerX, int centerY,GamePanel gp) {
         // Define the explosion pattern (relative coordinates)
         int[][] explosionPattern = {
                 {0, -1}, {0, -2}, // Up
@@ -79,7 +77,7 @@ public class Bombeur implements Role {
 
             // Check if the tile is within bounds
             if (x >= 0 && x < gp.getMaxScreenCol() && y >= 0 && y < gp.getMaxScreenRow()) {
-                boom(x, y); // Destroy the tile if it's destructible
+                boom(x, y,gp); // Destroy the tile if it's destructible
             }
         }
     }

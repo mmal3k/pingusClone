@@ -4,6 +4,7 @@ package model;
 import java.awt.*;
 
 import controller.CollisonChecker;
+import controller.RoleFactory;
 import model.roles.*;
 import view.GamePanel;
 
@@ -58,31 +59,31 @@ public class Player {
 
         switch (gp.keyH.role) {
             case "Role 1" :
-                this.role = new ParachutisteRole( );
+                this.role = RoleFactory.RoleFactory("parachutiste");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Parachutiste");
                 break;
             case "Role 2" :
-                this.role = new BlockerRole();
+                this.role = RoleFactory.RoleFactory("bloqueur");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Blocker");
                 break;
             case "Role 3" :
-                this.role = new TunnelierRole(new NormalRole());
+                this.role = RoleFactory.RoleFactory("tunnelier");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Tunnelier");
                 break;
             case "Role 4" :
-                this.role = new GrimpeurRole();
+                this.role = RoleFactory.RoleFactory("grimpeur");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Grimpeur");
                 break;
             case "Role 5" :
-                this.role = new Foreur(new NormalRole());
+                this.role = RoleFactory.RoleFactory("foreur");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Foreur");
                 break;
             case "Role 6" :
-                this.role = new Bombeur(gp);
+                this.role = RoleFactory.RoleFactory("bombeur");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Bomber");
                 break;
             case "Role 7":
-                this.role = new Charpentier(new NormalRole());
+                this.role = RoleFactory.RoleFactory("charpentier");
                 gp.ui.showRoleNotif("Player "+getId() + " is now a Charpentier");
                 break;
         }
