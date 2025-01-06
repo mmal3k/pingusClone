@@ -30,7 +30,10 @@ public class NormalRole implements Role{
             switchDirection(player);
             return;
         }
-        if (player!= null )moveNormally(player);
+        if (player!= null ){
+            player.fallen = 0;
+            moveNormally(player);
+        }
     }
 
     @Override
