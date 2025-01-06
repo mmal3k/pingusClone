@@ -5,7 +5,7 @@ import java.awt.*;
 public class Tile {
     private Color color ;
     private boolean collision ;
-    private boolean destructible;
+    private boolean destructible = false;
 
     public Color getColor() {
         return color;

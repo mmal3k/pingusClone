@@ -24,9 +24,11 @@
                         break;
                     case "portal" :
                         i++;
-                        System.out.println("poussins sortis :"+i + "player num " +gp.getPlayersView().getPlayerNumber() );
+                        gp.playSE(7);
+                        System.out.println("poussins sortis :"+i + " player num " +gp.getPlayersView().getPlayerNumber() );
                         gp.getPlayers().set(playerIndex,null);
                         if (i == gp.getPlayersView().getPlayerNumber() - 1) {
+                            gp.playSE(6);
                             gp.gameState = gp.wonState ;
                         }
 
