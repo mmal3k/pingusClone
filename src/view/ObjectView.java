@@ -32,8 +32,8 @@ public class ObjectView {
             }
             case "map03" -> {
                 gp.getObj()[0] = new OBJ_DOOR();
-                gp.getObj()[0].setObjX(6 * gp.getTileSize());
-                gp.getObj()[0].setObjY(9 * gp.getTileSize());
+                gp.getObj()[0].setObjX(3 * gp.getTileSize());
+                gp.getObj()[0].setObjY(12 * gp.getTileSize());
                 gp.getObj()[1] = new OBJ_PORTAL();
                 gp.getObj()[1].setObjX(20 * gp.getTileSize());
                 gp.getObj()[1].setObjY(13 * gp.getTileSize());
