@@ -1,6 +1,7 @@
 package controller;
 
-import model.roles.*;
+import controller.roles.*;
+import controller.roles.*;
 
 public class RoleFactory {
 

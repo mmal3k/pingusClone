@@ -1,4 +1,4 @@
-package model.roles;
+package controller.roles;
 
 import controller.CollisonChecker;
 import model.Player;

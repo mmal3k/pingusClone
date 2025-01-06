@@ -1,8 +1,7 @@
-package model.roles;
+package controller.roles;
 
 import controller.CollisonChecker;
 import model.Player;
-import model.tile.Tile;
 import view.GamePanel;
 
 import java.awt.*;

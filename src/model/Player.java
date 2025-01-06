@@ -5,7 +5,9 @@ import java.awt.*;
 
 import controller.CollisonChecker;
 import controller.RoleFactory;
-import model.roles.*;
+import controller.roles.NormalRole;
+import controller.roles.Role;
+import controller.roles.*;
 import view.GamePanel;
 
 public class Player {
