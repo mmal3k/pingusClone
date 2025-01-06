@@ -40,11 +40,6 @@ public class Bombeur implements Role {
         // Check if it's time to explode
         if (pas == gp.getTileSize() * 2) {
             gp.playSE(0); // Play explosion sound effect
-            try {
-                Thread.sleep(200); // Pause for effect
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
 
             // Remove the player from the game
             int playerInd = gp.getPlayers().indexOf(player);
