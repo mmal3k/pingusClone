@@ -62,25 +62,25 @@ public class Player {
 
         switch (gp.keyH.role) {
             case "Role 1" :
-                this.role = new ParachutisteRole(this);
+                this.role = new ParachutisteRole( this );
                 break;
             case "Role 2" :
                 this.role = new BlockerRole();
                 break;
             case "Role 3" :
-                this.role = new TunnelierRole();
+                this.role = new TunnelierRole(new NormalRole());
                 break;
             case "Role 4" :
                 this.role = new GrimpeurRole();
                 break;
             case "Role 5" :
-                this.role = new Foreur();
+                this.role = new Foreur(new NormalRole());
                 break;
             case "Role 6" :
                 this.role = new Bombeur(gp);
                 break;
             case "Role 7":
-                this.role = new Charpentier();
+                this.role = new Charpentier(new NormalRole());
                 break;
         }
         // Add your desired action here

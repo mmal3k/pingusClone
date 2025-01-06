@@ -4,14 +4,14 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class Charpentier extends Role{
-    NormalRole normal;
+public class Charpentier extends NormalRoleDecorator implements Role{
+
     private int built;
     private int lastX;
 
 
-    public Charpentier(){
-        normal = new NormalRole();
+    public Charpentier(NormalRole normalRole){
+        super(normalRole);
         built = 0;
     }
 
@@ -33,14 +33,14 @@ public class Charpentier extends Role{
                 gp.getTileM().getMapTileNum()[x-1][y]=1;
                 lastX=x-1;
                 built ++;
-            } else normal.move(gp, player, cChecker);
+            } else normalRoleDecorator.move(gp, player, cChecker);
         } else if (player.getDirection().equals("right")){
             if (!gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x+1][y]].isCollision() &&canbuild(x+1)){
                 gp.getTileM().getMapTileNum()[x+1][y]=1;
                 lastX=x+1;
                 built ++;
-            } else normal.move(gp, player, cChecker);
-        } else normal.move(gp, player, cChecker);
+            } else normalRoleDecorator.move(gp, player, cChecker);
+        } else normalRoleDecorator.move(gp, player, cChecker);
 
 
 

@@ -5,13 +5,21 @@ import model.Player;
 import model.tile.Tile;
 import view.GamePanel;
 
-public class TunnelierRole extends Role {
+public class TunnelierRole extends NormalRoleDecorator implements Role {
     NormalRole normalRole = new NormalRole();
+    public TunnelierRole (NormalRole normalRole) {
+        super(normalRole);
+    }
 
     @Override
     public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
         normalRole.move(gp , player,cChecker);
 
+        tunnelier(gp ,player);
+    }
+
+
+    public void tunnelier (GamePanel gp, Player player) {
         int leftPosX = player.getPlayerX() + player.getSolidArea().x;
         int rightPosX = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
         int topPosY = player.getPlayerY() + player.getSolidArea().y;

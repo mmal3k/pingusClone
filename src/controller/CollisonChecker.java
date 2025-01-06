@@ -110,7 +110,8 @@ public class CollisonChecker {
                                 int tileNum3 = gp.getTileM().getMapTileNum()[leftCol][bottomRow - 1];
                                 if (!gp.getTileM().getTiles()[tileNum3].isCollision()){
                                     ((GrimpeurRole) entity.getRole()).setGoUpNormally(true);
-                                    return;
+
+
                                 }
                                 entity.setCanGoUp(true);
                                 return;
@@ -129,7 +130,7 @@ public class CollisonChecker {
                                 int tileNum3 = gp.getTileM().getMapTileNum()[rightCol][bottomRow - 1];
                                 if (!gp.getTileM().getTiles()[tileNum3].isCollision()){
                                     ((GrimpeurRole) entity.getRole()).setGoUpNormally(true);
-                                    return;
+
                                 }
                                 entity.setCanGoUp(true);
                                 return ;
