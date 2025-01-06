@@ -20,7 +20,7 @@ public class ObjectView {
 
                 gp.getObj()[1] = new OBJ_PORTAL();
                 gp.getObj()[1].setObjX(20 * gp.getTileSize());
-                gp.getObj()[1].setObjY(13 * gp.getTileSize());
+                gp.getObj()[1].setObjY(8 * gp.getTileSize());
             }
             case "map02" -> {
                 gp.getObj()[0] = new OBJ_DOOR();
