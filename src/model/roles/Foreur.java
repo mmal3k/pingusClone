@@ -23,7 +23,7 @@ public class Foreur extends NormalRoleDecorator implements  Role {
 
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[mapx][mapy+1]].isDestructible() && !player.isFalling()){
             creuser++;
-            System.out.println("Forage");
+            gp.playSE(1);
             gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
             normalRoleDecorator.move(gp, player, cChecker);
             System.out.println("apres move");
