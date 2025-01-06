@@ -44,6 +44,7 @@ public class Bombeur implements Role {
             gp.getPlayers().set(playerInd, null);
             gp.getPlayersView().nbDiedPlayers ++ ;
             if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
+                gp.playSE(2);
                 gp.gameState = gp.gameOverState ;
             }
 

@@ -160,11 +160,22 @@ public class CollisonChecker {
             int tileNum1 = gp.getTileM().getMapTileNum()[rightCol][bottomRow];
             int tileNum2 = gp.getTileM().getMapTileNum()[leftCol][bottomRow];
 
-            if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
-                entity.setFalling(false);
+            if (tileNum1 != 3 || tileNum2 != 3){
+                if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                    entity.setFalling(false);
+                } else {
+                    entity.setFalling(true);
+                }
             } else {
-                entity.setFalling(true);
+                int playerInd = gp.getPlayers().indexOf(entity);
+                gp.getPlayers().set(playerInd, null);
+                gp.getPlayersView().nbDiedPlayers ++ ;
+                if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
+                    gp.playSE(2);
+                    gp.gameState = gp.gameOverState ;
+                }
             }
+
 
         }
     }
