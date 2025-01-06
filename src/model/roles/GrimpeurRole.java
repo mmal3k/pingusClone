@@ -13,6 +13,8 @@ public class GrimpeurRole extends NormalRole implements Role{
     public void move(GamePanel gp , Player player, CollisonChecker cChecker) {
         cChecker.checkTile(player);
         int[] indexes = cChecker.checkObject(player,true);
+        int x = (player.getPlayerX() + gp.halfTileSize) / gp.getTileSize() ;
+        int y = (player.getPlayerY() +  gp.halfTileSize) / gp.getTileSize() ;
         gp.getObjectController().interactWithObject(indexes[0],indexes[1]);
 
         if (player!= null && player.isFalling()){
@@ -20,15 +22,15 @@ public class GrimpeurRole extends NormalRole implements Role{
             return;
         }
 
-        if (player!= null && isGoUpNormally()) {
+        if (player!= null && isGoUpNormally() ) {
             player.fallen =0;
-            goUp(player);
+            goUp(player,gp,x,y);
             return;
         }
 
         if (player!= null && player.isCanGoUp()) {
             player.fallen =0;
-            goUp(player);
+            goUp(player,gp,x,y);
             return;
         }
 
@@ -37,13 +39,16 @@ public class GrimpeurRole extends NormalRole implements Role{
             switchDirection(player);
             return;
         }
-        if (player!= null )moveNormally(player);
+        if (player!= null ){
+            player.fallen = 0;
+            moveNormally(player);
+        }
     }
 
 
 
 
-    public void goUp(Player player){
+    public void goUp(Player player,GamePanel gp,int x, int y){
 
         if (isGoUpNormally()) {
             int posX = player.getPlayerX();
@@ -60,11 +65,13 @@ public class GrimpeurRole extends NormalRole implements Role{
                         break;
                 }
             }
-        }else {
+        }else if ((player.getDirection().equals("left") && gp.getTileM().getMapTileNum()[x-1][y] != 2) ||
+                (player.getDirection().equals("right") && gp.getTileM().getMapTileNum()[x+1][y] != 2)){
+            System.out.println(gp.getTileM().getMapTileNum()[x][y]);
             int posX = player.getPlayerX();
             int posY = player.getPlayerY();
             player.setPlayerY(posY - player.getSpeed());
-        }
+        } else switchDirection( player);
 
     }
 
