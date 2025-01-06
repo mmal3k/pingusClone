@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class Bombeur implements Role {
     private int pas; // Tracks the steps taken before exploding
     private GamePanel gp;
@@ -85,5 +87,10 @@ public class Bombeur implements Role {
                 boom(x, y); // Destroy the tile if it's destructible
             }
         }
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.RED;
     }
 }

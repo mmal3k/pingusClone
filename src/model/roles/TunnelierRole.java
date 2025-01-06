@@ -5,15 +5,19 @@ import model.Player;
 import model.tile.Tile;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class TunnelierRole extends NormalRoleDecorator implements Role {
-    NormalRole normalRole = new NormalRole();
+//    NormalRole normalRole = new NormalRole();
     public TunnelierRole (NormalRole normalRole) {
+
         super(normalRole);
+
     }
 
     @Override
     public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
-        normalRole.move(gp , player,cChecker);
+        normalRoleDecorator.move(gp , player,cChecker);
 
         tunnelier(gp ,player);
     }
@@ -78,5 +82,10 @@ public class TunnelierRole extends NormalRoleDecorator implements Role {
                 }
                 break;
         }
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.CYAN;
     }
 }

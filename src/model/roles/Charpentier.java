@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class Charpentier extends NormalRoleDecorator implements Role{
 
     private int built;
@@ -44,6 +46,10 @@ public class Charpentier extends NormalRoleDecorator implements Role{
 
 
 
+    }
+    @Override
+    public Color getColor() {
+        return Color.GREEN;
     }
 }
 

@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 // Le Foreur ya7fer 7ata yekemel l count c pas une ligne droite
 
 public class Foreur extends NormalRoleDecorator implements  Role {
@@ -31,5 +33,11 @@ public class Foreur extends NormalRoleDecorator implements  Role {
             player.setRole(new NormalRole());
         }
 
+    }
+
+
+    @Override
+    public Color getColor() {
+        return Color.BLUE;
     }
 }

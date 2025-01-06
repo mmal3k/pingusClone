@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class GrimpeurRole extends NormalRole implements Role{
     private boolean goUpNormally = false ;
 
@@ -74,5 +76,10 @@ public class GrimpeurRole extends NormalRole implements Role{
 
     public void setGoUpNormally(boolean goUpNormally) {
         this.goUpNormally = goUpNormally;
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.GRAY;
     }
 }

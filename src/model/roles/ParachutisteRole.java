@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class ParachutisteRole extends NormalRole implements Role{
 
     @Override
@@ -16,4 +18,8 @@ public class ParachutisteRole extends NormalRole implements Role{
     }
 
 
+    @Override
+    public Color getColor() {
+        return Color.PINK;
+    }
 }

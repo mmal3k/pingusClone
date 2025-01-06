@@ -43,13 +43,9 @@ public class Player {
 
     public void setDefaultValues(){
         this.playerX = gp.getTileSize() * 4 ;
-
         this.playerY = gp.getTileSize() * 9 ;
-
         this.speed = 3 ;
-
         this.direction = "left";
-
     }
 
 
@@ -63,24 +59,31 @@ public class Player {
         switch (gp.keyH.role) {
             case "Role 1" :
                 this.role = new ParachutisteRole( );
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Parachutiste");
                 break;
             case "Role 2" :
                 this.role = new BlockerRole();
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Blocker");
                 break;
             case "Role 3" :
                 this.role = new TunnelierRole(new NormalRole());
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Tunnelier");
                 break;
             case "Role 4" :
                 this.role = new GrimpeurRole();
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Grimpeur");
                 break;
             case "Role 5" :
                 this.role = new Foreur(new NormalRole());
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Foreur");
                 break;
             case "Role 6" :
                 this.role = new Bombeur(gp);
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Bomber");
                 break;
             case "Role 7":
                 this.role = new Charpentier(new NormalRole());
+                gp.ui.showRoleNotif("Player "+getId() + " is now a Charpentier");
                 break;
         }
         // Add your desired action here

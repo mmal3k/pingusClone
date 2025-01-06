@@ -4,6 +4,8 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 public class NormalRole implements Role{
 
     int up=0;
@@ -29,6 +31,11 @@ public class NormalRole implements Role{
             return;
         }
         if (player!= null )moveNormally(player);
+    }
+
+    @Override
+    public Color getColor() {
+        return new Color(255, 223, 0);
     }
 
     public void switchDirection(Player player){
@@ -80,14 +87,6 @@ public class NormalRole implements Role{
 
         player.setPlayerY(posY - player.getSpeed());
 
-
-//        switch (player.getDirection()){
-//            case "right" :
-//                player.setPlayerX(posX  + player.getSpeed());
-//                break;
-//            case "left" :
-//                player.setPlayerX(posX  - player.getSpeed());
-//                break;
 
         up+= player.getSpeed();
         if ( up!= 0&&up %16==0){
