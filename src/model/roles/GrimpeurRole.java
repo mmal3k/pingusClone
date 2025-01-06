@@ -37,7 +37,7 @@ public class GrimpeurRole extends NormalRole implements Role{
             switchDirection(player);
             return;
         }
-        if (player!= null )moveNormally(player);
+        if (player!= null )moveNormally(gp ,player);
     }
 
 

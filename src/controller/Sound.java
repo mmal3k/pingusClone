@@ -11,7 +11,14 @@ public class Sound {
     URL soundURL[] = new URL[30];
 
     public Sound(){
-        soundURL[0] = getClass().getResource("/sound/explosion-sound-effect.wav");
+        soundURL[0] = getClass().getResource("/sound/explosion.wav");
+        soundURL[1] = getClass().getResource("/sound/digging.wav");
+        soundURL[2] = getClass().getResource("/sound/game_over.wav");
+        soundURL[3] = getClass().getResource("/sound/menu_se.wav");
+        soundURL[4] = getClass().getResource("/sound/menu_confirm.wav");
+        soundURL[5] = getClass().getResource("/sound/pause_menu.wav");
+
+//        soundURL[0] = getClass().getResource("/sound/explosion-sound-effect.wav");
     }
 
     public void setFile(int i){

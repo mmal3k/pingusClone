@@ -331,4 +331,13 @@ public class CollisonChecker {
         }
         return new int[]{999,999};
     }
+
+    public boolean checkCollisionWithBounds(int x, int y) {
+        int padding = 1; // Define the padding size (e.g., 1 tile)
+        if (x < padding || x >= gp.getMaxScreenCol() - padding ||
+                y < padding || y >= gp.getMaxScreenRow() - padding) {
+            return true; // Collision with invisible padding
+        }
+        return false; // No collision
+    }
 }

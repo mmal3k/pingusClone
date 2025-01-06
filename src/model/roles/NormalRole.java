@@ -10,8 +10,14 @@ public class NormalRole implements Role{
 
     int up=0;
 
+
     @Override
     public void move(GamePanel gp , Player player, CollisonChecker cChecker) {
+
+//        if (cChecker.checkCollisionWithBounds(player.getPlayerX(), player.getPlayerY())) {
+//            return; // Stop movement if collision with padding
+//        }
+
         cChecker.checkTile(player);
         int[] indexes = cChecker.checkObject(player,true);
         gp.getObjectController().interactWithObject(indexes[0],indexes[1]);
@@ -32,7 +38,7 @@ public class NormalRole implements Role{
         }
         if (player!= null ){
             player.fallen = 0;
-            moveNormally(player);
+            moveNormally(gp ,player);
         }
     }
 
@@ -55,13 +61,21 @@ public class NormalRole implements Role{
                 break;
         }
     }
-    public void moveNormally(Player player){
+    public void moveNormally(GamePanel gp , Player player){
         int posX = player.getPlayerX();
         switch (player.getDirection()) {
             case "left" :
+                if (posX - player.getSpeed() < 0) {
+                    switchDirection(player);
+                    return;
+                }
                 player.setPlayerX(posX - player.getSpeed());
                 break;
             case "right" :
+                if (posX + player.getSpeed() >gp.getScreenWidth() ) {
+                    switchDirection(player);
+                    return;
+                }
                 player.setPlayerX(posX + player.getSpeed());
                 break;
         }

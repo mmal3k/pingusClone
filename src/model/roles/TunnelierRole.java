@@ -8,7 +8,7 @@ import view.GamePanel;
 import java.awt.*;
 
 public class TunnelierRole extends NormalRoleDecorator implements Role {
-//    NormalRole normalRole = new NormalRole();
+
     public TunnelierRole (NormalRole normalRole) {
 
         super(normalRole);
@@ -40,7 +40,9 @@ public class TunnelierRole extends NormalRoleDecorator implements Role {
                 leftCol = (leftPosX - player.getSpeed()) / gp.getTileSize();
                 tileNum1 = gp.getTileM().getMapTileNum()[leftCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[leftCol][bottomRow];
-                if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                if ((gp.getTileM().getTiles()[tileNum1].isCollision() && gp.getTileM().getTiles()[tileNum1].isDestructible())
+                        || (gp.getTileM().getTiles()[tileNum2].isCollision())&& gp.getTileM().getTiles()[tileNum2].isDestructible()) {
+                    gp.playSE(1);
                     gp.getTileM().getMapTileNum()[leftCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[leftCol][topRow] = 0;
 
@@ -62,7 +64,10 @@ public class TunnelierRole extends NormalRoleDecorator implements Role {
                 rightCol = (rightPosX + player.getSpeed()) / gp.getTileSize();
                 tileNum1 = gp.getTileM().getMapTileNum()[rightCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[rightCol][bottomRow];
-                if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                if ((gp.getTileM().getTiles()[tileNum1].isCollision() && gp.getTileM().getTiles()[tileNum1].isDestructible())
+                        ||
+                        (gp.getTileM().getTiles()[tileNum2].isCollision() && gp.getTileM().getTiles()[tileNum2].isDestructible())) {
+                    gp.playSE(1);
                     gp.getTileM().getMapTileNum()[rightCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[rightCol][topRow] = 0;
 
@@ -78,7 +83,6 @@ public class TunnelierRole extends NormalRoleDecorator implements Role {
                             player.setRole(new NormalRole());
                         }
                     }
-
                 }
                 break;
         }

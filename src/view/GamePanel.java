@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private PlayersView playersView = new PlayersView(this , 6) ;
 
-    public Sound sound = new Sound();
+    public Sound sound ;
 
 
     private SuperObject[] obj = new SuperObject[10];
@@ -82,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.addKeyListener(keyH);
+        sound = new Sound();
 
         addMouseListener(new MouseAdapter() {
             @Override
