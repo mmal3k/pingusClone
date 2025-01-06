@@ -89,7 +89,9 @@ public class NormalRole implements Role{
         if (player.fallen == gp.getTileSize()*5){
             int playerInd = gp.getPlayers().indexOf(player);
             System.out.println("Player "+player.getId()+" died due to the fall");
-            gp.getPlayers().set(playerInd,null);
+            if (playerInd>=0){
+                gp.getPlayers().set(playerInd,null);
+            }
             gp.getPlayersView().nbDiedPlayers ++ ;
             System.out.println("players died "+ gp.getPlayersView().nbDiedPlayers +" , players number : " + gp.getPlayersView().getPlayerNumber());
             if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
