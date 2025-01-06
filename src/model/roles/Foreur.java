@@ -4,14 +4,17 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
+import java.awt.*;
+
 // Le Foreur ya7fer 7ata yekemel l count c pas une ligne droite
 
-public class Foreur extends  Role{
+public class Foreur extends NormalRoleDecorator implements  Role {
     int creuser = 0 ;
-    NormalRole normal;
 
-    public Foreur(){
-        normal = new NormalRole();
+
+    public Foreur(NormalRole normalRole){
+
+        super(normalRole);
     }
     @Override
     public void move(GamePanel gp , Player player , CollisonChecker cChecker){
@@ -20,19 +23,21 @@ public class Foreur extends  Role{
 
         if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[mapx][mapy+1]].isDestructible() && !player.isFalling()){
             creuser++;
-            System.out.println("Forage");
+            gp.playSE(1);
             gp.getTileM().getMapTileNum()[mapx][mapy+1] = 0;
-
-
-            normal.move(gp, player, cChecker);
-
+            normalRoleDecorator.move(gp, player, cChecker);
             System.out.println("apres move");
-        } else normal.move(gp, player, cChecker);
-
+        } else normalRoleDecorator.move(gp, player, cChecker);
 
         if (creuser == 5){
             player.setRole(new NormalRole());
         }
 
+    }
+
+
+    @Override
+    public Color getColor() {
+        return Color.BLUE;
     }
 }

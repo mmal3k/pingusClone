@@ -4,319 +4,91 @@ import controller.CollisonChecker;
 import model.Player;
 import view.GamePanel;
 
-public class Bombeur extends Role {
-    int pas ;
-    GamePanel gp;
-    NormalRole normal;
-    public Bombeur(GamePanel gp){
-        pas = 0;
-        this.gp = gp;
-        normal = new NormalRole();
+import java.awt.*;
+
+public class Bombeur implements Role {
+    private int pas; // Tracks the steps taken before exploding
+    private NormalRole normal;
+
+    public Bombeur() {
+        this.pas = 0;
+        this.normal = new NormalRole();
     }
 
-    private void boom(int x,int y){
-        if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x][y]].isDestructible()){
-          gp.getTileM().getMapTileNum()[x][y]=0;
+    /**
+     * Destroys a tile at the specified position if it is destructible.
+     *
+     * @param x The x-coordinate of the tile.
+     * @param y The y-coordinate of the tile.
+     */
+    private void boom(int x, int y,GamePanel gp) {
+        if (gp.getTileM().getTiles()[gp.getTileM().getMapTileNum()[x][y]].isDestructible()) {
+            gp.getTileM().getMapTileNum()[x][y] = 0; // Destroy the tile
         }
     }
 
     @Override
-    public void move(GamePanel gp , Player player, CollisonChecker cChecker){
+    public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
+        // Delegate normal movement to the NormalRole
         normal.move(gp, player, cChecker);
-        pas = pas + player.getSpeed();
-        if (pas == gp.getTileSize()*2){
-            gp.playSE(0);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+
+        // Increment the step counter
+        pas += player.getSpeed();
+
+        // Check if it's time to explode
+        if (pas == gp.getTileSize() * 2) {
+            gp.playSE(0); // Play explosion sound effect
+
+            // Remove the player from the game
             int playerInd = gp.getPlayers().indexOf(player);
-            gp.getPlayers().set(playerInd,null);
-            System.out.println("BOOM!!!");
-            int mapx = (player.getPlayerX() + gp.halfTileSize)  / gp.getTileSize();
-            int mapy = (player.getPlayerY() +gp.halfTileSize) / gp.getTileSize();
-
-
-
-            if (mapx==0){
-                if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                } else if (mapy ==17){
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-                } else if (mapy == 1){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                } else if (mapy ==16){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                } else {
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx + 1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                }
+            gp.getPlayers().set(playerInd, null);
+            gp.getPlayersView().nbDiedPlayers ++ ;
+            if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
+                gp.gameState = gp.gameOverState ;
             }
 
-            else if (mapx ==1){
-                if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx - 1,mapy+1);
-                    boom(mapx - 1,mapy);
-                } else if (mapy ==17){
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
+            // Calculate the explosion center
+            int mapx = (player.getPlayerX() + gp.halfTileSize) / gp.getTileSize();
+            int mapy = (player.getPlayerY() + gp.halfTileSize) / gp.getTileSize();
 
-                } else if (mapy == 1){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
-
-                } else if (mapy ==16){
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
-
-                } else {
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx + 1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx-1,mapy);
-                }
-            }
-
-            else if (mapx ==22){
-                if (mapy == 0){
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx - 1,mapy+1);
-                    boom(mapx - 1,mapy);
-                    boom(mapx-2,mapy);
-
-                } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-
-
-                } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-
-
-
-
-                } else if (mapy ==16){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-
-
-
-                } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-                    boom(mapx+1,mapy);
-
-                }
-            } else if (mapx==23){
-                if (mapy == 0){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-
-
-                } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-
-                } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-
-                } else if (mapy ==16){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+2);
-
-
-                } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx,mapy-2);
-
-                }
-            }
-
-            else {
-                if (mapy == 0){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-
-                } else if (mapy ==17){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx+1,mapy-1);
-
-
-                } else if (mapy == 1){
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-
-
-                } else if (mapy ==16){
-
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-
-
-                } else {
-                    boom(mapx-1,mapy);
-                    boom(mapx-2,mapy);
-                    boom(mapx-1,mapy+1);
-                    boom(mapx-1,mapy-1);
-                    boom(mapx+1,mapy);
-                    boom(mapx+2,mapy);
-                    boom(mapx,mapy-1);
-                    boom(mapx,mapy-2);
-                    boom(mapx,mapy+1);
-                    boom(mapx,mapy+2);
-                    boom(mapx+1,mapy+1);
-                    boom(mapx+1,mapy-1);
-
-                }
-            }
-//            gp.stopMusic();
+            // Handle the explosion
+            handleExplosion(mapx, mapy,gp);
         }
     }
 
+    /**
+     * Handles the explosion logic for the Bombeur role.
+     *
+     * @param centerX The x-coordinate of the explosion center.
+     * @param centerY The y-coordinate of the explosion center.
+     */
+    private void handleExplosion(int centerX, int centerY,GamePanel gp) {
+        // Define the explosion pattern (relative coordinates)
+        int[][] explosionPattern = {
+                {0, -1}, {0, -2}, // Up
+                {0, 1}, {0, 2},   // Down
+                {-1, 0}, {-2, 0}, // Left
+                {1, 0}, {2, 0},   // Right
+                {-1, -1}, {1, -1}, // Diagonal up-left and up-right
+                {-1, 1}, {1, 1}    // Diagonal down-left and down-right
+        };
+
+
+        for (int[] offset : explosionPattern) {
+            int x = centerX + offset[0];
+            int y = centerY + offset[1];
+
+
+            if (x >= 0 && x < gp.getMaxScreenCol() && y >= 0 && y < gp.getMaxScreenRow()) {
+
+                boom(x, y,gp); // Destroy the tile if it's destructible
+
+            }
+        }
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.RED;
+    }
 }

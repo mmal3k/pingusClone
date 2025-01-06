@@ -34,12 +34,15 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
 
-    private PlayersView playersView = new PlayersView(this , 1) ;
+    private PlayersView playersView = new PlayersView(this , 6) ;
 
-    public Sound sound = new Sound();
+    public Sound sound ;
 
 
     private SuperObject[] obj = new SuperObject[10];
+
+
+
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
 
@@ -79,6 +82,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
         this.addKeyListener(keyH);
+        sound = new Sound();
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -98,7 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        objectView.setObject();
         gameState = titleState;
     }
 
@@ -173,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             tileView.draw(g2);
             objectView.draw(g2, this);
-            playersView.draw(g2);
+            if (gameState != pauseState) playersView.draw(g2);
             // UI
             ui.draw(g2);
 
@@ -190,6 +193,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void restart () {
         playersView.restartPlayers();
         objectController.restartObject();
+        ui.setPlayTime(0);
     }
 
 
@@ -251,5 +255,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setGameThread(Thread gameThread) {
         this.gameThread = gameThread;
+    }
+    public ObjectView getObjectView() {
+        return objectView;
     }
 }

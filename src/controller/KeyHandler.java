@@ -30,44 +30,55 @@ public class KeyHandler implements KeyListener {
             if (gp.ui.titleScreenState == 0) {
                 switch (code) {
                     case KeyEvent.VK_DOWN:
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 1) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP:
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 1;
                         }
                         break;
                     case KeyEvent.VK_ENTER:
+                        gp.playSE(4);
                         if (gp.ui.commandNum == 0) {
+
                             gp.ui.titleScreenState = 1;
                         }
                         if (gp.ui.commandNum == 1) {
                             System.exit(0);
                         }
+                        resetCommand();
                         break;
                 }
             } else if (gp.ui.titleScreenState == 1) {
                 switch (code) {
                     case KeyEvent.VK_DOWN :
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 2) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP :
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 2;
                         }
                         break;
                     case KeyEvent.VK_ENTER :
+                        gp.playSE(4);
                         gp.getTileM().setMap("map0" + (gp.ui.commandNum + 1));
                         gp.gameState = gp.playState;
+                        gp.restart();
+                        gp.getObjectView().setObject();
                         gp.getPlayersView().startAddThread();
+                        resetCommand();
                         break;
                 }
             }
@@ -78,6 +89,7 @@ public class KeyHandler implements KeyListener {
 
             switch (code) {
                 case KeyEvent.VK_ESCAPE:
+                    gp.playSE(5);
                     if (gp.gameState == gp.playState) {
                         gp.gameState = gp.pauseState;
                     } else if (gp.gameState == gp.pauseState) {
@@ -88,21 +100,24 @@ public class KeyHandler implements KeyListener {
             if (gp.gameState == gp.pauseState) {
                 switch (code) {
                     case KeyEvent.VK_DOWN :
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 2) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP :
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 2;
                         }
                         break;
                     case KeyEvent.VK_ENTER :
+                        gp.playSE(4);
                         if (gp.ui.commandNum == 0) {
-                            gp.restart();
                             gp.gameState = gp.titleState;
+                            gp.restart();
                             gp.ui.titleScreenState = 1;
                         }
                         if (gp.ui.commandNum == 1) {
@@ -115,6 +130,7 @@ public class KeyHandler implements KeyListener {
                             System.exit(0);
                         }
 
+                        resetCommand();
                         break;
                 }
             }
@@ -166,18 +182,21 @@ public class KeyHandler implements KeyListener {
 
                 switch (code) {
                     case KeyEvent.VK_DOWN:
+                        gp.playSE(3);
                         gp.ui.commandNum++;
                         if (gp.ui.commandNum > 1) {
                             gp.ui.commandNum = 0;
                         }
                         break;
                     case KeyEvent.VK_UP:
+                        gp.playSE(3);
                         gp.ui.commandNum--;
                         if (gp.ui.commandNum < 0) {
                             gp.ui.commandNum = 1;
                         }
                         break;
                     case KeyEvent.VK_ENTER:
+                        gp.playSE(4);
                         if (gp.ui.commandNum == 0) {
                             gp.restart();
                             gp.gameState = gp.titleState ;
@@ -187,6 +206,7 @@ public class KeyHandler implements KeyListener {
                         if (gp.ui.commandNum == 1) {
                             System.exit(0);
                         }
+                        resetCommand();
                         break;
                 }
 
@@ -199,6 +219,10 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // Not used
+    }
+
+    public void resetCommand () {
+        gp.ui.commandNum = 0;
     }
 
     public void presseKey(int j) {

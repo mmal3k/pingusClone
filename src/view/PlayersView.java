@@ -70,7 +70,8 @@ public class PlayersView implements Runnable {
         for (Player player : players) {
             if (player == null) continue;
             // Set player color (Bright Yellow)
-            g2.setColor(new Color(255, 223, 0));
+//            g2.setColor(new Color(255, 223, 0));
+            g2.setColor(player.getRole().getColor());
 
             // Get player position and size
             int posX = player.getPlayerX() + player.getSolidArea().x;
@@ -88,7 +89,8 @@ public class PlayersView implements Runnable {
             g2.fillOval(headPosX, headPosY, headWidth, headWidth);
 
             // Draw the nose (triangle)
-            g2.setColor(new Color(255, 223, 0));
+//            g2.setColor(new Color(255, 223, 0));
+            g2.setColor(player.getRole().getColor());
             int noseX = headPosX + (headWidth / 2); // X-coordinate for nose center
             int noseY = headPosY + (headWidth / 2); // Y-coordinate for nose center
             int[] xPoints;

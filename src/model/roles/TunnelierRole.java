@@ -5,13 +5,25 @@ import model.Player;
 import model.tile.Tile;
 import view.GamePanel;
 
-public class TunnelierRole extends Role {
-    NormalRole normalRole = new NormalRole();
+import java.awt.*;
+
+public class TunnelierRole extends NormalRoleDecorator implements Role {
+
+    public TunnelierRole (NormalRole normalRole) {
+
+        super(normalRole);
+
+    }
 
     @Override
     public void move(GamePanel gp, Player player, CollisonChecker cChecker) {
-        normalRole.move(gp , player,cChecker);
+        normalRoleDecorator.move(gp , player,cChecker);
 
+        tunnelier(gp ,player);
+    }
+
+
+    public void tunnelier (GamePanel gp, Player player) {
         int leftPosX = player.getPlayerX() + player.getSolidArea().x;
         int rightPosX = player.getPlayerX() + player.getSolidArea().x + player.getSolidArea().width;
         int topPosY = player.getPlayerY() + player.getSolidArea().y;
@@ -28,7 +40,9 @@ public class TunnelierRole extends Role {
                 leftCol = (leftPosX - player.getSpeed()) / gp.getTileSize();
                 tileNum1 = gp.getTileM().getMapTileNum()[leftCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[leftCol][bottomRow];
-                if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                if ((gp.getTileM().getTiles()[tileNum1].isCollision() && gp.getTileM().getTiles()[tileNum1].isDestructible())
+                        || (gp.getTileM().getTiles()[tileNum2].isCollision())&& gp.getTileM().getTiles()[tileNum2].isDestructible()) {
+                    gp.playSE(1);
                     gp.getTileM().getMapTileNum()[leftCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[leftCol][topRow] = 0;
 
@@ -50,7 +64,10 @@ public class TunnelierRole extends Role {
                 rightCol = (rightPosX + player.getSpeed()) / gp.getTileSize();
                 tileNum1 = gp.getTileM().getMapTileNum()[rightCol][topRow];
                 tileNum2 = gp.getTileM().getMapTileNum()[rightCol][bottomRow];
-                if (gp.getTileM().getTiles()[tileNum1].isCollision() || gp.getTileM().getTiles()[tileNum2].isCollision()) {
+                if ((gp.getTileM().getTiles()[tileNum1].isCollision() && gp.getTileM().getTiles()[tileNum1].isDestructible())
+                        ||
+                        (gp.getTileM().getTiles()[tileNum2].isCollision() && gp.getTileM().getTiles()[tileNum2].isDestructible())) {
+                    gp.playSE(1);
                     gp.getTileM().getMapTileNum()[rightCol][bottomRow] = 0;
                     gp.getTileM().getMapTileNum()[rightCol][topRow] = 0;
 
@@ -66,9 +83,13 @@ public class TunnelierRole extends Role {
                             player.setRole(new NormalRole());
                         }
                     }
-
                 }
                 break;
         }
+    }
+
+    @Override
+    public Color getColor() {
+        return Color.CYAN;
     }
 }
