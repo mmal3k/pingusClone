@@ -27,7 +27,6 @@ public class Main {
         frame.setVisible(true);
         gamePanel.setupGame();
         gamePanel.startGameThread();
-
     }
 
 }

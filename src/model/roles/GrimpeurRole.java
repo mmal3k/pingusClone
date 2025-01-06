@@ -22,7 +22,7 @@ public class GrimpeurRole extends NormalRole implements Role{
             return;
         }
 
-        if (player!= null && isGoUpNormally() ) {
+        if (player!= null && isGoUpNormally()) {
             player.fallen =0;
             goUp(player,gp,x,y);
             return;
@@ -41,7 +41,8 @@ public class GrimpeurRole extends NormalRole implements Role{
         }
         if (player!= null ){
             player.fallen = 0;
-            moveNormally(player);
+            moveNormally(gp ,player);
+
         }
     }
 

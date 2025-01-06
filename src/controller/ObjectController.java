@@ -26,7 +26,7 @@
                         i++;
                         System.out.println("poussins sortis :"+i + "player num " +gp.getPlayersView().getPlayerNumber() );
                         gp.getPlayers().set(playerIndex,null);
-                        if (i == gp.getPlayersView().getPlayerNumber()) {
+                        if (i == gp.getPlayersView().getPlayerNumber() - 1) {
                             gp.gameState = gp.wonState ;
                         }
 

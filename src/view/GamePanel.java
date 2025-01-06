@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     private Thread gameThread;
 
-    private PlayersView playersView = new PlayersView(this , 3) ;
+    private PlayersView playersView = new PlayersView(this , 6) ;
 
     public Sound sound ;
 

@@ -8,7 +8,7 @@ import view.GamePanel;
 import java.awt.*;
 
 public class TunnelierRole extends NormalRoleDecorator implements Role {
-//    NormalRole normalRole = new NormalRole();
+
     public TunnelierRole (NormalRole normalRole) {
 
         super(normalRole);

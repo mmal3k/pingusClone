@@ -42,7 +42,10 @@ public class Bombeur implements Role {
             // Remove the player from the game
             int playerInd = gp.getPlayers().indexOf(player);
             gp.getPlayers().set(playerInd, null);
-            System.out.println("BOOM!!!");
+            gp.getPlayersView().nbDiedPlayers ++ ;
+            if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
+                gp.gameState = gp.gameOverState ;
+            }
 
             // Calculate the explosion center
             int mapx = (player.getPlayerX() + gp.halfTileSize) / gp.getTileSize();
@@ -70,14 +73,16 @@ public class Bombeur implements Role {
                 {-1, 1}, {1, 1}    // Diagonal down-left and down-right
         };
 
-        // Iterate through the explosion pattern
+
         for (int[] offset : explosionPattern) {
             int x = centerX + offset[0];
             int y = centerY + offset[1];
 
-            // Check if the tile is within bounds
+
             if (x >= 0 && x < gp.getMaxScreenCol() && y >= 0 && y < gp.getMaxScreenRow()) {
+
                 boom(x, y,gp); // Destroy the tile if it's destructible
+
             }
         }
     }
