@@ -78,7 +78,7 @@ public class NormalRole implements Role{
             gp.getPlayers().set(playerInd,null);
             gp.getPlayersView().nbDiedPlayers ++ ;
             System.out.println("players died "+ gp.getPlayersView().nbDiedPlayers +" , players number : " + gp.getPlayersView().getPlayerNumber());
-            if (gp.getPlayersView().nbDiedPlayers ++ == gp.getPlayersView().getPlayerNumber()) {
+            if (gp.getPlayersView().nbDiedPlayers ++ >= gp.getPlayersView().getPlayerNumber() - 4) {
                 gp.gameState = gp.gameOverState ;
             }
         }
