@@ -32,12 +32,16 @@ public class TileManager {
 
         // Tile 2: Ground (Dark Green)
         tiles[2] = new Tile();
-        tiles[2].setColor(new Color(0, 102, 51)); // Dark green
+        tiles[2].setColor(new Color(87, 24, 7)); // Dark green
         tiles[2].setCollision(true);
 
         tiles[3] = new Tile();
-        tiles[3].setColor(new Color(87, 24, 7)); //
+//        tiles[3].setColor(new Color(87, 24, 7)); //
+        tiles[3].setColor(new Color(0, 102, 51)); //
+
         tiles[3].setCollision(true);
+
+
     }
 
     public void loadMap(String mapName) {
