@@ -48,6 +48,7 @@ public class KeyHandler implements KeyListener {
                         if (gp.ui.commandNum == 1) {
                             System.exit(0);
                         }
+                        resetCommand();
                         break;
                 }
             } else if (gp.ui.titleScreenState == 1) {
@@ -68,6 +69,7 @@ public class KeyHandler implements KeyListener {
                         gp.getTileM().setMap("map0" + (gp.ui.commandNum + 1));
                         gp.gameState = gp.playState;
                         gp.getPlayersView().startAddThread();
+                        resetCommand();
                         break;
                 }
             }
@@ -115,6 +117,7 @@ public class KeyHandler implements KeyListener {
                             System.exit(0);
                         }
 
+                        resetCommand();
                         break;
                 }
             }
@@ -187,6 +190,7 @@ public class KeyHandler implements KeyListener {
                         if (gp.ui.commandNum == 1) {
                             System.exit(0);
                         }
+                        resetCommand();
                         break;
                 }
 
@@ -199,6 +203,10 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         // Not used
+    }
+
+    public void resetCommand () {
+        gp.ui.commandNum = 0;
     }
 
     public void presseKey(int j) {
