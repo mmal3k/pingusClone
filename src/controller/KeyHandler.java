@@ -43,6 +43,7 @@ public class KeyHandler implements KeyListener {
                         break;
                     case KeyEvent.VK_ENTER:
                         if (gp.ui.commandNum == 0) {
+
                             gp.ui.titleScreenState = 1;
                         }
                         if (gp.ui.commandNum == 1) {
@@ -68,6 +69,8 @@ public class KeyHandler implements KeyListener {
                     case KeyEvent.VK_ENTER :
                         gp.getTileM().setMap("map0" + (gp.ui.commandNum + 1));
                         gp.gameState = gp.playState;
+                        gp.restart();
+                        gp.getObjectView().setObject();
                         gp.getPlayersView().startAddThread();
                         resetCommand();
                         break;
@@ -103,8 +106,8 @@ public class KeyHandler implements KeyListener {
                         break;
                     case KeyEvent.VK_ENTER :
                         if (gp.ui.commandNum == 0) {
-                            gp.restart();
                             gp.gameState = gp.titleState;
+                            gp.restart();
                             gp.ui.titleScreenState = 1;
                         }
                         if (gp.ui.commandNum == 1) {

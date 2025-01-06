@@ -40,6 +40,9 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     private SuperObject[] obj = new SuperObject[10];
+
+
+
     private ObjectView objectView = new ObjectView(this);
     private ObjectController objectController = new ObjectController(this);
 
@@ -98,7 +101,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        objectView.setObject();
         gameState = titleState;
     }
 
@@ -252,5 +254,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setGameThread(Thread gameThread) {
         this.gameThread = gameThread;
+    }
+    public ObjectView getObjectView() {
+        return objectView;
     }
 }

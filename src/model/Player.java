@@ -42,8 +42,8 @@ public class Player {
 
 
     public void setDefaultValues(){
-        this.playerX = gp.getTileSize() * 4 ;
-        this.playerY = gp.getTileSize() * 9 ;
+        this.playerX = gp.getObj()[0].getObjX() ;
+        this.playerY = gp.getObj()[0].getObjY() ;
         this.speed = 3 ;
         this.direction = "left";
     }
