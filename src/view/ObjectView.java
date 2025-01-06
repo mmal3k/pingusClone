@@ -24,11 +24,11 @@ public class ObjectView {
             }
             case "map02" -> {
                 gp.getObj()[0] = new OBJ_DOOR();
-                gp.getObj()[0].setObjX(5 * gp.getTileSize());
-                gp.getObj()[0].setObjY(9 * gp.getTileSize());
+                gp.getObj()[0].setObjX(0 * gp.getTileSize());
+                gp.getObj()[0].setObjY(10 * gp.getTileSize());
                 gp.getObj()[1] = new OBJ_PORTAL();
-                gp.getObj()[1].setObjX(20 * gp.getTileSize());
-                gp.getObj()[1].setObjY(13 * gp.getTileSize());
+                gp.getObj()[1].setObjX(22 * gp.getTileSize());
+                gp.getObj()[1].setObjY(9 * gp.getTileSize());
             }
             case "map03" -> {
                 gp.getObj()[0] = new OBJ_DOOR();
